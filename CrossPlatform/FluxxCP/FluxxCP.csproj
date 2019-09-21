@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\Brain.png" />
+    <None Remove="Resources\Bread.png" />
+    <None Remove="Resources\Chocolate.png" />
+    <None Remove="Resources\Cookies.png" />
+    <None Remove="Resources\Death.png" />
+    <None Remove="Resources\Dreams.png" />
+    <None Remove="Resources\FluxxDescriptions.json" />
+    <None Remove="Resources\Love.png" />
+    <None Remove="Resources\Milk.png" />
+    <None Remove="Resources\Money.png" />
+    <None Remove="Resources\Moon.png" />
+    <None Remove="Resources\NoTV.png" />
+    <None Remove="Resources\NoWar.png" />
+    <None Remove="Resources\Peace.png" />
+    <None Remove="Resources\Rocket.png" />
+    <None Remove="Resources\Sleep.png" />
+    <None Remove="Resources\Sun.png" />
+    <None Remove="Resources\Tank.png" />
+    <None Remove="Resources\Time.png" />
+    <None Remove="Resources\Toaster.png" />
+    <None Remove="Resources\TV.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Brain.png" />
+    <EmbeddedResource Include="Resources\Bread.png" />
+    <EmbeddedResource Include="Resources\Chocolate.png" />
+    <EmbeddedResource Include="Resources\Cookies.png" />
+    <EmbeddedResource Include="Resources\Death.png" />
+    <EmbeddedResource Include="Resources\Dreams.png" />
+    <EmbeddedResource Include="Resources\FluxxDescriptions.json" />
+    <EmbeddedResource Include="Resources\Love.png" />
+    <EmbeddedResource Include="Resources\Milk.png" />
+    <EmbeddedResource Include="Resources\Money.png" />
+    <EmbeddedResource Include="Resources\Moon.png" />
+    <EmbeddedResource Include="Resources\NoTV.png" />
+    <EmbeddedResource Include="Resources\NoWar.png" />
+    <EmbeddedResource Include="Resources\Peace.png" />
+    <EmbeddedResource Include="Resources\Rocket.png" />
+    <EmbeddedResource Include="Resources\Sleep.png" />
+    <EmbeddedResource Include="Resources\Sun.png" />
+    <EmbeddedResource Include="Resources\Tank.png" />
+    <EmbeddedResource Include="Resources\Time.png" />
+    <EmbeddedResource Include="Resources\Toaster.png" />
+    <EmbeddedResource Include="Resources\TV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

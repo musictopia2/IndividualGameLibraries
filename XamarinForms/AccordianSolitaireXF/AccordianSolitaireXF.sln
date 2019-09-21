@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.89
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccordianSolitaireXF", "AccordianSolitaireXF.csproj", "{D28816EA-DD5C-4B9D-BF1C-726E21E6B2F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccordianSolitaireCP", "..\..\..\CrossPlatform\Templates\AccordianSolitaireCP\AccordianSolitaireCP.csproj", "{81353915-278B-480E-9488-AFEE6D0A9628}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D28816EA-DD5C-4B9D-BF1C-726E21E6B2F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D28816EA-DD5C-4B9D-BF1C-726E21E6B2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D28816EA-DD5C-4B9D-BF1C-726E21E6B2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D28816EA-DD5C-4B9D-BF1C-726E21E6B2F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81353915-278B-480E-9488-AFEE6D0A9628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81353915-278B-480E-9488-AFEE6D0A9628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81353915-278B-480E-9488-AFEE6D0A9628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81353915-278B-480E-9488-AFEE6D0A9628}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2054A9F-6F3B-4790-BF32-38B8F6E2FBAF}
+	EndGlobalSection
+EndGlobal

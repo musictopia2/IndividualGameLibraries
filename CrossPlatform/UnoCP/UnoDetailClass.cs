@@ -1,0 +1,56 @@
+using BasicGameFramework.Attributes;
+using BasicGameFramework.BasicDrawables.Dictionary;
+using BasicGameFramework.BasicGameDataClasses;
+using CommonBasicStandardLibraries.CollectionClasses;
+namespace UnoCP
+{
+    [SingletonGame]
+    public class UnoDetailClass : IGameInfo, ICardInfo<UnoCardInformation>
+    {
+        EnumGameType IGameInfo.GameType => EnumGameType.Rounds;
+
+        bool IGameInfo.CanHaveExtraComputerPlayers => false;
+
+        EnumPlayerChoices IGameInfo.SinglePlayerChoice => EnumPlayerChoices.ComputerOnly;
+
+        EnumPlayerType IGameInfo.PlayerType => EnumPlayerType.SingleAndNetworked; //computer can play this one too.
+
+        string IGameInfo.GameName => "Uno";
+
+        int IGameInfo.NoPlayers => 0;
+
+        int IGameInfo.MinPlayers => 2;
+
+        int IGameInfo.MaxPlayers => 6;
+
+        bool IGameInfo.CanAutoSave => true;
+
+        EnumSmallestSuggested IGameInfo.SmallestSuggestedSize => EnumSmallestSuggested.AnyDevice; //default to smallest but can change as needed.
+
+        EnumSuggestedOrientation IGameInfo.SuggestedOrientation => EnumSuggestedOrientation.Landscape; //looks like most games are landscape.  can change to what is needed though.
+
+        int ICardInfo<UnoCardInformation>.CardsToPassOut => 7; //change to what you need.
+
+        CustomBasicList<int> ICardInfo<UnoCardInformation>.ExcludeList => new CustomBasicList<int>();
+
+        bool ICardInfo<UnoCardInformation>.AddToDiscardAtBeginning => true;
+
+        bool ICardInfo<UnoCardInformation>.ReshuffleAllCardsFromDiscard => false;
+
+        bool ICardInfo<UnoCardInformation>.ShowMessageWhenReshuffling => true;
+
+        bool ICardInfo<UnoCardInformation>.PassOutAll => false;
+
+        bool ICardInfo<UnoCardInformation>.PlayerGetsCards => true;
+
+        bool ICardInfo<UnoCardInformation>.NoPass => false;
+
+        bool ICardInfo<UnoCardInformation>.NeedsDummyHand => false;
+
+        DeckObservableDict<UnoCardInformation> ICardInfo<UnoCardInformation>.DummyHand { get; set; } = new DeckObservableDict<UnoCardInformation>();
+
+        bool ICardInfo<UnoCardInformation>.HasDrawAnimation => true;
+
+        bool ICardInfo<UnoCardInformation>.CanSortCardsToBeginWith => true;
+    }
+}

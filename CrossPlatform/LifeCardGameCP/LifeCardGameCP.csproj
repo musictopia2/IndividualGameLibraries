@@ -1,0 +1,149 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\1-VegasWedding.png" />
+    <None Remove="Resources\10-RideTheTallestRollerCoaster.png" />
+    <None Remove="Resources\11-PopStar.png" />
+    <None Remove="Resources\12-PictureOfPeopleCarryingLuggage.png" />
+    <None Remove="Resources\13-Treehouse.png" />
+    <None Remove="Resources\14-PinkCadillac.png" />
+    <None Remove="Resources\15-Lion.png" />
+    <None Remove="Resources\16-BabyPolarBear.png" />
+    <None Remove="Resources\17-EcoBubbleCar.png" />
+    <None Remove="Resources\18-BabyGirl.png" />
+    <None Remove="Resources\19-TwinBoys.png" />
+    <None Remove="Resources\2-CelebrityWedding.png" />
+    <None Remove="Resources\20-Giraffe.png" />
+    <None Remove="Resources\21-FindBigFoot.png" />
+    <None Remove="Resources\22-ExploreLiveVolcano.png" />
+    <None Remove="Resources\23-FindMessageInABottle.png" />
+    <None Remove="Resources\24-Castle.png" />
+    <None Remove="Resources\25-WinACharitySkateboardContest.png" />
+    <None Remove="Resources\26-TravelToMoonInRocket.png" />
+    <None Remove="Resources\27-JetPilot.png" />
+    <None Remove="Resources\28-EcoHouse.png" />
+    <None Remove="Resources\29-RanchHouse.png" />
+    <None Remove="Resources\3-UnderwaterWedding.png" />
+    <None Remove="Resources\30-Lighthouse.png" />
+    <None Remove="Resources\31-BeachHouse.png" />
+    <None Remove="Resources\32-ViewSolarEclipse.png" />
+    <None Remove="Resources\33-BuildASwimmingPool.png" />
+    <None Remove="Resources\34-BathtubBoat.png" />
+    <None Remove="Resources\35-DiamondAnniversary.png" />
+    <None Remove="Resources\36-RacingYacht.png" />
+    <None Remove="Resources\37-GoSkydiving.png" />
+    <None Remove="Resources\38-HeadlineAtRockConcert.png" />
+    <None Remove="Resources\39-GoDivingInNiagraFalls.png" />
+    <None Remove="Resources\4-ParachuteWedding.png" />
+    <None Remove="Resources\40-StuntDouble.png" />
+    <None Remove="Resources\41-BabyTriplets.png" />
+    <None Remove="Resources\41-BuildMultiScreenCinema.png" />
+    <None Remove="Resources\43-Monkey.png" />
+    <None Remove="Resources\44-SwimWithDolphins.png" />
+    <None Remove="Resources\45-Igloo.png" />
+    <None Remove="Resources\46-WinTheJackpot.png" />
+    <None Remove="Resources\47-PrivateJet.png" />
+    <None Remove="Resources\48-DigUpDinosaurFossil.png" />
+    <None Remove="Resources\49-RocketScientist.png" />
+    <None Remove="Resources\5-BeachWedding.png" />
+    <None Remove="Resources\50-Shark.png" />
+    <None Remove="Resources\51-Teacher.png" />
+    <None Remove="Resources\52-ExoticPetVet.png" />
+    <None Remove="Resources\53-SwitchToNaturalPower.png" />
+    <None Remove="Resources\54-BabyGirlTwins.png" />
+    <None Remove="Resources\55-LearnTheLoopTheLoop.png" />
+    <None Remove="Resources\56-WinJungleSafariRaffle.png" />
+    <None Remove="Resources\57-SailAroundWorld.png" />
+    <None Remove="Resources\58-DanceAtRioCarnival.png" />
+    <None Remove="Resources\59-Politician.png" />
+    <None Remove="Resources\6-FairytaleWedding.png" />
+    <None Remove="Resources\60-BabyBoy.png" />
+    <None Remove="Resources\7-University.png" />
+    <None Remove="Resources\8-FlyHighInHotAirBalloon.png" />
+    <None Remove="Resources\9-LearnToPlayTheBongos.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\1-VegasWedding.png" />
+    <EmbeddedResource Include="Resources\10-RideTheTallestRollerCoaster.png" />
+    <EmbeddedResource Include="Resources\11-PopStar.png" />
+    <EmbeddedResource Include="Resources\12-PictureOfPeopleCarryingLuggage.png" />
+    <EmbeddedResource Include="Resources\13-Treehouse.png" />
+    <EmbeddedResource Include="Resources\14-PinkCadillac.png" />
+    <EmbeddedResource Include="Resources\15-Lion.png" />
+    <EmbeddedResource Include="Resources\16-BabyPolarBear.png" />
+    <EmbeddedResource Include="Resources\17-EcoBubbleCar.png" />
+    <EmbeddedResource Include="Resources\18-BabyGirl.png" />
+    <EmbeddedResource Include="Resources\19-TwinBoys.png" />
+    <EmbeddedResource Include="Resources\2-CelebrityWedding.png" />
+    <EmbeddedResource Include="Resources\20-Giraffe.png" />
+    <EmbeddedResource Include="Resources\21-FindBigFoot.png" />
+    <EmbeddedResource Include="Resources\22-ExploreLiveVolcano.png" />
+    <EmbeddedResource Include="Resources\23-FindMessageInABottle.png" />
+    <EmbeddedResource Include="Resources\24-Castle.png" />
+    <EmbeddedResource Include="Resources\25-WinACharitySkateboardContest.png" />
+    <EmbeddedResource Include="Resources\26-TravelToMoonInRocket.png" />
+    <EmbeddedResource Include="Resources\27-JetPilot.png" />
+    <EmbeddedResource Include="Resources\28-EcoHouse.png" />
+    <EmbeddedResource Include="Resources\29-RanchHouse.png" />
+    <EmbeddedResource Include="Resources\3-UnderwaterWedding.png" />
+    <EmbeddedResource Include="Resources\30-Lighthouse.png" />
+    <EmbeddedResource Include="Resources\31-BeachHouse.png" />
+    <EmbeddedResource Include="Resources\32-ViewSolarEclipse.png" />
+    <EmbeddedResource Include="Resources\33-BuildASwimmingPool.png" />
+    <EmbeddedResource Include="Resources\34-BathtubBoat.png" />
+    <EmbeddedResource Include="Resources\35-DiamondAnniversary.png" />
+    <EmbeddedResource Include="Resources\36-RacingYacht.png" />
+    <EmbeddedResource Include="Resources\37-GoSkydiving.png" />
+    <EmbeddedResource Include="Resources\38-HeadlineAtRockConcert.png" />
+    <EmbeddedResource Include="Resources\39-GoDivingInNiagraFalls.png" />
+    <EmbeddedResource Include="Resources\4-ParachuteWedding.png" />
+    <EmbeddedResource Include="Resources\40-StuntDouble.png" />
+    <EmbeddedResource Include="Resources\41-BabyTriplets.png" />
+    <EmbeddedResource Include="Resources\41-BuildMultiScreenCinema.png" />
+    <EmbeddedResource Include="Resources\43-Monkey.png" />
+    <EmbeddedResource Include="Resources\44-SwimWithDolphins.png" />
+    <EmbeddedResource Include="Resources\45-Igloo.png" />
+    <EmbeddedResource Include="Resources\46-WinTheJackpot.png" />
+    <EmbeddedResource Include="Resources\47-PrivateJet.png" />
+    <EmbeddedResource Include="Resources\48-DigUpDinosaurFossil.png" />
+    <EmbeddedResource Include="Resources\49-RocketScientist.png" />
+    <EmbeddedResource Include="Resources\5-BeachWedding.png" />
+    <EmbeddedResource Include="Resources\50-Shark.png" />
+    <EmbeddedResource Include="Resources\51-Teacher.png" />
+    <EmbeddedResource Include="Resources\52-ExoticPetVet.png" />
+    <EmbeddedResource Include="Resources\53-SwitchToNaturalPower.png" />
+    <EmbeddedResource Include="Resources\54-BabyGirlTwins.png" />
+    <EmbeddedResource Include="Resources\55-LearnTheLoopTheLoop.png" />
+    <EmbeddedResource Include="Resources\56-WinJungleSafariRaffle.png" />
+    <EmbeddedResource Include="Resources\57-SailAroundWorld.png" />
+    <EmbeddedResource Include="Resources\58-DanceAtRioCarnival.png" />
+    <EmbeddedResource Include="Resources\59-Politician.png" />
+    <EmbeddedResource Include="Resources\6-FairytaleWedding.png" />
+    <EmbeddedResource Include="Resources\60-BabyBoy.png" />
+    <EmbeddedResource Include="Resources\7-University.png" />
+    <EmbeddedResource Include="Resources\8-FlyHighInHotAirBalloon.png" />
+    <EmbeddedResource Include="Resources\9-LearnToPlayTheBongos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

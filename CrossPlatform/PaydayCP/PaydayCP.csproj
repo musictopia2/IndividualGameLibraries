@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="Resources\blackgreennarrowhorizontal.png" />
+    <None Remove="Resources\blacklightgray.png" />
+    <None Remove="Resources\lightgrayblacktrellis.png" />
+    <None Remove="Resources\lightgraywhitesmallcon.png" />
+    <None Remove="Resources\redbrownzip.png" />
+    <None Remove="Resources\redyellowlargecon.png" />
+    <None Remove="Resources\silverwhitecsmallcon.png" />
+    <None Remove="Resources\whiteredtrellis.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\blackgreennarrowhorizontal.png" />
+    <EmbeddedResource Include="Resources\blacklightgray.png" />
+    <EmbeddedResource Include="Resources\lightgrayblacktrellis.png" />
+    <EmbeddedResource Include="Resources\lightgraywhitesmallcon.png" />
+    <EmbeddedResource Include="Resources\redbrownzip.png" />
+    <EmbeddedResource Include="Resources\redyellowlargecon.png" />
+    <EmbeddedResource Include="Resources\silverwhitecsmallcon.png" />
+    <EmbeddedResource Include="Resources\whiteredtrellis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

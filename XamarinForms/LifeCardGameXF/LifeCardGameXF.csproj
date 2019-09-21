@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.778463" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CrossPlatform\Standard\AndyCristinaGamePackageCP\AndyCristinaGamePackageCP.csproj" />
+    <ProjectReference Include="..\..\..\CrossPlatform\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+    <ProjectReference Include="..\..\..\CrossPlatform\Games\LifeCardGameCP\LifeCardGameCP.csproj" />
+    <ProjectReference Include="..\..\Standard\AndyCristinaGamePackageXF\AndyCristinaGamePackageXF.csproj" />
+    <ProjectReference Include="..\..\Standard\BaseGPXPagesAndControlsXF\BaseGPXPagesAndControlsXF.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AndyCristinaBasicClasses">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\AndyCristinaBasicClasses\AndyCristinaBasicClasses\bin\Release\netstandard2.0\AndyCristinaBasicClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicXFControlsAndPages">
+      <HintPath>..\..\..\..\..\..\Standard2.0\XFControls\BasicXFControlsAndPages\bin\Release\netstandard2.0\BasicXFControlsAndPages.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

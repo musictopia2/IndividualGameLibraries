@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\Car.png" />
+    <None Remove="Resources\Dog.png" />
+    <None Remove="Resources\Electric.png" />
+    <None Remove="Resources\Hat.png" />
+    <None Remove="Resources\Horse.png" />
+    <None Remove="Resources\House.png" />
+    <None Remove="Resources\Iron.png" />
+    <None Remove="Resources\MrMonopoly.png" />
+    <None Remove="Resources\RailRoad.png" />
+    <None Remove="Resources\Ship.png" />
+    <None Remove="Resources\Waterworks.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Car.png" />
+    <EmbeddedResource Include="Resources\Dog.png" />
+    <EmbeddedResource Include="Resources\Electric.png" />
+    <EmbeddedResource Include="Resources\Hat.png" />
+    <EmbeddedResource Include="Resources\Horse.png" />
+    <EmbeddedResource Include="Resources\House.png" />
+    <EmbeddedResource Include="Resources\Iron.png" />
+    <EmbeddedResource Include="Resources\MrMonopoly.png" />
+    <EmbeddedResource Include="Resources\RailRoad.png" />
+    <EmbeddedResource Include="Resources\Ship.png" />
+    <EmbeddedResource Include="Resources\Waterworks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

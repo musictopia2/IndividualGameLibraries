@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\Accountant.png" />
+    <None Remove="Resources\arrows.png" />
+    <None Remove="Resources\Artist.png" />
+    <None Remove="Resources\Athlete.png" />
+    <None Remove="Resources\BeachHouse.png" />
+    <None Remove="Resources\ComputerConsultant.png" />
+    <None Remove="Resources\CozyCondo.png" />
+    <None Remove="Resources\Doctor.png" />
+    <None Remove="Resources\DutchColonial.png" />
+    <None Remove="Resources\Entertainer.png" />
+    <None Remove="Resources\FarmHouse.png" />
+    <None Remove="Resources\gameboard.png" />
+    <None Remove="Resources\highspeed1.png" />
+    <None Remove="Resources\highspeed2.png" />
+    <None Remove="Resources\lifeboardgame.json" />
+    <None Remove="Resources\LogCabin.png" />
+    <None Remove="Resources\MobileHome.png" />
+    <None Remove="Resources\PoliceOfficer.png" />
+    <None Remove="Resources\SalesPerson.png" />
+    <None Remove="Resources\spinner.png" />
+    <None Remove="Resources\SplitLevel.png" />
+    <None Remove="Resources\star.bmp" />
+    <None Remove="Resources\Teacher.png" />
+    <None Remove="Resources\Tudor.png" />
+    <None Remove="Resources\Victorian.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Accountant.png" />
+    <EmbeddedResource Include="Resources\arrows.png" />
+    <EmbeddedResource Include="Resources\Artist.png" />
+    <EmbeddedResource Include="Resources\Athlete.png" />
+    <EmbeddedResource Include="Resources\BeachHouse.png" />
+    <EmbeddedResource Include="Resources\ComputerConsultant.png" />
+    <EmbeddedResource Include="Resources\CozyCondo.png" />
+    <EmbeddedResource Include="Resources\Doctor.png" />
+    <EmbeddedResource Include="Resources\DutchColonial.png" />
+    <EmbeddedResource Include="Resources\Entertainer.png" />
+    <EmbeddedResource Include="Resources\FarmHouse.png" />
+    <EmbeddedResource Include="Resources\gameboard.png" />
+    <EmbeddedResource Include="Resources\highspeed1.png" />
+    <EmbeddedResource Include="Resources\highspeed2.png" />
+    <EmbeddedResource Include="Resources\lifeboardgame.json" />
+    <EmbeddedResource Include="Resources\LogCabin.png" />
+    <EmbeddedResource Include="Resources\MobileHome.png" />
+    <EmbeddedResource Include="Resources\PoliceOfficer.png" />
+    <EmbeddedResource Include="Resources\SalesPerson.png" />
+    <EmbeddedResource Include="Resources\spinner.png" />
+    <EmbeddedResource Include="Resources\SplitLevel.png" />
+    <EmbeddedResource Include="Resources\star.bmp" />
+    <EmbeddedResource Include="Resources\Teacher.png" />
+    <EmbeddedResource Include="Resources\Tudor.png" />
+    <EmbeddedResource Include="Resources\Victorian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

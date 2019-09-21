@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SkiaSharp.Views" Version="1.68.0">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CrossPlatform\Standard\AndyCristinaGamePackageCP\AndyCristinaGamePackageCP.csproj" />
+    <ProjectReference Include="..\..\..\CrossPlatform\Standard\BasicGameFramework\BasicGameFramework.csproj" />
+    <ProjectReference Include="..\..\..\CrossPlatform\Games\TileRummyCP\TileRummyCP.csproj" />
+    <ProjectReference Include="..\..\Standard\BaseGPXWindowsAndControlsCore\BaseGPXWindowsAndControlsCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AndyCristinaBasicClasses">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\AndyCristinaBasicClasses\AndyCristinaBasicClasses\bin\Release\netstandard2.0\AndyCristinaBasicClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicControlsAndWindowsCore">
+      <HintPath>..\..\..\..\..\..\Core3.0\WPFLibraries\UI\BasicControlsAndWindowsCore\bin\Release\netcoreapp3.0\BasicControlsAndWindowsCore.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharpGeneralLibrary">
+      <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
