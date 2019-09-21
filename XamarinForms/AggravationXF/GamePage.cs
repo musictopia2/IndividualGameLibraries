@@ -1,9 +1,9 @@
 using AggravationCP;
-using AndyCristinaGamePackageCP.CommonProportionClasses;
-using AndyCristinaGamePackageCP.DataClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using AndyCristinaGamePackageXF;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.BasicClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
@@ -23,15 +23,13 @@ using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExt
 using CommonBasicStandardLibraries.Messenging;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 namespace AggravationXF
 {
     public class GamePage : MultiPlayerPage<AggravationViewModel, AggravationPlayerItem, AggravationSaveInfo>, IHandle<NewTurnEventModel>
     {
         public GamePage(IGamePlatform customPlatform, IStartUp starts, EnumGamePackageMode mode) : base(customPlatform, starts, mode) { }
-
         public override Task HandleAsync(LoadEventModel message)
         {
             _thisColor!.LoadLists(ThisMod!.ColorChooser!);
@@ -76,13 +74,7 @@ namespace AggravationXF
             _ourPiece = new MarblePiecesXF<EnumColorChoice>();
             _ourPiece.Margin = new Thickness(3, 3, 3, 3);
             _ourPiece.HorizontalOptions = LayoutOptions.Start;
-            _ourPiece.VerticalOptions = LayoutOptions.Start;
-            
-            //Grid tempGrid = new Grid();
-            //thisStack.Children.Add(tempGrid);
-            // _thisBoard.InputTransparent = true;
-            //_thisBoard.Margin = new Thickness(0, 40, 0, 0);
-            //_ourPiece.Init(); //i think.
+            _ourPiece.VerticalOptions = LayoutOptions.Start;            
             Button thisRoll;
             if (ScreenUsed == EnumScreen.SmallPhone)
                 thisRoll = GetSmallerButton("Roll Dice", nameof(AggravationViewModel.RollCommand));
@@ -104,7 +96,6 @@ namespace AggravationXF
             firstInfo.AddRow("Turn", nameof(AggravationViewModel.NormalTurn));
             firstInfo.AddRow("Instructions", nameof(AggravationViewModel.Instructions));
             firstInfo.AddRow("Temp Space", nameof(AggravationViewModel.TempSpace));
-            //firstInfo.AddRow("Status", nameof(AggravationViewModel.Status));
             otherStack.Children.Add(_ourPiece);
             otherStack.Children.Add(thisRoll);
             otherStack.Children.Add(_diceControl);
