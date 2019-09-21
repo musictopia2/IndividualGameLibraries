@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Reference Include="BaseMahjongTilesCP">
-      <HintPath>..\..\Standard\BaseMahjongTilesCP\bin\Release\netstandard2.0\BaseMahjongTilesCP.dll</HintPath>
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BaseMahjongTilesCP\bin\Release\netstandard2.0\BaseMahjongTilesCP.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharpGeneralLibrary">
       <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>

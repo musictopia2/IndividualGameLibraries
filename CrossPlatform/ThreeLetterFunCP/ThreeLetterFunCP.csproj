@@ -29,7 +29,7 @@
       <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
     </Reference>
     <Reference Include="SpellingDll">
-      <HintPath>..\..\Standard\SpellingDll\bin\Release\netstandard2.0\SpellingDll.dll</HintPath>
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\SpellingDll\bin\Release\netstandard2.0\SpellingDll.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Reference Include="BaseSolitaireClassesCP">
-      <HintPath>..\..\Standard\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharpGeneralLibrary">
       <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>

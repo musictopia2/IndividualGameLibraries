@@ -25,7 +25,7 @@
       <HintPath>..\..\..\..\..\..\Standard2.0\General\AndyCristinaBasicClasses\AndyCristinaBasicClasses\bin\Release\netstandard2.0\AndyCristinaBasicClasses.dll</HintPath>
     </Reference>
     <Reference Include="BaseSolitaireClassesCP">
-      <HintPath>..\..\..\CrossPlatform\Standard\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>
     </Reference>
     <Reference Include="BasicXFControlsAndPages">
       <HintPath>..\..\..\..\..\..\Standard2.0\XFControls\BasicXFControlsAndPages\bin\Release\netstandard2.0\BasicXFControlsAndPages.dll</HintPath>
@@ -34,7 +34,7 @@
       <HintPath>..\..\..\..\..\..\Standard2.0\General\SkiaSharpGeneralLibrary\bin\Release\netstandard2.0\SkiaSharpGeneralLibrary.dll</HintPath>
     </Reference>
     <Reference Include="SolitaireGraphicsXF">
-      <HintPath>..\..\Standard\SolitaireGraphicsXF\bin\Release\netstandard2.0\SolitaireGraphicsXF.dll</HintPath>
+      <HintPath>..\..\..\GamingPackXBasicLibraries\XF\SolitaireGraphicsXF\bin\Release\netstandard2.0\SolitaireGraphicsXF.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

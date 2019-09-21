@@ -28,7 +28,7 @@
       <HintPath>..\..\..\..\..\..\Standard2.0\General\AndyCristinaBasicClasses\AndyCristinaBasicClasses\bin\Release\netstandard2.0\AndyCristinaBasicClasses.dll</HintPath>
     </Reference>
     <Reference Include="BaseSolitaireClassesCP">
-      <HintPath>..\..\..\CrossPlatform\Standard\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>
     </Reference>
     <Reference Include="BasicControlsAndWindowsCore">
       <HintPath>..\..\..\..\..\..\Core3.0\WPFLibraries\UI\BasicControlsAndWindowsCore\bin\Release\netcoreapp3.0\BasicControlsAndWindowsCore.dll</HintPath>
