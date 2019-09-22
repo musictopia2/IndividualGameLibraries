@@ -12,7 +12,7 @@ using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.Jso
 using VegasSolitaireCP;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BasicGameFramework.CommonInterfaces;
 using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using Xamarin.Forms;

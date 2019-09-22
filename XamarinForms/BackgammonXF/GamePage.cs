@@ -2,7 +2,7 @@ using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionC
 using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using BasicGameFramework.StandardImplementations.XamarinForms.BasicClasses;
 using BackgammonCP;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;

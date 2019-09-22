@@ -1,7 +1,7 @@
 using A8RoundRummyCP;
 using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
 using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;

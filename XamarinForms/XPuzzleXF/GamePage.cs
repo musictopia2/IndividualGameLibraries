@@ -1,5 +1,5 @@
 using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BasicGameFramework.BasicEventModels;
 using BasicGameFramework.BasicGameDataClasses;

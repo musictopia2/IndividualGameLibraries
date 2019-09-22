@@ -1,6 +1,6 @@
 using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using BaseGPXPagesAndControlsXF.BasicControls.SingleCardFrames;

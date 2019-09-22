@@ -13,12 +13,14 @@
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\XF\BaseGPXPagesAndControlsXF\BaseGPXPagesAndControlsXF.csproj" />
-    <ProjectReference Include="..\..\CrossPlatform\XactikaCP\XactikaCP.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="BasicGameFramework">
       <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="BaseGPXPagesAndControlsXF">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\XF\BaseGPXPagesAndControlsXF\bin\Release\netstandard2.0\BaseGPXPagesAndControlsXF.dll</HintPath>
+    </Reference>
+    <Reference Include="XactikaCP">
+      <HintPath>..\..\CrossPlatform\XactikaCP\bin\Release\netstandard2.0\XactikaCP.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

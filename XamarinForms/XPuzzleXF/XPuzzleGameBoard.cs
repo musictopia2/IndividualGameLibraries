@@ -1,6 +1,6 @@
 using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.StandardImplementations.XamarinForms.BasicClasses;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using SkiaSharp;
 using Xamarin.Forms;

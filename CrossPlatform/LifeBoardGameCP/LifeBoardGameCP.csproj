@@ -64,7 +64,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="SkiaSharpGeneralLibrary" Version="1.0.0" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Reference Include="BasicGameFramework">
       <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>

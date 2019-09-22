@@ -13,12 +13,14 @@
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\XF\BaseGPXPagesAndControlsXF\BaseGPXPagesAndControlsXF.csproj" />
-    <ProjectReference Include="..\..\CrossPlatform\SpiderSolitaireCP\SpiderSolitaireCP.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="BasicGameFramework">
       <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="BaseGPXPagesAndControlsXF">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\XF\BaseGPXPagesAndControlsXF\bin\Release\netstandard2.0\BaseGPXPagesAndControlsXF.dll</HintPath>
+    </Reference>
+    <Reference Include="SpiderSolitaireCP">
+      <HintPath>..\..\CrossPlatform\SpiderSolitaireCP\bin\Release\netstandard2.0\SpiderSolitaireCP.dll</HintPath>
     </Reference>
     <Reference Include="BaseSolitaireClassesCP">
       <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BaseSolitaireClassesCP\bin\Release\netstandard2.0\BaseSolitaireClassesCP.dll</HintPath>

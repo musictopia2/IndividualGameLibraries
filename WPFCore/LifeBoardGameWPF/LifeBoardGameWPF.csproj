@@ -15,12 +15,14 @@
     <PackageReference Include="BasicControlsAndWindowsCore" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\WPF\BaseGPXWindowsAndControlsCore\BaseGPXWindowsAndControlsCore.csproj" />
-    <ProjectReference Include="..\..\CrossPlatform\LifeBoardGameCP\LifeBoardGameCP.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="BasicGameFramework">
       <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="BaseGPXWindowsAndControlsCore">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\WPF\BaseGPXWindowsAndControlsCore\bin\Release\netcoreapp3.0\BaseGPXWindowsAndControlsCore.dll</HintPath>
+    </Reference>
+    <Reference Include="LifeBoardGameCP">
+      <HintPath>..\..\CrossPlatform\LifeBoardGameCP\bin\Release\netstandard2.0\LifeBoardGameCP.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
