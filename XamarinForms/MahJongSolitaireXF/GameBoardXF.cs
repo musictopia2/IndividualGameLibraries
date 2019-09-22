@@ -3,7 +3,6 @@ using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
 using MahJongSolitaireCP;
-using Microsoft.Extensions.Logging.Abstractions;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace MahJongSolitaireXF

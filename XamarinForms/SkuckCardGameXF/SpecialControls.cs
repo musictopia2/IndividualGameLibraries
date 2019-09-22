@@ -4,13 +4,12 @@ using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
 using BasicGameFramework.ChooserClasses;
 using BasicGameFramework.GameGraphicsCP.GamePieces;
 using BasicGameFramework.RegularDeckOfCards;
-using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
 using SkuckCardGameCP;
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-
 namespace SkuckCardGameXF
 {
     public class BidControl : BaseFrameXF

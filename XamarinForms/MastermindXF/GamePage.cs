@@ -14,7 +14,7 @@ using MastermindCP;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
-using ss  = AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using ss  = BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace MastermindXF
 {
     public class GamePage : SinglePlayerGamePage<MastermindViewModel>
