@@ -249,20 +249,20 @@ namespace Rummy500CP
         public bool CardContainsRummy(int deck, IDeckDict<RegularRummyCard> newSet)
         {
             int x;
-            var ThisCard = DeckList!.GetSpecificItem(deck);
-            int Plays;
+            var thisCard = DeckList!.GetSpecificItem(deck);
+            int plays;
             foreach (var thisSet in _thisMod!.MainSets1!.SetList)
             {
                 for (x = 1; x <= 2; x++)
                 {
-                    Plays = thisSet.PositionToPlay(ThisCard);
-                    if (Plays > 0)
+                    plays = thisSet.PositionToPlay(thisCard);
+                    if (plays > 0)
                         return true;
                 }
             }
             if (newSet.Count < 4)
                 return false; //because still needs one for discard.
-            int manys = newSet.Count(items => items.Value == ThisCard.Value);
+            int manys = newSet.Count(items => items.Value == thisCard.Value);
             if (manys >= 3)
                 return true; //other cases are covered.
             DeckRegularDict<RegularRummyCard> mainList;

@@ -29,7 +29,7 @@ namespace Rummy500CP
         public static int NegativePoints(this RegularRummyCard ThisCard)
         {
             //i think it should just show the minus amounts.
-            if (ThisCard.SecondNumber == EnumCardValueList.HighAce)
+            if (ThisCard.Value == EnumCardValueList.HighAce)
                 return -15;
             if (ThisCard.Value < EnumCardValueList.Eight)
                 return -5;

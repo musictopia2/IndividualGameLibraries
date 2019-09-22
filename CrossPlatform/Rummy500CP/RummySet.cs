@@ -76,12 +76,17 @@ namespace Rummy500CP
                 if (thisCard.Player == player)
                 {
                     output.NumberOfCards++;
-                    if (x == 1 && _setType == EnumWhatSets.runs && thisCard.Value == EnumCardValueList.LowAce)
+                    if (x == 1 && _setType == EnumWhatSets.runs && thisCard.SecondNumber == EnumCardValueList.LowAce)
                         output.Points += 5;
-                    else if (thisCard.SecondNumber == EnumCardValueList.HighAce)
+                    else if (thisCard.Value == EnumCardValueList.HighAce || thisCard.SecondNumber == EnumCardValueList.LowAce)
                         output.Points += 15;
+                    //else if (_setType == EnumWhatSets.kinds && thisCard.Value == EnumCardValueList.LowAce)
+                    //    output.Points += 15; //if its in a kind, its 15 period.  this is the best way to handle that.
+                    //else if (thisCard.Value == EnumCardValueList.HighAce)
+                    //    output.Points += 15;
                     else if (thisCard.Value < EnumCardValueList.Eight)
                         output.Points += 5;
+
                     else
                         output.Points += 10;
                 }
@@ -107,19 +112,18 @@ namespace Rummy500CP
                 }
                 throw new BasicBlankException("Cannot find the card needed for kinds");
             }
-
             if (position == 1)
             {
-                if (thisCard.Value == EnumCardValueList.LowAce)
+                if (thisCard.SecondNumber == EnumCardValueList.LowAce) //since i don't know which is which.  needs to cover both cases.
                     return 0;
                 EnumCardValueList LowerValue;
                 LowerValue = thisCard.Value - 1;
                 return _mainGame.DeckList.Single(Items => Items.Value == LowerValue && Items.Suit == thisCard.Suit).Deck;
             }
-            if (thisCard.SecondNumber == EnumCardValueList.HighAce)
+            if (thisCard.Value == EnumCardValueList.HighAce) //has to lean towards low.  if i do something else, i risk breaking other rummy games.
                 return 0;//because nothing higher than high ace.
             EnumCardValueList higherValue = thisCard.Value + 1;
-            return _mainGame.DeckList.Single(Items => Items.SecondNumber == higherValue && Items.Suit == thisCard.Suit).Deck; //hopefully this simple.
+            return _mainGame.DeckList.Single(Items => Items.Value == higherValue && Items.Suit == thisCard.Suit).Deck; //hopefully this simple.
         }
         public int PositionToPlay(RegularRummyCard thisCard)
         {
