@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using BasicGameFramework.BasicDrawables.Dictionary;
 using FluxxCP;
 using System.Windows.Controls;

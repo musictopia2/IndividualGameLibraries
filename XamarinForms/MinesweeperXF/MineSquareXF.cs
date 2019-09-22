@@ -1,4 +1,4 @@
-﻿using MinesweeperCP;
+using MinesweeperCP;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 namespace MinesweeperXF

@@ -1,4 +1,4 @@
-﻿using RummyDiceCP;
+using RummyDiceCP;
 using Xamarin.Forms;
 namespace RummyDiceXF
 {

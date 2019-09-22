@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.BasicEventModels;
+using BasicGameFramework.BasicEventModels;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
@@ -7,8 +7,8 @@ using SnakesAndLaddersCP;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 
 namespace SnakesAndLaddersXF
 {

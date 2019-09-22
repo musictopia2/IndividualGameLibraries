@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFramework.GameGraphicsCP.Interfaces;
 namespace ClueBoardGameXF
 {
     public class BoardProportion : IProportionBoard //since only large tablets are supported now.

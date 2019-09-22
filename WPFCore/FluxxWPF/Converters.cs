@@ -1,4 +1,4 @@
-﻿using FluxxCP;
+using FluxxCP;
 using System.Windows.Data;
 using static BasicControlsAndWindowsCore.BasicWindows.Misc.WindowHelper;
 namespace FluxxWPF

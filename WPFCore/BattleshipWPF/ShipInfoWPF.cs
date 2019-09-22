@@ -1,4 +1,4 @@
-﻿using BasicControlsAndWindowsCore.BasicWindows.BasicConverters;
+using BasicControlsAndWindowsCore.BasicWindows.BasicConverters;
 using BasicControlsAndWindowsCore.Helpers;
 using BattleshipCP;
 using CommonBasicStandardLibraries.Exceptions;

@@ -1,5 +1,5 @@
 using AccordianSolitaireCP;
-using AndyCristinaGamePackageCP.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using BaseGPXWindowsAndControlsCore.BaseWindows;
 using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;

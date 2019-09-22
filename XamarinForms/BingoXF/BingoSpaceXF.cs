@@ -1,10 +1,10 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BingoCP;
 using CommonBasicStandardLibraries.Exceptions;
 using SkiaSharp.Views.Forms;
 using System.ComponentModel;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace BingoXF
 {

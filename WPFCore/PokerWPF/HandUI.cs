@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BaseWindows;
+using BaseGPXWindowsAndControlsCore.BaseWindows;
 using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
 using BasicControlsAndWindowsCore.Helpers;
 using CommonBasicStandardLibraries.CollectionClasses;

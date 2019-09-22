@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
+using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
 using MastermindCP;
 using Xamarin.Forms;
 using static MastermindXF.GlobalXF;

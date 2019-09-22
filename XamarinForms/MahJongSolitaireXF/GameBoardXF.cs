@@ -1,4 +1,4 @@
-﻿using BaseMahjongTilesCP;
+using BaseMahjongTilesCP;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;

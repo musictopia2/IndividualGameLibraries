@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
+using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
 using BasicXFControlsAndPages.Helpers;
 using CommonBasicStandardLibraries.CollectionClasses;
@@ -7,8 +7,8 @@ using PokerCP;
 using System.Collections.Specialized;
 using Xamarin.Forms;
 using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 namespace PokerXF
 {
     public class HandUI : ContentView, INewCard

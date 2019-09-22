@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.GameGraphics.Base;
+using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using BasicGameFramework.GameGraphicsCP.BaseGraphics;
 using CommonBasicStandardLibraries.CollectionClasses;
 using SkiaSharp;

@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.BasicEventModels;
+using BasicGameFramework.BasicEventModels;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
 using LifeBoardGameCP;

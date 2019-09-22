@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.Exceptions;
 using FluxxCP;
 using Xamarin.Forms;

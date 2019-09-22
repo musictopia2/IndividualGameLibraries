@@ -1,4 +1,4 @@
-﻿using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.Exceptions;
 using HeapSolitaireCP;
 using System.Windows;
 using System.Windows.Controls;

@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
+using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 using ClueBoardGameCP;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;

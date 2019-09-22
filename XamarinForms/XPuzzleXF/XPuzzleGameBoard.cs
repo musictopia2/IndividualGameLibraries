@@ -1,11 +1,11 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
-using AndyCristinaGamePackageXF;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.BasicClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using SkiaSharp;
 using Xamarin.Forms;
 using XPuzzleCP;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace XPuzzleXF
 {
     public class XPuzzleGameBoard : BasicGameBoardXF<XPuzzleSpaceInfo>

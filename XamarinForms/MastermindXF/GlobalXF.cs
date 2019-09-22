@@ -1,5 +1,5 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace MastermindXF
 {
     public static class GlobalXF

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
+using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
 using BaseGPXWindowsAndControlsCore.BasicControls.SingleCardFrames;
 using LifeBoardGameCP;
 using System.Linq;

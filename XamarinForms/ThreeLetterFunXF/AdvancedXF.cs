@@ -1,8 +1,8 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using ThreeLetterFunCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;

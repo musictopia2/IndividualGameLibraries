@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.BasicEventModels;
+using BasicGameFramework.BasicEventModels;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using BasicControlsAndWindowsCore.Helpers;
 using BladesOfSteelCP;
 using System.Windows;

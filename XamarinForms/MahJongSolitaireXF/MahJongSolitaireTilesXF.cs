@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.GameGraphics.Base;
+using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using BaseMahjongTilesCP;
 using BasicGameFramework.GameGraphicsCP.Tiles;
 using Xamarin.Forms;

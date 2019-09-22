@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.BasicDrawables.Dictionary;
+using BasicGameFramework.BasicDrawables.Dictionary;
 using BasicGameFramework.MultiplePilesViewModels;
 using CommonBasicStandardLibraries.Exceptions;
 using FlinchCP;

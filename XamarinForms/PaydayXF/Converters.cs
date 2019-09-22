@@ -1,4 +1,4 @@
-﻿using PaydayCP;
+using PaydayCP;
 using Xamarin.Forms;
 namespace PaydayXF
 {

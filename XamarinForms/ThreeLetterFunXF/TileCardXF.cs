@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.GameGraphics.Base;
+using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using ThreeLetterFunCP;
 using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
+using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using BowlingDiceGameCP;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;

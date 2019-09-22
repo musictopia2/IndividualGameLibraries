@@ -1,6 +1,6 @@
-using AndyCristinaGamePackageCP.DataClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.MultipleFrameContainers;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
@@ -18,7 +18,7 @@ using BasicGameFramework.RegularDeckOfCards;
 using EasyGoSolitaireCP;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace EasyGoSolitaireXF

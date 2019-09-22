@@ -1,5 +1,5 @@
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 using BaseGPXPagesAndControlsXF.BasicControls.Misc;
@@ -15,8 +15,8 @@ using TileRummyCP;
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper; //just in case
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.BasicGameDataClasses;
 namespace TileRummyXF
 {

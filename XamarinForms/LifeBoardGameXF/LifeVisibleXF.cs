@@ -1,4 +1,4 @@
-﻿using LifeBoardGameCP;
+using LifeBoardGameCP;
 using Xamarin.Forms;
 namespace LifeBoardGameXF
 {

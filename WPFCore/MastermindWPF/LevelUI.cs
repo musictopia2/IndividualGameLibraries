@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
+using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using MastermindCP;
 using System.Windows;

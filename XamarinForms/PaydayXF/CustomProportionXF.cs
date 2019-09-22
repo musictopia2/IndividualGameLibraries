@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
@@ -10,8 +10,8 @@ using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
 using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
 using BasicGameFramework.GameGraphicsCP.Interfaces;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 namespace PaydayXF
 {
     public class CustomProportionXF : IProportionImage, IProportionBoard

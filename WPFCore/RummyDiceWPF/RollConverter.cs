@@ -1,4 +1,4 @@
-﻿using RummyDiceCP;
+using RummyDiceCP;
 using System.Windows.Data;
 namespace RummyDiceWPF
 {

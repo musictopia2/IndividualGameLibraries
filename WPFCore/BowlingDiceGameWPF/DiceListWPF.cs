@@ -1,4 +1,4 @@
-﻿using BowlingDiceGameCP;
+using BowlingDiceGameCP;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Windows;

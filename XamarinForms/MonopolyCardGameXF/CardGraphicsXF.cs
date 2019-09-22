@@ -1,8 +1,8 @@
 using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using MonopolyCardGameCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 namespace MonopolyCardGameXF

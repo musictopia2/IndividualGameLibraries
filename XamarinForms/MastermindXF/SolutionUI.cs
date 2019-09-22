@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
+using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
 using CommonBasicStandardLibraries.Exceptions;
 using MastermindCP;
 using Xamarin.Forms;

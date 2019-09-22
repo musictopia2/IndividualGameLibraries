@@ -1,4 +1,4 @@
-﻿using CommonBasicStandardLibraries.CollectionClasses;
+using CommonBasicStandardLibraries.CollectionClasses;
 using CribbageCP;
 using System.Windows;
 using System.Windows.Controls;

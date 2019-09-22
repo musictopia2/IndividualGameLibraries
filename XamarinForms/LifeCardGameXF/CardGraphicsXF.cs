@@ -3,8 +3,8 @@ using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using LifeCardGameCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 namespace LifeCardGameXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<LifeCardGameCardInformation, LifeCardGameGraphicsCP>

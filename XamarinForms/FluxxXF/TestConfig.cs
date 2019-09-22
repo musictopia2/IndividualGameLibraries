@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.BasicDrawables.Interfaces;
+using BasicGameFramework.BasicDrawables.Interfaces;
 using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
 using BasicGameFramework.TestUtilities;
 using FluxxCP;

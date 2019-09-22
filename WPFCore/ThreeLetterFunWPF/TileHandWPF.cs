@@ -1,4 +1,4 @@
-﻿using CommonBasicStandardLibraries.CollectionClasses;
+using CommonBasicStandardLibraries.CollectionClasses;
 using System;
 using System.Windows.Controls;
 using System.Windows.Data;

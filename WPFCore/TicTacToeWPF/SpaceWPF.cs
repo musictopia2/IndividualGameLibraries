@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.BasicEventModels;
+using BasicGameFramework.BasicEventModels;
 using CommonBasicStandardLibraries.Messenging;
 using SkiaSharp.Views.WPF;
 using System.Windows.Controls;

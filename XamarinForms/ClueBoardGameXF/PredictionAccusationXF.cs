@@ -1,4 +1,4 @@
-﻿using ClueBoardGameCP;
+using ClueBoardGameCP;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Linq;

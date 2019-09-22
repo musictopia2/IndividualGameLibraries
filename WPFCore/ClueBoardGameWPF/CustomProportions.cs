@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFramework.GameGraphicsCP.Interfaces;
 namespace ClueBoardGameWPF
 {
     public class BoardProportion : IProportionBoard

@@ -1,4 +1,4 @@
-﻿using BasicControlsAndWindowsCore.Helpers;
+using BasicControlsAndWindowsCore.Helpers;
 using BowlingDiceGameCP;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Windows;

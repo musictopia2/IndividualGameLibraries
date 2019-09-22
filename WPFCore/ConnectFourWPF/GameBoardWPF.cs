@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
+using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
 using BaseGPXWindowsAndControlsCore.GameGraphics.GamePieces;
 using ConnectFourCP;
 using System;

@@ -1,6 +1,6 @@
-using AndyCristinaGamePackageCP.CommonProportionClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
@@ -17,8 +17,8 @@ using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using ts = BasicGameFramework.GameGraphicsCP.Dominos.DominosCP;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.BasicGameDataClasses;
 namespace DominosRegularXF
 {

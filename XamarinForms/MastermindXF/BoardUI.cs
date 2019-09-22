@@ -1,4 +1,4 @@
-﻿using CommonBasicStandardLibraries.CollectionClasses;
+using CommonBasicStandardLibraries.CollectionClasses;
 using MastermindCP;
 using System.Linq;
 using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿using AggravationCP;
+using AggravationCP;
 using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;

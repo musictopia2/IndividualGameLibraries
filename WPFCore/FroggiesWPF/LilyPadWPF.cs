@@ -1,4 +1,4 @@
-﻿using FroggiesCP;
+using FroggiesCP;
 using SkiaSharp.Views.WPF;
 using System.Windows.Controls;
 namespace FroggiesWPF

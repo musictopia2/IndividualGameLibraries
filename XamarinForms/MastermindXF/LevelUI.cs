@@ -1,9 +1,9 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using MastermindCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace MastermindXF
 {
     public class LevelUI : BaseFrameXF

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
+using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using BaseGPXWindowsAndControlsCore.GameGraphics.GamePieces;
 using BasicGameFramework.ChooserClasses;

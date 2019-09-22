@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using MonopolyCardGameCP;
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;

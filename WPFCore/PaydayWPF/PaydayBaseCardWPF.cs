@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
 using PaydayCP;
 using System.Windows;
 using System.Windows.Data;

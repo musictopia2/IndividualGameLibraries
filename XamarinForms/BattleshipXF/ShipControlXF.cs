@@ -1,4 +1,4 @@
-﻿using BattleshipCP;
+using BattleshipCP;
 using CommonBasicStandardLibraries.CollectionClasses;
 using Xamarin.Forms;
 namespace BattleshipXF

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BaseWindows;
+using BaseGPXWindowsAndControlsCore.BaseWindows;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using BasicControlsAndWindowsCore.Helpers;
 using BasicGameFramework.BasicDrawables.Dictionary;

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
+using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
 using System.Windows.Controls;
 using ThreeLetterFunCP;
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;

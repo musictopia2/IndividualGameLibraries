@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.GameGraphics.GamePieces;
+using BaseGPXWindowsAndControlsCore.GameGraphics.GamePieces;
 using CommonBasicStandardLibraries.Exceptions;
 using MastermindCP;
 using System.Windows.Controls;

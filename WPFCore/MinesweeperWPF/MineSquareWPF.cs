@@ -1,4 +1,4 @@
-﻿using MinesweeperCP;
+using MinesweeperCP;
 using SkiaSharp.Views.WPF;
 using System.Windows.Controls;
 namespace MinesweeperWPF

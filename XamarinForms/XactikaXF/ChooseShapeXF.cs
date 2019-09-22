@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.Extensions;
+using BasicGameFramework.Extensions;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using CommonBasicStandardLibraries.CollectionClasses;
 using SkiaSharp;

@@ -1,4 +1,4 @@
-﻿using BattleshipCP;
+using BattleshipCP;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System.Windows;

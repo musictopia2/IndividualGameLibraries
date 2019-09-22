@@ -1,4 +1,4 @@
-﻿using CommonBasicStandardLibraries.CollectionClasses;
+using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using MillebournesCP;
 using System.Collections.Specialized;

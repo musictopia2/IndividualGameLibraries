@@ -1,5 +1,5 @@
-using AndyCristinaGamePackageCP.CommonProportionClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using BackgammonCP;
 using BaseGPXWindowsAndControlsCore.BaseWindows;
 using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;

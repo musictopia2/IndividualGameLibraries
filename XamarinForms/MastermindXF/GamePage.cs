@@ -1,7 +1,7 @@
-using AndyCristinaGamePackageCP.DataClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using AndyCristinaGamePackageXF;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.BasicClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;

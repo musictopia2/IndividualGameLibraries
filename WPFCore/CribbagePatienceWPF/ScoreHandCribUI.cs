@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
 using BasicGameFramework.BasicDrawables.Dictionary;
 using CommonBasicStandardLibraries.Exceptions;

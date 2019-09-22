@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
+using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
 using BattleshipCP;
 using System.Windows.Controls;
 using System.Windows.Data;

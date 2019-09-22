@@ -1,9 +1,9 @@
-using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using XactikaCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace XactikaXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<XactikaCardInformation, XactikaGraphicsCP>

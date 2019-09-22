@@ -1,4 +1,4 @@
-﻿using SkiaSharp.Views.Forms;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using static BowlingDiceGameCP.BowlingGlobalDrawing;
 namespace BowlingDiceGameXF

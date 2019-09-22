@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
+using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
 using BingoCP;
 using System.Windows.Controls;
 namespace BingoWPF

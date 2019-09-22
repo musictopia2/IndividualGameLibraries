@@ -1,10 +1,10 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
 using BasicGameFramework.GameBoardCollections;
 using SolitaireBoardGameCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace SolitaireBoardGameXF
 {
     public class SolitaireGameBoard : ImageGameBoardXF<GameSpace>

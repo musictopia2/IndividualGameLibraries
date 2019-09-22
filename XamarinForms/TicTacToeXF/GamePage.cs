@@ -1,6 +1,6 @@
-using AndyCristinaGamePackageCP.DataClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using BasicGameFramework.BasicEventModels;
@@ -10,7 +10,7 @@ using BasicGameFramework.MultiplayerClasses.LoadingClasses;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using TicTacToeCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace TicTacToeXF
 {
     public class GamePage : MultiPlayerPage<TicTacToeViewModel, TicTacToePlayerItem, TicTacToeSaveInfo>

@@ -12,15 +12,15 @@ using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.Jso
 using DemonSolitaireCP;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BasicGameFramework.BasicEventModels;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BasicGameFramework.CommonInterfaces;
-using AndyCristinaGamePackageCP.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper; //just in case
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.DrawableListsViewModels;
 using BasicGameFramework.BasicDrawables.Interfaces;
 using BasicGameFramework.RegularDeckOfCards;

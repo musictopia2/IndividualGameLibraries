@@ -1,4 +1,4 @@
-﻿using FluxxCP;
+using FluxxCP;
 using Xamarin.Forms;
 namespace FluxxXF
 {

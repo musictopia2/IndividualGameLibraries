@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
+using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using BattleshipCP;
 using Xamarin.Forms;
 namespace BattleshipXF

@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.MultipleFrameContainers;
+using BaseGPXPagesAndControlsXF.BasicControls.MultipleFrameContainers;
 using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
 using BaseSolitaireClassesCP.Cards;
 using BaseSolitaireClassesCP.GraphicsViewModels;

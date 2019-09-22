@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
 using BaseMahjongTilesCP;
 using BasicGameFramework.GameGraphicsCP.Tiles;
 using System.Windows;

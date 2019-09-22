@@ -1,6 +1,6 @@
 using A21DiceGameCP;
-using AndyCristinaGamePackageCP.CommonProportionClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using BaseGPXWindowsAndControlsCore.BaseWindows;
 using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
 using BaseGPXWindowsAndControlsCore.BasicControls.Misc;

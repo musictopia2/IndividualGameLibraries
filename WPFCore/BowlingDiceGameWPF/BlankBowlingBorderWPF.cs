@@ -1,4 +1,4 @@
-﻿using SkiaSharp.Views.Desktop;
+using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System.Windows.Controls;
 using static BowlingDiceGameCP.BowlingGlobalDrawing;

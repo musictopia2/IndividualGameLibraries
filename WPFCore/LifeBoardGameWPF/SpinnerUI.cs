@@ -1,4 +1,4 @@
-﻿using LifeBoardGameCP;
+using LifeBoardGameCP;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System.Windows.Controls;

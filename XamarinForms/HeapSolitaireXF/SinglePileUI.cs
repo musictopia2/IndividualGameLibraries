@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
+using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
 using BasicGameFramework.BasicDrawables.Dictionary;
 using BasicGameFramework.MultiplePilesViewModels;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;

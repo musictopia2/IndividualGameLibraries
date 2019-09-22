@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using BaseGPXWindowsAndControlsCore.GameGraphics.Dominos;
 using BasicGameFramework.BasicDrawables.Dictionary;
 using BasicGameFramework.Dominos;

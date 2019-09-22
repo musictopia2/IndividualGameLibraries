@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.CollectionClasses;
 using MonasteryCardGameCP;
 using System;

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.Exceptions;
 using FluxxCP;
 using SkiaSharp;

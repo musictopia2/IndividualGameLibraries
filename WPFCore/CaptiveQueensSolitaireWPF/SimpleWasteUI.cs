@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
+using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
 using BaseSolitaireClassesCP.Cards;
 using BasicGameFramework.RegularDeckOfCards;
 using CaptiveQueensSolitaireCP;

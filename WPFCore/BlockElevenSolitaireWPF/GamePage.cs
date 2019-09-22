@@ -22,7 +22,7 @@ using BasicGameFramework.Extensions;
 using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using AndyCristinaGamePackageCP.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using BasicGameFramework.CommonInterfaces;
 using BaseGPXWindowsAndControlsCore.BasicControls.SingleCardFrames;
 using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;

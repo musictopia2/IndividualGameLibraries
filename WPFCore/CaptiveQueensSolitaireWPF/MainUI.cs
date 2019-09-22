@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.MultipleFrameContainers;
+using BaseGPXWindowsAndControlsCore.BasicControls.MultipleFrameContainers;
 using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
 using BaseSolitaireClassesCP.Cards;
 using BasicGameFramework.MultiplePilesViewModels;

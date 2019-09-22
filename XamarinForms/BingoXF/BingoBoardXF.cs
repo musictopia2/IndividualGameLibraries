@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
+using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using BingoCP;
 using Xamarin.Forms;
 namespace BingoXF

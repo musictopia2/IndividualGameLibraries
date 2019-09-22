@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
 using FluxxCP;
 using System;
 using System.Linq;

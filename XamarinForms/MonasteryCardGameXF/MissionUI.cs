@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.CollectionClasses;
 using MonasteryCardGameCP;
 using System;
@@ -7,8 +7,8 @@ using System.Globalization;
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using AndyCristinaGamePackageCP.DataClasses;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace MonasteryCardGameXF
 {
     public class MissionUI : BaseFrameXF

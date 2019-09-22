@@ -1,4 +1,4 @@
-﻿using BattleshipCP;
+using BattleshipCP;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;

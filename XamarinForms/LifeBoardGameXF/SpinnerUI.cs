@@ -1,4 +1,4 @@
-﻿using LifeBoardGameCP;
+using LifeBoardGameCP;
 using SkiaSharp.Views.Forms;
 using System;
 using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
 using SnakesAndLaddersCP;

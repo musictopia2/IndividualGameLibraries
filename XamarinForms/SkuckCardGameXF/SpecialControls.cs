@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
+using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
 using BasicGameFramework.ChooserClasses;
@@ -8,8 +8,8 @@ using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
 using SkuckCardGameCP;
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 
 namespace SkuckCardGameXF
 {

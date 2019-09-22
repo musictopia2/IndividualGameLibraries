@@ -1,7 +1,7 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using CandylandCP;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace CandylandXF
 {
     public class PieceXF : BaseGraphicsXF<CandylandPieceGraphicsCP>

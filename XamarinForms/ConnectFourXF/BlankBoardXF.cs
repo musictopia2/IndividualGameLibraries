@@ -1,4 +1,4 @@
-﻿using ConnectFourCP;
+using ConnectFourCP;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;

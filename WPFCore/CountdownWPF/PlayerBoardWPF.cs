@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
+using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
 using BasicGameFramework.BasicEventModels;
 using BasicGameFramework.DIContainers;
 using CommonBasicStandardLibraries.Messenging;

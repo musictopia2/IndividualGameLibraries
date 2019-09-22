@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.CommonInterfaces;
+using BasicGameFramework.CommonInterfaces;
 using BasicGameFramework.Extensions;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using RummyDiceCP;

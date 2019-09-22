@@ -1,4 +1,4 @@
-﻿using FroggiesCP;
+using FroggiesCP;
 using SkiaSharp.Views.Forms;
 using System.Threading.Tasks;
 using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Messenging;
 using FroggiesCP;

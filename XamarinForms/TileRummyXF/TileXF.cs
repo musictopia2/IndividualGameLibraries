@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
@@ -13,8 +13,8 @@ using Xamarin.Forms;
 using TileRummyCP;
 using BaseGPXPagesAndControlsXF.GameGraphics.Base;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 namespace TileRummyXF
 {
     public class TileXF : BaseDeckGraphicsXF<TileInfo, TileCP>

@@ -1,4 +1,4 @@
-﻿using LifeBoardGameCP;
+using LifeBoardGameCP;
 using System.Windows.Data;
 using static BasicControlsAndWindowsCore.BasicWindows.Misc.WindowHelper;
 namespace LifeBoardGameWPF

@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using SkiaSharp;
 using System.Windows;

@@ -1,12 +1,12 @@
-﻿using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Messenging;
 using FroggiesCP;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
-using AndyCristinaGamePackageCP.DataClasses;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 namespace FroggiesXF
 {
     public class GameBoardXF : ContentView, IHandle<SubscribeGameBoardEventModel>

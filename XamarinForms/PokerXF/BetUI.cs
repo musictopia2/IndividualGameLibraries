@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
+using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using PokerCP;
 using Xamarin.Forms;

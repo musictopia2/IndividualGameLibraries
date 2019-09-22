@@ -1,4 +1,4 @@
-﻿using BasicGameFramework.DIContainers;
+using BasicGameFramework.DIContainers;
 using BasicGameFramework.Extensions;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using SkiaSharp;

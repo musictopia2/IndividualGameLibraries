@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using BasicGameFramework.BasicDrawables.Dictionary;
 using BasicGameFramework.Extensions;
 using BasicXFControlsAndPages.Helpers;

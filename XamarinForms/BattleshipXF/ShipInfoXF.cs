@@ -1,4 +1,4 @@
-﻿using BasicXFControlsAndPages.Helpers;
+using BasicXFControlsAndPages.Helpers;
 using BattleshipCP;
 using CommonBasicStandardLibraries.Exceptions;
 using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
 using BasicGameFramework.BasicEventModels;
 using BasicGameFramework.Extensions;
 using BasicGameFramework.GameGraphicsCP.Animations;

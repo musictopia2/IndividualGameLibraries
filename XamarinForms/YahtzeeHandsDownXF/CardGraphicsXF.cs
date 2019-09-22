@@ -1,4 +1,4 @@
-using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 using BaseGPXPagesAndControlsXF.BasicControls.SingleCardFrames;
 using BaseGPXPagesAndControlsXF.GameGraphics.Base;
@@ -6,7 +6,7 @@ using BasicGameFramework.GameGraphicsCP.Interfaces;
 using System;
 using Xamarin.Forms;
 using YahtzeeHandsDownCP;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace YahtzeeHandsDownXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<YahtzeeHandsDownCardInformation, YahtzeeHandsDownGraphicsCP>

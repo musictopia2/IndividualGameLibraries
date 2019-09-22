@@ -1,4 +1,4 @@
-﻿using BasicXFControlsAndPages.Helpers;
+using BasicXFControlsAndPages.Helpers;
 using CommonBasicStandardLibraries.Messenging;
 using MinesweeperCP;
 using SkiaSharp.Views.Forms;

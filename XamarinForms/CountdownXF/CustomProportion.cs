@@ -1,7 +1,7 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using CommonBasicStandardLibraries.Exceptions;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace CountdownXF
 {
     public class CustomProportion : IProportionBoard

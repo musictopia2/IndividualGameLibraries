@@ -1,4 +1,4 @@
-﻿using BasicControlsAndWindowsCore.Helpers;
+using BasicControlsAndWindowsCore.Helpers;
 using CommonBasicStandardLibraries.Messenging;
 using MinesweeperCP;
 using SkiaSharp.Views.Desktop;

@@ -1,7 +1,7 @@
-using AndyCristinaGamePackageCP.CommonProportionClasses;
-using AndyCristinaGamePackageCP.DataClasses;
-using AndyCristinaGamePackageCP.ExtensionClasses;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Interfaces;
+using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;;
 using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
 using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
 using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
@@ -21,7 +21,7 @@ using CommonBasicStandardLibraries.Exceptions;
 using GalaxyCardGameCP;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper; //just in case
 using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;

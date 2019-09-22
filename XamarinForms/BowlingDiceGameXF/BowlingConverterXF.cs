@@ -1,4 +1,4 @@
-﻿using BowlingDiceGameCP;
+using BowlingDiceGameCP;
 using Xamarin.Forms;
 namespace BowlingDiceGameXF
 {

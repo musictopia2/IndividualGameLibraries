@@ -1,8 +1,8 @@
-﻿using AndyCristinaGamePackageCP.DataClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
 using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using SequenceDiceCP;
 using Xamarin.Forms;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace SequenceDiceXF
 {
     public class GameBoardXF : BasicGameBoardXF<SpaceInfoCP>

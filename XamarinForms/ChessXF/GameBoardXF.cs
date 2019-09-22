@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
+using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using BasicGameFramework.BasicEventModels;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
 using ChessCP;

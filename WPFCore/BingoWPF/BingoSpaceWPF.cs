@@ -1,4 +1,4 @@
-﻿using BingoCP;
+using BingoCP;
 using CommonBasicStandardLibraries.Exceptions;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;

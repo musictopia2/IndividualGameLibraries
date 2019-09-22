@@ -1,4 +1,4 @@
-﻿using ConnectFourCP;
+using ConnectFourCP;
 using SkiaSharp.Views.WPF;
 using System.Windows;
 using System.Windows.Controls;

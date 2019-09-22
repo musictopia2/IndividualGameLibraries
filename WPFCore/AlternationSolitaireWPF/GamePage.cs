@@ -1,5 +1,5 @@
 using AlternationSolitaireCP;
-using AndyCristinaGamePackageCP.ExtensionClasses;
+using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
 using BaseGPXWindowsAndControlsCore.BaseWindows;
 using BaseGPXWindowsAndControlsCore.BasicControls.MultipleFrameContainers;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;

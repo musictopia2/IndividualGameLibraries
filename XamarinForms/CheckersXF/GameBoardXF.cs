@@ -1,4 +1,4 @@
-﻿using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
+using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
 using BasicGameFramework.BasicEventModels;
 using CheckersCP;
 using CommonBasicStandardLibraries.Messenging;
@@ -6,7 +6,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using static AndyCristinaGamePackageCP.DataClasses.GlobalStaticClass;
+using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 
 namespace CheckersXF
 {

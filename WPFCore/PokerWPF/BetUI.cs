@@ -1,4 +1,4 @@
-﻿using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
+using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
 using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
 using PokerCP;
 using System.Windows.Controls;
