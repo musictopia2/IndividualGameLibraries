@@ -1,27 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-	<Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="BasicControlsAndWindowsCore" Version="1.0.0" />
-    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="SkiaSharp.Views" Version="1.68.0">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
+    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="SkiaSharpGeneralLibrary" Version="1.0.0" />
+    <PackageReference Include="BasicControlsAndWindowsCore" Version="1.0.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\BasicGameFramework.csproj" />
     <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\WPF\BaseGPXWindowsAndControlsCore\BaseGPXWindowsAndControlsCore.csproj" />
     <ProjectReference Include="..\..\CrossPlatform\AggravationCP\AggravationCP.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Reference Include="BasicGameFramework">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

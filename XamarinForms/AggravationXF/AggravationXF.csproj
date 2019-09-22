@@ -1,24 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="BasicXFControlsAndPages" Version="1.0.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="SkiaSharpGeneralLibrary" Version="1.0.0" />
+    <PackageReference Include="BasicXFControlsAndPages" Version="1.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\BasicGameFramework.csproj" />
     <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\XF\BaseGPXPagesAndControlsXF\BaseGPXPagesAndControlsXF.csproj" />
     <ProjectReference Include="..\..\CrossPlatform\AggravationCP\AggravationCP.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BasicGameFramework">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
