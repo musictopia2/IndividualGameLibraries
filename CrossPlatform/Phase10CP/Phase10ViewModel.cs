@@ -10,6 +10,8 @@ using CommonBasicStandardLibraries.MVVMHelpers.Interfaces;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
 using BasicGameFramework.Extensions;
+using CommonBasicStandardLibraries.Exceptions;
+
 namespace Phase10CP
 {
     public class Phase10ViewModel : BasicCardGamesVM<Phase10CardInformation, Phase10PlayerItem, Phase10MainGameClass>
@@ -89,6 +91,8 @@ namespace Phase10CP
                     return;
                 }
                 var thisCol = MainGame.ListValidSets();
+                if (thisCol.Count > 2)
+                    throw new BasicBlankException("Can not have more than 2 sets");
                 CustomBasicList<string> newList = new CustomBasicList<string>();
                 await thisCol.ForEachAsync(async thisTemp =>
                 {

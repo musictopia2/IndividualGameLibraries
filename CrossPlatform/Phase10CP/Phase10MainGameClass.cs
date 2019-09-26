@@ -485,7 +485,7 @@ namespace Phase10CP
         {
             CustomBasicList<TempInfo> output = new CustomBasicList<TempInfo>();
             int phase = SingleInfo!.Phase;
-            PhaseList ThisPhase = _phaseInfo![phase - 1]; //because 0 based.
+            PhaseList thisPhase = _phaseInfo![phase - 1]; //because 0 based.
             DeckRegularDict<Phase10CardInformation> thisCollection;
             IDeckDict<Phase10CardInformation> tempCollection; //hopefully still works (?)
             TempInfo thisTemp;
@@ -496,7 +496,7 @@ namespace Phase10CP
                 if (tempCollection.Count > 0)
                     thisCollection.AddRange(tempCollection);
                 if (thisCollection.Count > 0)
-                    foreach (var newSet in ThisPhase.PhaseSets)
+                    foreach (var newSet in thisPhase.PhaseSets)
                     {
                         newSet.DidSucceed = newSet.SetType switch
                         {
@@ -520,6 +520,8 @@ namespace Phase10CP
                             break;
                         }
                     }
+                if (output.Count == thisPhase.PhaseSets.Count)
+                    break; //try this too.
             }
             ResetSuccess();
             return output;

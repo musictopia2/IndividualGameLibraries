@@ -122,6 +122,10 @@ namespace Phase10WPF
             AddRestoreCommand(thisStack); //i think.  if a stack can't be used, rethink.
             await FinishUpAsync();
         }
+        protected override void RegisterTests()
+        {
+            OurContainer!.RegisterType<TestConfig>(); //do this way is best.  so if i forget, no problem because the other one is not test mode.  besides, this game is on server.  others are not.
+        }
         protected override void RegisterInterfaces()
         {
             OurContainer!.RegisterNonSavedClasses<Phase10ViewModel>();

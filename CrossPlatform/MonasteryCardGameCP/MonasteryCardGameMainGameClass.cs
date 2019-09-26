@@ -471,6 +471,8 @@ namespace MonasteryCardGameCP
                         }
                     }
                 }
+                if (tempList.Count == thisMission.MissionSets.Count)
+                    break; //so no possibility of allow more than was allowed.
             }
             if (thisMission.MissionSets.Any(items => items.DidSucceed == false))
             {
