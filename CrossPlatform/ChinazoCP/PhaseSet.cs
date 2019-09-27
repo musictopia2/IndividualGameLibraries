@@ -31,6 +31,8 @@ namespace ChinazoCP
             output.CardList = HandList.ToRegularDeckDict();
             output.UseSecond = _useSecond;
             output.WhatSet = _whatSet;
+            if (_firstNumber > 12 && _whatSet == RummyProcesses<EnumSuitList, EnumColorList, ChinazoCard>.EnumRummyType.Sets)
+                throw new BasicBlankException("The first number when doing sets can never be higher than 12 when doing autoresume");
             output.FirstNumber = _firstNumber;
             return output;
         }
@@ -78,6 +80,8 @@ namespace ChinazoCP
             else
                 tempCol.First().UsedAs = (int)tempCol.First().Value;
             firstNum = tempCol.First().UsedAs;
+            if (firstNum > 12)
+                throw new BasicBlankException("The first number cannot be higher than 12 for runs.");
             tempCol.Last().UsedAs = (int)tempCol.Last().Value;
             int whatFirst = firstNum;
             int lastNum = tempCol.Last().UsedAs;
@@ -103,6 +107,8 @@ namespace ChinazoCP
                     else
                         tempCard.UsedAs = (int)tempCard.Value;
                 }
+                if (tempCard.UsedAs > 14)
+                    throw new BasicBlankException("The use as cannot be higher than 14 ever");
             }
             if (wildCol.Count > 0)
             {
@@ -157,6 +163,8 @@ namespace ChinazoCP
                     {
                         thisCard.UsedAs = HandList.First().UsedAs - 1;
                     }
+                    if (thisCard.UsedAs == 14)
+                        throw new BasicBlankException("Ace cannot be used as 14 when its low.");
                     _firstNumber = thisCard.UsedAs;
                 }
                 HandList.InsertBeginning(thisCard);
@@ -168,6 +176,8 @@ namespace ChinazoCP
                     if (thisCard.IsObjectWild == true)
                     {
                         thisCard.UsedAs = HandList.Last().UsedAs + 1;
+                        if (thisCard.UsedAs > 14)
+                            throw new BasicBlankException("Use as can never be higher than 14 ever");
                     }
                 }
                 HandList.Add(thisCard);
@@ -193,13 +203,13 @@ namespace ChinazoCP
                 return position;
             if (position == 1)
             {
-                thisCard.UsedAs = (int)thisCard.Value;
-                newCard.UsedAs = (int)newCard.Value;
+                thisCard.UsedAs = (int)thisCard.SecondNumber;
+                newCard.UsedAs = (int)newCard.SecondNumber;
             }
             else
             {
-                thisCard.UsedAs = (int)thisCard.SecondNumber;
-                newCard.UsedAs = (int)newCard.SecondNumber;
+                thisCard.UsedAs = (int)thisCard.Value;
+                newCard.UsedAs = (int)newCard.Value;
             }
             if (thisCard.Suit == newCard.Suit && thisCard.UsedAs == newCard.UsedAs)
                 return position; //i think.
@@ -210,13 +220,13 @@ namespace ChinazoCP
             newCard = CardNeeded(position);
             if (position == 1)
             {
-                thisCard.UsedAs = (int)thisCard.Value;
-                newCard.UsedAs = (int)newCard.Value;
+                thisCard.UsedAs = (int)thisCard.SecondNumber;
+                newCard.UsedAs = (int)newCard.SecondNumber;
             }
             else
             {
-                thisCard.UsedAs = (int)thisCard.SecondNumber;
-                newCard.UsedAs = (int)newCard.SecondNumber;
+                thisCard.UsedAs = (int)thisCard.Value;
+                newCard.UsedAs = (int)newCard.Value;
             }
             if (newCard.Deck > 0 && thisCard.IsObjectWild == true)
                 return position;

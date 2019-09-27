@@ -8,9 +8,9 @@ using System.Linq;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 namespace ChinazoXF
 {
-    //public class TestConfig : ITestCardSetUp<RegularSimpleCard, ChinazoPlayerItem>
+    //public class TestConfig : ITestCardSetUp<ChinazoCard, ChinazoPlayerItem>
     //{
-    //    public Task SetUpTestHandsAsync(PlayerCollection<ChinazoPlayerItem> PlayerList, IListShuffler<RegularSimpleCard> DeckList)
+    //    public Task SetUpTestHandsAsync(PlayerCollection<ChinazoPlayerItem> PlayerList, IListShuffler<ChinazoCard> DeckList)
     //    {
     //        ChinazoPlayerItem ThisPlayer = PlayerList.GetSelf();
     //        //for testing i will get 8 eights.
