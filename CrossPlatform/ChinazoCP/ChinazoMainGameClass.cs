@@ -510,6 +510,8 @@ namespace ChinazoCP
                         }
                     }
                 }
+                if (output.Count == thisSet.PhaseSets.Count)
+                    break; //to keep you from doing more than you can.
             }
             ResetSuccess();
             return output;
