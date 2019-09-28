@@ -16,6 +16,8 @@ using System.Windows.Controls;
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
 using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
 using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using CommonBasicStandardLibraries.Exceptions;
+
 namespace BladesOfSteelWPF
 {
     public class GamePage : MultiPlayerWindow<BladesOfSteelViewModel, BladesOfSteelPlayerItem, BladesOfSteelSaveInfo>
@@ -33,6 +35,7 @@ namespace BladesOfSteelWPF
             _discardGPile.StartListeningDiscardPile(); // its the main one.
             _deckGPile!.Init(ThisMod.Deck1!, ts.TagUsed); // try here.  may have to do something else as well (?)
             _deckGPile.StartListeningMainDeck();
+
             _yourFace!.Init(ThisMod.YourFaceOffCard!, ts.TagUsed);
             _opponentFace!.Init(ThisMod.OpponentFaceOffCard!, ts.TagUsed);
             _mainDefenseCards!.LoadList(ThisMod.MainDefense1!, ts.TagUsed);
