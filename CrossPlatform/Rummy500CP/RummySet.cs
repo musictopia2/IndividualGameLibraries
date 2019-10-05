@@ -118,7 +118,7 @@ namespace Rummy500CP
                     return 0;
                 EnumCardValueList LowerValue;
                 LowerValue = thisCard.Value - 1;
-                return _mainGame.DeckList.Single(Items => Items.Value == LowerValue && Items.Suit == thisCard.Suit).Deck;
+                return _mainGame.DeckList.Single(Items => Items.SecondNumber == LowerValue && Items.Suit == thisCard.Suit).Deck;
             }
             if (thisCard.Value == EnumCardValueList.HighAce) //has to lean towards low.  if i do something else, i risk breaking other rummy games.
                 return 0;//because nothing higher than high ace.

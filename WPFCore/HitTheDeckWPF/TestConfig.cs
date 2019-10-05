@@ -15,6 +15,8 @@ namespace HitTheDeckWPF
         {
             HitTheDeckPlayerItem thisPlayer = playerList.GetSelf();
             thisPlayer.StartUpList = new DeckRegularDict<HitTheDeckCardInformation>(); //sample too.
+            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CardType == EnumTypeList.Flip).Take(2));
+
             //for testing i will get 8 eights.
             //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
             //this was example with regular deck of card.

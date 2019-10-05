@@ -1,4 +1,5 @@
 using BasicGameFramework.Attributes;
+using BasicGameFramework.BasicDrawables.Dictionary;
 using BasicGameFramework.DIContainers;
 using BasicGameFramework.Extensions;
 using BasicGameFramework.MultiplayerClasses.BasicGameClasses;
@@ -251,11 +252,14 @@ namespace HitTheDeckCP
         }
         public async Task FlipDeckAsync()
         {
+            _thisMod!.CommandContainer!.ManuelFinish = true; //should be this way anyways.
             var deckList = _thisMod!.Deck1!.FlipCardList();
             PlayerList!.ChangeReverse();
             var discardList = _thisMod.Pile1!.FlipCardList();
             if (discardList.Count > 110)
                 throw new BasicBlankException("Cannot have over 110 cards since that is all the cards total");
+            if (discardList.Count + deckList.Count > 110)
+                throw new BasicBlankException("The discard and decklist combined cannot be more than 110");
             _thisMod.Deck1.OriginalList(discardList);
             _thisMod.Pile1.NewList(deckList);
             var thisCard = _thisMod.Pile1.GetCardInfo();

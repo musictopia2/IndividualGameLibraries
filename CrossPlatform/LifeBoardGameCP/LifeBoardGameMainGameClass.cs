@@ -1316,11 +1316,13 @@ namespace LifeBoardGameCP
                     await TradedLifeForSalaryAsync();
                     return;
                 case "tradedsalary":
-                    ThisMod!.PlayerChosen = await js.DeserializeObjectAsync<string>(content); //i was forced to deserialize even for strings.
+                    //ThisMod!.PlayerChosen = await js.DeserializeObjectAsync<string>(content); //i was forced to deserialize even for strings.
+                    ThisMod!.PlayerChosen = content; //take a risk because of serialization issues.  otherwise, has to try something else.
                     await TradedSalaryAsync();
                     return;
                 case "stole":
-                    ThisMod!.PlayerChosen = await js.DeserializeObjectAsync<string>(content);
+                    //ThisMod!.PlayerChosen = await js.DeserializeObjectAsync<string>(content);
+                    ThisMod!.PlayerChosen = content;
                     await TilesStolenAsync();
                     return;
                 case "purchasedhouseinsurance":

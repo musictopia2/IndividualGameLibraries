@@ -96,6 +96,11 @@ namespace HitTheDeckWPF
             AddRestoreCommand(thisStack); //i think.  if a stack can't be used, rethink.
             await FinishUpAsync();
         }
+        protected override void RegisterTests()
+        {
+            ThisTest!.AllowAnyMove = true;
+            OurContainer!.RegisterType<TestConfig>();
+        }
         protected override void RegisterInterfaces()
         {
             OurContainer!.RegisterNonSavedClasses<HitTheDeckViewModel>();
