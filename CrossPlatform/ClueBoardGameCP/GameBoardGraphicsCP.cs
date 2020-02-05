@@ -5,11 +5,14 @@ using BasicGameFramework.GameGraphicsCP.BasicGameBoards;
 using BasicGameFramework.GameGraphicsCP.GameboardPositionHelpers;
 using BasicGameFramework.GameGraphicsCP.GamePieces;
 using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFramework.TestUtilities;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using SkiaSharp;
 using SkiaSharpGeneralLibrary.SKExtensions;
 using System.Collections;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
 namespace ClueBoardGameCP
 {
     [SingletonGame]
@@ -34,9 +37,12 @@ namespace ClueBoardGameCP
         private CustomBasicList<Room>? arr_Rooms; // 0 based here unless i use dictionary.
         private Hashtable? arr_Squares;
         private readonly ClueBoardGameMainGameClass _mainGame;
-        public GameBoardGraphicsCP(IGamePackageResolver MainContainer) : base(MainContainer)
+        private readonly TestOptions _tester;
+        private float _tempHeight;
+        public GameBoardGraphicsCP(IGamePackageResolver mainContainer) : base(mainContainer)
         {
-            _mainGame = MainContainer.Resolve<ClueBoardGameMainGameClass>();
+            _mainGame = mainContainer.Resolve<ClueBoardGameMainGameClass>();
+            _tester = mainContainer.Resolve<TestOptions>();
             InitializeRooms();
             InitializeSquares();
         }
@@ -55,7 +61,7 @@ namespace ClueBoardGameCP
         {
             var output = base.GetGamePiece(color, location);
             output.NeedsToClear = false;
-            output.ActualHeight = SpaceSize();
+            output.ActualHeight = _tempHeight; //i think.  this is better.
             output.ActualWidth = SpaceSize();
             return output;
         }
@@ -65,7 +71,7 @@ namespace ClueBoardGameCP
             thisRoom = arr_Rooms![room - 1];  // its minus, not plus
             return thisRoom.Name;
         }
-        private int SpaceClicked(float x, float y)
+        private int SpaceClicked(float x, float y) //hopefully this is enough now.
         {
             var bounds = GetBounds();
             int int_Row;
@@ -500,7 +506,9 @@ namespace ClueBoardGameCP
             string str_Name;
             float dbl_SquareWidth;
             float dbl_SquareHeight;
-            dbl_SquareHeight = SpaceSize();
+            //var rect_Board = GetBounds(); // i think
+            //dbl_SquareHeight = SpaceSize();
+            dbl_SquareHeight = _tempHeight;
             dbl_SquareWidth = SpaceSize();
             for (int_Row = 1; int_Row <= 25; int_Row++)
             {
@@ -585,6 +593,23 @@ namespace ClueBoardGameCP
             CustomBasicList<CharacterInfo> tempCol2;
             SKPoint newPoint;
             IProportionImage thisP = _mainGame.MainContainer.Resolve<IProportionImage>();
+            if (_tester.DoubleCheck)
+            {
+                //will use blue piece alone as well.
+                int count = arr_Squares!.Count - 6; //i think
+                count.Times(y =>
+                {
+                    var thisPoint = PositionForBoardPiece(y);
+                    string color;
+                    if (y == _mainGame.TempClicked)
+                        color = cs.Red;
+                    else
+                        color = cs.Blue;
+                    var thisPiece = GetGamePiece(color, thisPoint);
+                    thisPiece.DrawImage(canvas);
+                });
+                return; //only those things alone.
+            }
             foreach (var thisRoom in _mainGame.ThisGlobal.RoomList.Values)
             {
                 x++;
@@ -610,7 +635,7 @@ namespace ClueBoardGameCP
                 tempCol2.ForEach(thisCharacter =>
                 {
                     PawnPiecesCP<EnumColorChoice> otherCharacter = new PawnPiecesCP<EnumColorChoice>();
-                    otherCharacter.ActualHeight = SpaceSize();
+                    otherCharacter.ActualHeight = _tempHeight;
                     otherCharacter.ActualWidth = SpaceSize();
                     newPoint = _mainGame.ThisGlobal.ThisPos.GetPosition(thisRoom.Space, (float)otherCharacter.ActualWidth, (float)otherCharacter.ActualHeight);
                     otherCharacter.MainColor = thisCharacter.MainColor;
@@ -705,6 +730,7 @@ namespace ClueBoardGameCP
             SKPaint br_2;
             dbl_SquareWidth = rect_Board.Width / 24;
             dbl_SquareHeight = rect_Board.Height / 25;
+            _tempHeight = dbl_SquareHeight;
             float fontRoomSize = dbl_SquareHeight * 0.8f;
             rect_Temp = SKRect.Create(9 * dbl_SquareWidth, 8 * dbl_SquareHeight, 5 * dbl_SquareWidth, 7 * dbl_SquareHeight);
             canvas.DrawRect(rect_Temp, _whitePaint);

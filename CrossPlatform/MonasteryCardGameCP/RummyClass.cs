@@ -48,7 +48,7 @@ namespace MonasteryCardGameCP
                     q++;
                     if (q > thisCol.Count)
                         return true; //if went far enough, then its fine.
-                    if (z > thisCol.Count)
+                    if (z > tempCol.Count) //maybe it was supposed to be tempcol here.
                     {
                         diffs = thisCol.Count - tempCol.Count;
                         return aceList.Count + removes == diffs;

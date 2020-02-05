@@ -142,6 +142,11 @@ namespace MillebournesWPF
             _discardGPile.Margin = new Thickness(5, 5, 5, 5);
             await FinishUpAsync();
         }
+        protected override void RegisterTests()
+        {
+            OurContainer!.RegisterType<TestConfig>();
+            ThisTest!.PlayCategory = BasicGameFramework.TestUtilities.EnumPlayCategory.Reverse; //so computer should go first.
+        }
         protected override void RegisterInterfaces()
         {
             OurContainer!.RegisterNonSavedClasses<MillebournesViewModel>();

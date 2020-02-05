@@ -36,7 +36,7 @@ namespace HitTheDeckCP
         {
             if (NeedsSpecial == true)
                 return false; //otherwise, can't compile.
-            if (MainGame!.SingleInfo!.MainHandList.Any(items => MainGame.CanPlay(items.Deck)))
+            if (MainGame!.SingleInfo!.MainHandList.Any(items => MainGame.CanPlay(items.Deck)) && ThisTest!.AllowAnyMove == false)
                 return false;
             return !MainGame.AlreadyDrew;
         }

@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
+using BasicGameFramework.TestUtilities;
+
 namespace HitTheDeckWPF
 {
     public class GamePage : MultiPlayerWindow<HitTheDeckViewModel, HitTheDeckPlayerItem, HitTheDeckSaveInfo>
@@ -98,6 +100,8 @@ namespace HitTheDeckWPF
         }
         protected override void RegisterTests()
         {
+
+            //ThisTest!.SaveOption = EnumTestSaveCategory.RestoreOnly;
             ThisTest!.AllowAnyMove = true;
             OurContainer!.RegisterType<TestConfig>();
         }

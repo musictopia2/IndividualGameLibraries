@@ -1790,6 +1790,11 @@ namespace LifeBoardGameCP
             FillInfo(thisPlayer);
             if (GameStatus == EnumWhatStatus.NeedTradeSalary)
                 GameStatus = EnumWhatStatus.NeedToEndTurn;
+            else if (GameStatus == EnumWhatStatus.LastSpin)
+            {
+                await PossibleAutomateMoveAsync();
+                return; //i think.
+            }
             else if (GameStatus != EnumWhatStatus.NeedToSpin)
                 throw new BasicBlankException("Rethinking is required");
             await ContinueTurnAsync();
@@ -1803,7 +1808,7 @@ namespace LifeBoardGameCP
                 await Delay!.DelaySeconds(1);
             var thisPlayer = PlayerList![ThisMod.PlayerChosen];
             thisPlayer.TilesCollected--;
-            ObtainLife(thisPlayer);
+            ObtainLife(SingleInfo!); //i think it could be because i used the wrong variable
             if (SaveRoot!.WasMarried)
                 GameStatus = EnumWhatStatus.NeedToSpin;
             else
@@ -1931,6 +1936,8 @@ namespace LifeBoardGameCP
             }
             if (SaveRoot!.SpinList.Count < 2)
                 return false;
+            if (ThisTest!.DoubleCheck == true)
+                return true; //to test the entertainer part.
             var tempList = SaveRoot.SpinList.Skip(SaveRoot.SpinList.Count - 2).ToCustomBasicList();
             if (tempList.Count != 2)
                 throw new BasicBlankException("Must have 2 items");

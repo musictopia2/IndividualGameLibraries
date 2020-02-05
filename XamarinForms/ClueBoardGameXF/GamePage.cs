@@ -147,6 +147,10 @@ namespace ClueBoardGameXF
             OurContainer.RegisterSingleton<IGenerateDice<int>, SimpleDice>();
             OurContainer.RegisterSingleton(_thisBoard.ThisElement, "");
         }
+        protected override void RegisterTests()
+        {
+            ThisTest!.DoubleCheck = true; //for this case, if doublecheck is set to true, will show the pieces everywhere on the board.
+        }
         public void Handle(NewTurnEventModel message)
         {
             _thisPiece!.MainColor = _mainGame!.SingleInfo!.Color.ToColor();

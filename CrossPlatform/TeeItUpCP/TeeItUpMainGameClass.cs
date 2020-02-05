@@ -1,4 +1,5 @@
 using BasicGameFramework.Attributes;
+using BasicGameFramework.BasicDrawables.Dictionary;
 using BasicGameFramework.DIContainers;
 using BasicGameFramework.Extensions;
 using BasicGameFramework.MultiplayerClasses.BasicGameClasses;
@@ -113,6 +114,10 @@ namespace TeeItUpCP
         }
         public override async Task EndTurnAsync()
         {
+            PlayerList!.ForEach(tempPlayer =>
+            {
+                tempPlayer.PlayerBoard!.DoubleCheck();
+            });
             SingleInfo = PlayerList!.GetWhoPlayer();
             SingleInfo.MainHandList.UnhighlightObjects(); //i think this is best.
             if (SaveRoot!.GameStatus == EnumStatusType.Normal)
@@ -160,8 +165,14 @@ namespace TeeItUpCP
                 thisPlayer.PlayerBoard!.ClearBoard(thisPlayer.MainHandList);
                 thisPlayer.FinishedChoosing = false;
                 thisPlayer.WentOut = false;
-
             });
+            //if (ThisTest!.DoubleCheck)
+            //{
+            //    DeckRegularDict<TeeItUpCardInformation> tempList = new DeckRegularDict<TeeItUpCardInformation>();
+            //    tempList.AddRange(DeckList.Where(items => items.IsMulligan == true).Take(1));
+            //    _thisMod!.Deck1!.InsertBeginningCards(tempList);
+
+            //}
             return base.LastPartOfSetUpBeforeBindingsAsync();
         }
         private void LoadPlayerBoards()

@@ -498,27 +498,32 @@ namespace Phase10CP
                 if (thisCollection.Count > 0)
                     foreach (var newSet in thisPhase.PhaseSets)
                     {
-                        newSet.DidSucceed = newSet.SetType switch
+                        if (newSet.DidSucceed == false)
                         {
-                            EnumWhatSets.Colors => _rummys!.IsNewRummy(thisCollection, newSet.HowMany, RummyProcesses<EnumColorTypes, EnumColorTypes, Phase10CardInformation>.EnumRummyType.Colors),
-                            EnumWhatSets.Kinds => _rummys!.IsNewRummy(thisCollection, newSet.HowMany, RummyProcesses<EnumColorTypes, EnumColorTypes, Phase10CardInformation>.EnumRummyType.Sets),
-                            EnumWhatSets.Runs => _rummys!.IsNewRummy(thisCollection, newSet.HowMany, RummyProcesses<EnumColorTypes, EnumColorTypes, Phase10CardInformation>.EnumRummyType.Runs),
-                            _ => throw new BasicBlankException("Not Supported"),
-                        };
-                        if (newSet.DidSucceed == true)
-                        {
-                            thisTemp = new TempInfo();
-                            thisTemp.CardList = thisCollection;
-                            thisTemp.WhatSet = newSet.SetType;
-                            if (newSet.SetType == EnumWhatSets.Runs)
+                            newSet.DidSucceed = newSet.SetType switch
                             {
-                                thisTemp.FirstNumber = _rummys!.FirstUsed;
-                                thisTemp.SecondNumber = _rummys!.FirstUsed + thisCollection.Count - 1;
+                                EnumWhatSets.Colors => _rummys!.IsNewRummy(thisCollection, newSet.HowMany, RummyProcesses<EnumColorTypes, EnumColorTypes, Phase10CardInformation>.EnumRummyType.Colors),
+                                EnumWhatSets.Kinds => _rummys!.IsNewRummy(thisCollection, newSet.HowMany, RummyProcesses<EnumColorTypes, EnumColorTypes, Phase10CardInformation>.EnumRummyType.Sets),
+                                EnumWhatSets.Runs => _rummys!.IsNewRummy(thisCollection, newSet.HowMany, RummyProcesses<EnumColorTypes, EnumColorTypes, Phase10CardInformation>.EnumRummyType.Runs),
+                                _ => throw new BasicBlankException("Not Supported"),
+                            };
+                            if (newSet.DidSucceed == true)
+                            {
+                                thisTemp = new TempInfo();
+                                thisTemp.CardList = thisCollection;
+                                thisTemp.WhatSet = newSet.SetType;
+                                if (newSet.SetType == EnumWhatSets.Runs)
+                                {
+                                    thisTemp.FirstNumber = _rummys!.FirstUsed;
+                                    thisTemp.SecondNumber = _rummys!.FirstUsed + thisCollection.Count - 1;
+                                }
+                                output.Add(thisTemp);
+                                _thisMod.TempSets.ClearBoard(x);
+                                break;
                             }
-                            output.Add(thisTemp);
-                            _thisMod.TempSets.ClearBoard(x);
-                            break;
                         }
+                        
+                        
                     }
                 if (output.Count == thisPhase.PhaseSets.Count)
                     break; //try this too.

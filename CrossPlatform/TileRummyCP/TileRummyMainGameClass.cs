@@ -523,7 +523,7 @@ namespace TileRummyCP
         }
         public async Task RemoveEntireSetAsync(int index)
         {
-            TileSet thisSet = _thisMod!.MainSets1!.SetList[index];
+            TileSet thisSet = _thisMod!.MainSets1!.GetIndividualSet(index); //looks like 0 based bug again  try a different method that is not 0 based.
             var tempList = new DeckRegularDict<TileInfo>();
             thisSet.HandList.ForEach(thisTile =>
             {
@@ -533,7 +533,7 @@ namespace TileRummyCP
                     thisTile.Number = 20;
                 tempList.Add(thisTile);
             });
-            _thisMod.MainSets1.RemoveSet(index);
+            _thisMod.MainSets1.RemoveSet(index - 1); //i think 0 based bug again.
             SingleInfo!.MainHandList.AddRange(tempList);
             if (SingleInfo.PlayerCategory == EnumPlayerCategory.Self)
                 SingleInfo.MainHandList.Sort();

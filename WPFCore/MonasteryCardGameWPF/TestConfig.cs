@@ -8,15 +8,20 @@ using System.Linq;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 namespace MonasteryCardGameWPF
 {
-    //public class TestConfig : ITestCardSetUp<RegularSimpleCard, MonasteryCardGamePlayerItem>
-    //{
-    //    public Task SetUpTestHandsAsync(PlayerCollection<MonasteryCardGamePlayerItem> PlayerList, IListShuffler<RegularSimpleCard> DeckList)
-    //    {
-    //        MonasteryCardGamePlayerItem ThisPlayer = PlayerList.GetSelf();
-    //        //for testing i will get 8 eights.
-    //        ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-    //        //can be anything you want.
-    //        return Task.CompletedTask;
-    //    }
-    //}
+    public class TestConfig : ITestCardSetUp<MonasteryCardInfo, MonasteryCardGamePlayerItem>
+    {
+        public Task SetUpTestHandsAsync(PlayerCollection<MonasteryCardGamePlayerItem> PlayerList, IListShuffler<MonasteryCardInfo> DeckList)
+        {
+            MonasteryCardGamePlayerItem ThisPlayer = PlayerList.GetSelf();
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(Items => Items.Value == EnumCardValueList.LowAce).Take(2));
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(items => items.Value == EnumCardValueList.Three).Take(1));
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(items => items.Value == EnumCardValueList.Queen).Take(1));
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(Items => Items.Value == EnumCardValueList.Five).Take(2));
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(Items => Items.Value == EnumCardValueList.Seven).Take(2));
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(Items => Items.Value == EnumCardValueList.Four).Take(1));
+            ThisPlayer.StartUpList.AddRange(DeckList.Where(Items => Items.Value == EnumCardValueList.Six).Take(1));
+            //can be anything you want.
+            return Task.CompletedTask;
+        }
+    }
 }

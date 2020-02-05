@@ -22,6 +22,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
+using BasicGameFramework.TestUtilities;
+
 namespace SorryCardGameWPF
 {
     public class GamePage : MultiPlayerWindow<SorryCardGameViewModel, SorryCardGamePlayerItem, SorryCardGameSaveInfo>
@@ -145,6 +147,10 @@ namespace SorryCardGameWPF
             _otherPileWPF.Margin = new Thickness(5, 5, 5, 5);
             AddRestoreCommand(thisStack); //i think.  if a stack can't be used, rethink.
             await FinishUpAsync();
+        }
+        protected override void RegisterTests()
+        {
+            ThisTest!.SaveOption = EnumTestSaveCategory.RestoreOnly;
         }
         protected override void RegisterInterfaces()
         {

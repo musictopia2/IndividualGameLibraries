@@ -3,7 +3,9 @@ using BasicGameFramework.DIContainers;
 using BasicGameFramework.DrawableListsViewModels;
 using BasicGameFramework.MainViewModels;
 using CommonBasicStandardLibraries.CollectionClasses;
+using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.MVVMHelpers.Interfaces;
+using System;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 namespace TeeItUpCP
 {
@@ -71,11 +73,19 @@ namespace TeeItUpCP
                 tempItem = MainGame!.PlayerList!.GetSelf();
             else
                 tempItem = MainGame!.PlayerList!.GetWhoPlayer();
-            int matches = tempItem.PlayerBoard!.ColumnMatched(oldDeck);
-            if (matches > 0)
+            try
             {
-                await ShowGameMessageAsync("Cannot discard a card because there is a match");
-                return;
+                int matches = tempItem.PlayerBoard!.ColumnMatched(oldDeck);
+                if (matches > 0)
+                {
+                    await ShowGameMessageAsync("Cannot discard a card because there is a match");
+                    return;
+                }
+
+            }
+            catch(Exception ex)
+            {
+                throw new BasicBlankException($"Exception when trying to find out about column matching.  Message was {ex.Message}");
             }
             var thisCard = MainGame.DeckList!.GetSpecificItem(oldDeck);
             if (thisCard.IsMulligan == true)

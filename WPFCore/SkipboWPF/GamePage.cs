@@ -129,7 +129,7 @@ namespace SkipboWPF
         }
         //protected override void RegisterTests()
         //{
-        //    ThisTest.SaveOption = BasicGameFramework.TestUtilities.EnumTestSaveCategory.RestoreOnly;
+        //    ThisTest!.SaveOption = BasicGameFramework.TestUtilities.EnumTestSaveCategory.RestoreOnly;
         //}
         protected override void RegisterInterfaces()
         {

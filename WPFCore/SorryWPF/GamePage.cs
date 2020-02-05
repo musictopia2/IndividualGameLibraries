@@ -23,6 +23,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
 using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using BasicGameFramework.TestUtilities;
+
 namespace SorryWPF
 {
     public class GamePage : MultiPlayerWindow<SorryViewModel, SorryPlayerItem, SorrySaveInfo>
@@ -86,6 +88,11 @@ namespace SorryWPF
             tempStack.Children.Add(endButton);
             MainGrid!.Children.Add(thisStack);
             await FinishUpAsync();
+        }
+        protected override void RegisterTests()
+        {
+            ThisTest!.SaveOption = EnumTestSaveCategory.RestoreOnly;
+            //ThisTest.DoubleCheck = true; //try this too.
         }
         protected override void RegisterInterfaces()
         {

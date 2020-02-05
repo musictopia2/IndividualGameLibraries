@@ -293,7 +293,7 @@ namespace SorryCP
                 thisPawn.DrawImage(canvas);
             }
         }
-        protected override void DrawBoard(SKCanvas canvas) //hopefully xamarin forms don't have problems this time.
+        protected override void DrawBoard(SKCanvas canvas)
         {
             canvas.Clear();
             

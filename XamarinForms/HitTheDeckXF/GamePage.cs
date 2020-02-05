@@ -17,6 +17,8 @@ using HitTheDeckCP;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
 using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using BasicGameFramework.TestUtilities;
+
 namespace HitTheDeckXF
 {
     public class GamePage : MultiPlayerPage<HitTheDeckViewModel, HitTheDeckPlayerItem, HitTheDeckSaveInfo>
@@ -91,6 +93,12 @@ namespace HitTheDeckXF
             _discardGPile.Margin = new Thickness(5, 5, 5, 5);
             AddRestoreCommand(thisStack); //i think.  if a stack can't be used, rethink.
             await FinishUpAsync();
+        }
+        protected override void RegisterTests()
+        {
+            ThisTest!.SaveOption = EnumTestSaveCategory.RestoreOnly;
+            //ThisTest!.AllowAnyMove = true;
+            //OurContainer!.RegisterType<TestConfig>();
         }
         protected override void RegisterInterfaces()
         {

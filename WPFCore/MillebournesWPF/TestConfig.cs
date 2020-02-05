@@ -15,8 +15,8 @@ namespace MillebournesWPF
         {
             //thisPlayer.StartUpList = new DeckRegularDict<MillebournesCardInformation>(); //sample too.
             //thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CardName == "").Take(1));
-            var thisPlayer = playerList.Where(items => items.PlayerCategory == EnumPlayerCategory.OtherHuman).Single();
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CompleteCategory == EnumCompleteCategories.SpeedLimit).Take(1));
+            var thisPlayer = playerList.Where(items => items.PlayerCategory == EnumPlayerCategory.Computer).First();
+            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CompleteCategory == EnumCompleteCategories.SpeedLimit).Take(1)); //the computer will have a speed limit
             //for testing i will get 8 eights.
             //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
             //this was example with regular deck of card.

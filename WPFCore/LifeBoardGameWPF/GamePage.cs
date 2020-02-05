@@ -18,6 +18,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
 using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using BasicGameFramework.TestUtilities;
+
 namespace LifeBoardGameWPF
 {
     public class GamePage : MultiPlayerWindow<LifeBoardGameViewModel, LifeBoardGamePlayerItem, LifeBoardGameSaveInfo>, IHandle<NewTurnEventModel>
@@ -194,6 +196,7 @@ namespace LifeBoardGameWPF
             _popScore = new ScoreBoardWPF();
             _popScore.AddColumn("Nick Name", true, nameof(LifeBoardGamePlayerItem.NickName));
             _popScore.AddColumn("Salary", true, nameof(LifeBoardGamePlayerItem.Salary), useCurrency: true, rightMargin: 10);
+            _popScore.AddColumn("Tiles Collected", true, nameof(LifeBoardGamePlayerItem.TilesCollected));
             popStack.Children.Add(_popScore);
             AddControlToGrid(finalGrid, popStack, 0, 0);
             Grid.SetRowSpan(popStack, 2);
@@ -211,6 +214,11 @@ namespace LifeBoardGameWPF
             OurContainer.RegisterNonSavedClasses<LifeBoardGameViewModel>();
             OurContainer.RegisterSingleton<IProportionImage, CardProportion>();
             OurContainer.RegisterSingleton(_thisBoard.ThisElement, "");
+        }
+        protected override void RegisterTests()
+        {
+            ThisTest!.SaveOption = EnumTestSaveCategory.RestoreOnly;
+            ThisTest.DoubleCheck = true; //to test entertainer part.
         }
         private void SetVisibleBindingStatus(FrameworkElement thisControl, IValueConverter thisConverter)
         {

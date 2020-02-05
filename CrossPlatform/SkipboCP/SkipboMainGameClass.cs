@@ -448,6 +448,13 @@ namespace SkipboCP
                 if (ThisData!.MultiPlayer == false || ThisData.Client == false)
                     ComputerList.RemoveFirstItem(); //hopefully this is still fine (?)
             }
+            int manys = _thisMod!.Pile1!.HowManyInDiscard();
+            if (_thisMod.Pile1.PileEmpty() == false)
+                manys++; //to account for the current card as well because of this part ReshuffleAllCardsFromDiscard
+            int expected = SaveRoot!.CardsToShuffle;
+            //try here to see if it reconciles.  so if it does not, can hopefully get to the root of the problem each time.
+            if (manys != expected)
+                throw new BasicBlankException("After playing on pile, does not reconcile for the discard pile.  Rethink further");
             await ContinueTurnAsync(); //since this will check first to see if it has to draw 5 more cards.
         }
     }

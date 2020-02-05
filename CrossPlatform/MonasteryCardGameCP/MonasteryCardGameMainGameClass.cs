@@ -175,7 +175,7 @@ namespace MonasteryCardGameCP
         }
         protected override Task StartSetUpAsync(bool isBeginning)
         {
-            LoadControls();
+            //LoadControls();
             if (isBeginning)
                 PlayerList!.ForEach(thisPlayer => thisPlayer.UpdateIndexes());
             PlayerList!.ForEach(thisPlayer => thisPlayer.FinishedCurrentMission = false);

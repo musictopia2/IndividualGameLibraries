@@ -34,6 +34,7 @@ namespace ClueBoardGameCP
                 SaveRoot!.PlayOrder.OtherTurn = value;
             }
         }
+        public int TempClicked { get; set; } = 0;
         public int MyID => PlayerList!.GetSelf().Id; //i think.
         public ClueBoardGameMainGameClass(IGamePackageResolver container) : base(container) { }
 

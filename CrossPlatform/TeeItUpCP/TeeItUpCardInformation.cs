@@ -76,7 +76,10 @@ namespace TeeItUpCP
                 return 14;
             if (chosen < 88)
                 return 15;
-            throw new BasicBlankException("Too High");
+            if (chosen <= 100)
+                return 5;
+            return 15;
+            //throw new BasicBlankException("Too High");
 
 
         }

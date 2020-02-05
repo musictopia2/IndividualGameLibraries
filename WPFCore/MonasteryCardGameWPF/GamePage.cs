@@ -123,6 +123,10 @@ namespace MonasteryCardGameWPF
             AddRestoreCommand(thisStack); //usually to this.  can be to another control if needed.
             await FinishUpAsync();
         }
+        protected override void RegisterTests()
+        {
+            OurContainer!.RegisterType<TestConfig>();
+        }
         protected override void RegisterInterfaces()
         {
             OurContainer!.RegisterType<BasicGameLoader<MonasteryCardGamePlayerItem, MonasteryCardGameSaveInfo>>(); //i think basic game loader gets done here still.

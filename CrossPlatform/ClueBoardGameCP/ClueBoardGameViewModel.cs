@@ -138,6 +138,12 @@ namespace ClueBoardGameCP
             base.EndInit(); //must do this too.
             SpaceCommand = new BasicGameCommand<int>(this, async space =>
             {
+                if (ThisTest!.DoubleCheck)
+                {
+                    MainGame!.TempClicked = space;
+                    GameBoard1!.RepaintBoard(); //i think.
+                    return;
+                }
                 if (GameBoard1!.CanMoveToSpace(space) == false)
                 {
                     await ShowGameMessageAsync("Illegal Move");
@@ -154,6 +160,8 @@ namespace ClueBoardGameCP
                 await MainGame.ContinueMoveAsync();
             }, item =>
             {
+                if (ThisTest!.DoubleCheck)
+                    return true;
                 if (CanEnablePart == false)
                     return false;
                 return CanEnableSpace;

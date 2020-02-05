@@ -8,6 +8,7 @@ using BasicGameFramework.MultiplayerClasses.Extensions;
 using BasicGameFramework.MultiplayerClasses.InterfaceMessages;
 using BasicGameFramework.MultiplayerClasses.InterfacesForHelpers;
 using BasicGameFramework.NetworkingClasses.Extensions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.RandomGenerator;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Linq;
@@ -74,6 +75,7 @@ namespace HitTheDeckCP
         {
             if (ThisTest!.NoAnimations == false)
                 await Delay!.DelaySeconds(.75);
+            SingleInfo = PlayerList!.GetWhoPlayer(); //just in case the turn is wrong for that player.  can't take any chances.
             var thisCard = _thisMod!.Pile1!.GetCardInfo();
             if (thisCard.Instructions == EnumInstructionList.Flip)
             {
@@ -158,6 +160,7 @@ namespace HitTheDeckCP
         }
         public override async Task EndTurnAsync()
         {
+            ReconcileCards();
             SingleInfo = PlayerList!.GetWhoPlayer();
             SingleInfo.MainHandList.UnhighlightObjects(); //i think this is best.
             if (SingleInfo.PlayerCategory == EnumPlayerCategory.Computer)
@@ -250,26 +253,58 @@ namespace HitTheDeckCP
             }
             await EndTurnAsync();
         }
+        private void ReconcileCards()
+        {
+            int deckcount = _thisMod!.Deck1!.CardsLeft();
+            int pileCount = _thisMod.Pile1!.CardsLeft();
+            int counts = deckcount + pileCount;
+            PlayerList!.ForEach(thisPlayer =>
+            {
+                counts += thisPlayer.MainHandList.Count;
+            });
+            if (counts != 110)
+                throw new BasicBlankException($"Wrong card count upon ending turn.  Accounted for {counts} and not 110");
+        }
+        private void ReconcileFlips(DeckObservableDict<HitTheDeckCardInformation> discardList, DeckObservableDict<HitTheDeckCardInformation> deckList)
+        {
+            DeckRegularDict<HitTheDeckCardInformation> finalList = new DeckRegularDict<HitTheDeckCardInformation>();
+            finalList.AddRange(discardList);
+            finalList.AddRange(deckList);
+            PlayerList!.ForEach(thisPlayer =>
+            {
+                finalList.AddRange(thisPlayer.MainHandList);
+            });
+            110.Times(x =>
+            {
+                if (finalList.ObjectExist(x) == false)
+                    throw new BasicBlankException($"Deck of {x} is not accounted for");
+            });
+            if (finalList.Count != 110)
+                throw new BasicBlankException($"There has to be a total of 110 cards after playing flip, not {finalList.Count}");
+        }
         public async Task FlipDeckAsync()
         {
             _thisMod!.CommandContainer!.ManuelFinish = true; //should be this way anyways.
             var deckList = _thisMod!.Deck1!.FlipCardList();
             PlayerList!.ChangeReverse();
             var discardList = _thisMod.Pile1!.FlipCardList();
-            if (discardList.Count > 110)
-                throw new BasicBlankException("Cannot have over 110 cards since that is all the cards total");
-            if (discardList.Count + deckList.Count > 110)
-                throw new BasicBlankException("The discard and decklist combined cannot be more than 110");
+            ReconcileFlips(discardList, deckList);
+            //maybe no need for other checks because we are reconciling now.
+            //if (discardList.Count > 110)
+            //    throw new BasicBlankException("Cannot have over 110 cards since that is all the cards total");
+            //if (discardList.Count + deckList.Count > 110)
+            //    throw new BasicBlankException("The discard and decklist combined cannot be more than 110");
             _thisMod.Deck1.OriginalList(discardList);
             _thisMod.Pile1.NewList(deckList);
+            ReconcileCards();
             var thisCard = _thisMod.Pile1.GetCardInfo();
             bool useDeck;
             if (thisCard.Instructions == EnumInstructionList.Flip)
             {
-                useDeck = _thisMod.Pile1.CanCutDiscard();
+                useDeck = !_thisMod.Pile1.CanCutDiscard(); //try this way.
                 do
                 {
-                    if (useDeck == false)
+                    if (useDeck == false) //looks 
                         _thisMod.Pile1.CutDeck();
                     else
                     {
@@ -285,6 +320,12 @@ namespace HitTheDeckCP
                 } while (true);
             }
             await EndTurnAsync();
+        }
+        public override async Task ContinueTurnAsync()
+        {
+            await base.ContinueTurnAsync();
+            _thisMod!.CutDeckCommand!.ReportCanExecuteChange(); //try to do manually
+            //for now, had to do manually.  unless i find a better solution.  not the best but it works for now.
         }
         private bool CanProcessPlay
         {
@@ -305,7 +346,7 @@ namespace HitTheDeckCP
                     var deckList = _thisMod.Deck1.FlipCardList();
                     await _thisMod.ShowGameMessageAsync("Its the end of the deck; therefore; the cards are being reshuffled");
                     _thisMod.Pile1!.AddRestOfDeck(deckList);
-                    await ReshuffleCardsAsync(true);
+                    await ReshuffleCardsAsync(SingleInfo!.CanSendMessage(ThisData!)); //try this way.
                 }
                 if (ThisData!.MultiPlayer == true)
                 {

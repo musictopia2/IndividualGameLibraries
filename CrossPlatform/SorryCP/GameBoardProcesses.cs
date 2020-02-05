@@ -277,6 +277,11 @@ namespace SorryCP
                 return true; //you can always change your mind.
             if (PreviousPiece == 0)
                 return MoveList.Any(items => items.SpaceFrom == index);
+            //actually allow any move may not work because it would not know where to move to unfortunately.
+            //if (_mainGame.ThisTest!.AllowAnyMove)
+            //{
+            //    return true; //i think allow any move even if not on list.  hopefully won't cause problems (?)
+            //}
             return MoveList.Any(items => items.SpaceTo == index); //i think this simple.  hopefully does not have to allow any move (?)
         }
         private async Task NoMovesEndTurnAsync()
@@ -314,9 +319,23 @@ namespace SorryCP
                         throw new BasicBlankException($"Player {thisPlayer.NickName} has piece {thisPiece} for UI but the View Model shows its not there.  They have {thisPlayer.HowManyHomePieces} at home.  Total pieces not at home is {thisPlayer.PieceList.Count}");
                 });
             });
+            //i can also risk doing the error checking to check the spacelist as well.
+            var tempList = _spaceList!.Values.Where(item => item.Player != 0).ToCustomBasicList();
+            tempList.ForEach(item =>
+            {
+                //find out if the player has it in the piecelist.  if they don't error.
+                //if (PlayerHasPiece(item) == false)
+                SorryPlayerItem player = _mainGame.PlayerList[item.Player];
+                if (player.PieceList.Any(piece => piece == item.Index) == false)
+                    throw new BasicBlankException("Player does not have the piece that is in the space list.  Possible slide problem.  Rethink");
+            });
+            //if this finds the problem early, then i don't have to go to that extremes.
+            //i can even manually edit if necessary as well.
         }
+        
         public void ClearBoard()
         {
+
             _mainGame.PlayerList!.ForEach(thisPlayer =>
             {
                 thisPlayer.PieceList.Clear();
@@ -569,7 +588,10 @@ namespace SorryCP
             await slideList.ForEachAsync(async finSpace =>
             {
                 if (finSpace.Player != 0)
+                {
                     await BackToStartAsync(finSpace.Index, finSpace.Player);
+                    finSpace.Player = 0; //try this.  hopefully this does not cause further problems.
+                }
             });
             _thisE.RepaintBoard();
         }
@@ -591,8 +613,10 @@ namespace SorryCP
             if (_mainGame.ThisTest!.NoAnimations == false)
                 await _mainGame.Delay!.DelayMilli(200);
             await AnimateTradeAsync(nextSpace.Index, spaceFrom, nextPlayer, nextPlayer, false);
-            await MoveSlideAsync(nextSpace);
-            await MoveSlideAsync(lastSpace, lastPlayer);
+            await MoveSlideAsync(lastSpace);
+            await MoveSlideAsync(nextSpace, lastPlayer);
+            //await MoveSlideAsync(nextSpace);
+            //await MoveSlideAsync(lastSpace, lastPlayer);
             await EndMoveAsync();
         }
         private async Task SorryPlayerAsync(MoveInfo thisMove)
@@ -1044,7 +1068,7 @@ namespace SorryCP
                             }
                         }
                     }
-                    if (CurrentCard.Trade)
+                    if (CurrentCard.Trade && thisSpace.WhatBoard == EnumBoardStatus.OnBoard)
                     {
                         tempList.ForConditionalItems(items => items.WhatBoard == EnumBoardStatus.OnBoard, finalSpace =>
                         {

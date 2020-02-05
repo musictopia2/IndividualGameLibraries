@@ -4,6 +4,7 @@ using BasicGameFramework.Extensions;
 using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
 using BasicGameFramework.ViewModelInterfaces;
 using CommonBasicStandardLibraries.Exceptions;
+using System;
 using System.Linq;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 namespace TeeItUpCP
@@ -64,6 +65,7 @@ namespace TeeItUpCP
         }
         private TeeItUpCardInformation GetCard(int deck)
         {
+            //return _mainGame.DeckList!.GetSpecificItem(deck); //try this way now.  hopefully won't cause a different issue.
             return ObjectList.GetSpecificItem(deck); //try this way.
         }
         public void ChooseCard(int deck)
@@ -78,7 +80,7 @@ namespace TeeItUpCP
         }
         public void ReplaceFirstWith(int deck)
         {
-            var tempCard = GetCard(deck);
+            var tempCard = _mainGame.DeckList!.GetSpecificItem(deck);
             TradeObject(_previousCard!.Deck, tempCard);
         }
         public bool IsCardKnown(int deck)
@@ -147,10 +149,11 @@ namespace TeeItUpCP
             TeeItUpCardInformation thisCard = new TeeItUpCardInformation();
             thisCard.Populate(newDeck);
             thisCard.IsUnknown = false;
-            if (ObjectList.ObjectExist(thisCard.Deck))
-                ObjectList.RemoveObjectByDeck(thisCard.Deck); //try this way.   hopefully won't cause any deeper issues.
             if (thisCard.IsMulligan == true)
                 thisCard.MulliganUsed = true;
+            if (ObjectList.ObjectExist(thisCard.Deck))
+                return;
+                //ObjectList.RemoveObjectByDeck(thisCard.Deck); //looks like causes deeper issues though.
             TradeObject(oldDeck, thisCard);
         }
         private EnumColumnType ColumnStatus(TeeItUpCardInformation oldCard, TeeItUpCardInformation newCard)
@@ -215,6 +218,11 @@ namespace TeeItUpCP
                 return tempList.All(items => items.IsUnknown == false);
             }
         }
+        public void DoubleCheck()
+        {
+            if (ObjectList.Count != 8)
+                throw new BasicBlankException($"Somehow does not have 8 cards.  Only had {ObjectList.Count} for {_thisPlayer!.NickName}");
+        }
         public int ColumnMatched(int deck) //make it one based.
         {
             TeeItUpCardInformation thisCard = new TeeItUpCardInformation(); //try this way.
@@ -227,10 +235,19 @@ namespace TeeItUpCP
             EnumColumnType statuss;
             int newPoints;
             bool newMulligan = false;
+            if (ObjectList.Count != 8)
+                throw new BasicBlankException($"Must have 8 cards, not {ObjectList.Count} when figuring out whether to match card");
             for (x = 1; x <= 4; x++)
             {
-                firstCard = GetObject(1, x);
-                secondCard = GetObject(2, x);
+                try
+                {
+                    firstCard = GetObject(1, x);
+                    secondCard = GetObject(2, x); //problem is here.
+                }
+                catch (Exception ex)
+                {
+                    throw new BasicBlankException($"Exception when getting object Method was columnmatched.  Message was {ex.Message}");
+                }
                 statuss = ColumnStatus(firstCard, secondCard);
                 if (statuss == EnumColumnType.IsValid1)
                 {

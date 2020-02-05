@@ -163,6 +163,12 @@ namespace MillebournesCP
                     message = "This is not a speed limit";
                 return false;
             }
+            if (_mainGame.SaveRoot!.CurrentTeam == TeamNumber)
+            {
+                if (_selfPlayer == _mainGame.WhoTurn)
+                    throw new BasicBlankException("Should have not considered a hazard because its from the same team.");
+                return false;
+            }
             bool hasSpeedLimit = HasSpeedLimit;
             if (hasSpeedLimit == true)
             {

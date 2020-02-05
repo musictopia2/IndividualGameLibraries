@@ -43,8 +43,8 @@ namespace MillebournesCP
                 return _mainGame!.CurrentCP!.CurrentCard!.CardType switch
                 {
                     EnumCardCategories.Miles => _mainGame.CurrentCP.CanPlaceMiles(out _),
-                    EnumCardCategories.Hazard => _mainGame.TeamList.Any(items => items.HasSpeedLimit == false && items.TeamNumber != _mainGame.SaveRoot!.CurrentTeam),
-                    EnumCardCategories.Speed => _mainGame.TeamList.Any(items => items.WhichHazard == EnumHazardType.None && items.TeamNumber != _mainGame.SaveRoot!.CurrentTeam),
+                    EnumCardCategories.Speed => _mainGame.TeamList.Any(items => items.HasSpeedLimit == false && items.TeamNumber != _mainGame.SaveRoot!.CurrentTeam),
+                    EnumCardCategories.Hazard => _mainGame.TeamList.Any(items => items.WhichHazard == EnumHazardType.None && items.TeamNumber != _mainGame.SaveRoot!.CurrentTeam),
                     EnumCardCategories.Remedy => _mainGame.CurrentCP.CanFixHazard(out _),
                     EnumCardCategories.EndLimit => _mainGame.CurrentCP.CanEndSpeedLimit(out _),
                     EnumCardCategories.Safety => _mainGame.CurrentCP.CanPlaceSafety(out _),
@@ -79,13 +79,25 @@ namespace MillebournesCP
             }
             return false;
         }
-        private DeckRegularDict<MillebournesCardInformation> Hazardlist(IDeckDict<MillebournesCardInformation> moveList)
+        private DeckRegularDict<MillebournesCardInformation> HazardList(IDeckDict<MillebournesCardInformation> moveList)
         {
             DeckRegularDict<MillebournesCardInformation> output = new DeckRegularDict<MillebournesCardInformation>();
             output.AddRange(moveList);
-            output.KeepConditionalItems(items => items.CardType == EnumCardCategories.Hazard);
+            output.KeepConditionalItems(items => items.CardType == EnumCardCategories.Hazard || items.CardType == EnumCardCategories.Speed);
             return output;
         }
+        //private MoveInfo SpeedList(IDeckDict<MillebournesCardInformation> moveList)
+        //{
+        //    DeckRegularDict<MillebournesCardInformation> tempList = new DeckRegularDict<MillebournesCardInformation>();
+        //    tempList.AddRange(moveList);
+        //    tempList.KeepConditionalItems(items => items.CardType == EnumCardCategories.Speed);
+        //    if (tempList.Count == 0)
+        //        return new MoveInfo();
+        //    MoveInfo output = new MoveInfo();
+        //    output.Deck = tempList.First().Deck;
+        //    output.
+        //    //return output;
+        //}
         private DeckRegularDict<MillebournesCardInformation> GetPlayList()
         {
             DeckRegularDict<MillebournesCardInformation> output = new DeckRegularDict<MillebournesCardInformation>();
@@ -312,7 +324,7 @@ namespace MillebournesCP
             var moveList = PossibleMoves();
             if (moveList.Count == 0)
                 return ComputerThrow();
-            var whatHazards = Hazardlist(moveList);
+            var whatHazards = HazardList(moveList);
             if (whatHazards.Count > 0)
             {
                 MoveInfo newMove = BestHazard(whatHazards);
