@@ -37,6 +37,12 @@ namespace ConcentrationWPF
             _thisBoard!.UpdateLists(ThisMod!.GameBoard1!);
             return Task.CompletedTask;
         }
+        protected override void RegisterTests()
+        {
+            ThisTest!.AllowAnyMove = true;
+            ThisTest.PlayCategory = BasicGameFramework.TestUtilities.EnumPlayCategory.NoShuffle;
+            base.RegisterTests();
+        }
         private ScoreBoardWPF? _thisScore;
         private BasicMultiplePilesWPF<RegularSimpleCard, ts, DeckOfCardsWPF<RegularSimpleCard>>? _thisBoard;
         protected async override void AfterGameButton()

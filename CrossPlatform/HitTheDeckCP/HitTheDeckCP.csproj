@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
@@ -14,11 +14,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="1.68.0" />
-    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SkiaSharpGeneralLibrary" Version="1.0.0" />
+    <PackageReference Include="CommonBasicStandardLibraries" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SkiaSharpGeneralLibrary" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\BasicGameFramework.csproj" />
+    <Reference Include="BasicGameFrameworkLibrary">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFrameworkLibrary\bin\Release\netstandard2.1\BasicGameFrameworkLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
