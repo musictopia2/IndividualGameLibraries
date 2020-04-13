@@ -1,4 +1,4 @@
-using BowlingDiceGameCP;
+﻿using BowlingDiceGameCP.ViewModels;
 using System.Windows.Data;
 namespace BowlingDiceGameWPF
 {

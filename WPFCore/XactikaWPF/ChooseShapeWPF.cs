@@ -1,16 +1,20 @@
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using XactikaCP;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
+using XactikaCP.Data;
+using XactikaCP.Logic;
+using XactikaCP.MiscImages;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+
 namespace XactikaWPF
 {
     public class ChooseShapeWPF : UserControl
     {
         private CustomBasicCollection<PieceCP>? _shapeList;
-        private ChooseShapeViewModel? _tempMod;
+        private ChooseShapeObservable? _tempMod;
         private void PieceBindings(XactikaPieceWPF thisGraphics, PieceCP thisPiece)
         {
             thisGraphics.Width = 90;
@@ -18,8 +22,8 @@ namespace XactikaWPF
             thisGraphics.Margin = new Thickness(5, 0, 5, 5); // i do like the idea of margins this time as well.
             thisGraphics.Visibility = Visibility.Visible; // has to manually be set
             thisGraphics.DataContext = thisPiece;
-            var thisBind = GetCommandBinding(nameof(ChooseShapeViewModel.ShapeSelectedCommand));
-            thisGraphics.SetBinding(XactikaPieceWPF.CommandProperty, thisBind);
+            var thisBind = GetCommandBinding(nameof(ChooseShapeObservable.ShapeSelectedCommand));
+            thisGraphics.SetBinding(GraphicsCommand.CommandProperty, thisBind);
             thisGraphics.CommandParameter = thisPiece; // i think
             thisGraphics.SetBinding(XactikaPieceWPF.ShapeUsedProperty, nameof(PieceCP.ShapeUsed));
             thisGraphics.SetBinding(XactikaPieceWPF.HowManyProperty, nameof(PieceCP.HowMany));
@@ -34,13 +38,13 @@ namespace XactikaWPF
             return ThisBind;
         }
         private StackPanel? _thisStack;
-        public void Init(XactikaViewModel thisMod)
+        public void Init(XactikaVMData thisMod)
         {
             _tempMod = thisMod.ShapeChoose1;
             _shapeList = _tempMod!.PieceList;
             Margin = new Thickness(10, 10, 10, 10);
             DataContext = _tempMod; // i think
-            var thisBind = GetVisibleBinding(nameof(ChooseShapeViewModel.Visible));
+            var thisBind = GetVisibleBinding(nameof(ChooseShapeObservable.Visible));
             SetBinding(VisibilityProperty, thisBind); // i think
             _thisStack = new StackPanel();
             _thisStack.Orientation = Orientation.Horizontal; // for this time, must be horizontal.

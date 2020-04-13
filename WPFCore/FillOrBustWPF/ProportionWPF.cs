@@ -1,4 +1,5 @@
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+
 namespace FillOrBustWPF
 {
     public class ProportionWPF : IProportionImage

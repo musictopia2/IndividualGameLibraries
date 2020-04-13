@@ -1,5 +1,6 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using HitTheDeckCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using HitTheDeckCP.Cards;
+using HitTheDeckCP.Data;
 using System.Windows;
 namespace HitTheDeckWPF
 {

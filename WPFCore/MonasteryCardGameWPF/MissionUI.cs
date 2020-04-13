@@ -1,25 +1,36 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+﻿using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
+using BasicGamingUIWPFLibrary.Helpers;
 using CommonBasicStandardLibraries.CollectionClasses;
-using MonasteryCardGameCP;
+using CommonBasicStandardLibraries.Messenging;
+using CommonBasicStandardLibraries.MVVMFramework.UIHelpers;
+using MonasteryCardGameCP.Data;
+using MonasteryCardGameCP.ViewModels;
 using System;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //usually needs this as well for grid helpers.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+
 namespace MonasteryCardGameWPF
 {
     public class MissionUI : BaseFrameWPF
     {
         private CustomBasicCollection<MissionList>? _thisList;
         private Grid? _thisGrid;
-        public void Init(MonasteryCardGameViewModel thisMod)
+        private IUIView? _view;
+        private IEventAggregator? _aggregator;
+        public async Task InitAsync(MonasteryCardGameVMData model, IUIView view, IEventAggregator aggregator)
         {
+            _view = view;
+            _aggregator = aggregator;
             Text = "Mission List";
-            _thisList = thisMod.CompleteMissions;
+            _thisList = model.CompleteMissions;
             Grid mainGrid = new Grid();
             var thisRect = ThisFrame.GetControlArea();
             _thisGrid = new Grid();
@@ -29,37 +40,41 @@ namespace MonasteryCardGameWPF
             AddLeftOverColumn(_thisGrid, 50);
             mainGrid.Children.Add(ThisDraw);
             mainGrid.Children.Add(_thisGrid);
-            PopulateList();
+            await PopulateListAsync();
             _thisList.CollectionChanged += ListChange;
             Content = mainGrid;
         }
-        private void ListChange(object sender, NotifyCollectionChangedEventArgs e)
+        private async void ListChange(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Reset)
-                PopulateList(); //hopefully this is all i need.
+                await PopulateListAsync(); //hopefully this is all i need.
         }
         private Button GetDescButton()
         {
-            var thisBut = GetGamingButton("Mission Description", nameof(MonasteryCardGameViewModel.MissionDetailCommand));
+            var thisBut = GetGamingButton("Mission Description", nameof(MonasteryCardGameMainViewModel.MissionDetailAsync));
+            GamePackageViewModelBinder.ManuelElements.Add(thisBut);
             return thisBut;
         }
-        private void PopulateList()
+        private async Task PopulateListAsync()
         {
+            GamePackageViewModelBinder.ManuelElements.Clear();
             _thisGrid!.Children.Clear();
             if (_thisList!.Count == 0)
             {
                 var tempButton = GetDescButton();
                 AddControlToGrid(_thisGrid, tempButton, 0, 0);
+                await _view!.RefreshBindingsAsync(_aggregator!);
                 return;
             }
             int column = 0;
             int row = 0;
             _thisList.ForEach(thisMission =>
             {
-                var thisButton = GetGamingButton(thisMission.Description, nameof(MonasteryCardGameViewModel.SelectPossibleMissionCommand));
+                var thisButton = GetGamingButton(thisMission.Description, nameof(MonasteryCardGameMainViewModel.SelectPossibleMission));
+                GamePackageViewModelBinder.ManuelElements.Add(thisButton);
                 thisButton.CommandParameter = thisMission;
                 ButtonOptionConverter thisConvert = new ButtonOptionConverter();
-                Binding thisBind = new Binding(nameof(MonasteryCardGameViewModel.MissionChosen));
+                Binding thisBind = new Binding(nameof(MonasteryCardGameMainViewModel.MissionChosen));
                 thisBind.Converter = thisConvert;
                 thisBind.ConverterParameter = thisMission.Description;
                 thisButton.SetBinding(BackgroundProperty, thisBind);
@@ -76,10 +91,12 @@ namespace MonasteryCardGameWPF
             finalStack.Orientation = Orientation.Horizontal;
             AddControlToGrid(_thisGrid, finalStack, row, 0);
             Grid.SetColumnSpan(finalStack, 3);
-            var finalButton = GetGamingButton("Complete Mission", nameof(MonasteryCardGameViewModel.CompleteChosenMissionCommand));
+            var finalButton = GetGamingButton("Complete Mission", nameof(MonasteryCardGameMainViewModel.CompleteChosenMissionAsync));
+            GamePackageViewModelBinder.ManuelElements.Add(finalButton);
             finalStack.Children.Add(finalButton);
             finalButton = GetDescButton();
             finalStack.Children.Add(finalButton);
+            await _view!.RefreshBindingsAsync(_aggregator!);
         }
     }
     public class ButtonOptionConverter : IValueConverter

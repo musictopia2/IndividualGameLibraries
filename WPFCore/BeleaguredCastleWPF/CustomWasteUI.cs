@@ -1,13 +1,13 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.MultipleFrameContainers;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BaseSolitaireClassesCP.GraphicsViewModels;
+﻿using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGameFrameworkLibrary.SolitaireClasses.GraphicsObservable;
+using BasicGamingUIWPFLibrary.BasicControls.MultipleFrameContainers;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Windows;
 using System.Windows.Controls;
 using static BasicControlsAndWindowsCore.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
-//i think this is the most common things i like to do
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+
 namespace BeleaguredCastleWPF
 {
     public class CustomWasteUI : UserControl
@@ -31,21 +31,21 @@ namespace BeleaguredCastleWPF
             int x;
             for (x = 1; x <= 4; x++)
             {
-                var ThisSingle = new SinglePileUI();
-                var ThisPile = _thisMod.PileList[x - 1];
-                ThisSingle.Init(ThisPile, _thisMod); // the first 4 are reversed
-                AddControlToGrid(_thisGrid, ThisSingle, x - 1, 0);
+                var thisSingle = new SinglePileUI();
+                var thisPile = _thisMod.PileList[x - 1];
+                thisSingle.Init(thisPile, _thisMod); // the first 4 are reversed
+                AddControlToGrid(_thisGrid, thisSingle, x - 1, 0);
             }
 
             for (x = 5; x <= 8; x++)
             {
-                var ThisSingle = new SinglePileUI();
-                var ThisPile = _thisMod.PileList[x - 1];
-                ThisSingle.Init(ThisPile, _thisMod); //no reverse anymore.
-                ThisSingle.Margin = new Thickness(20, 0, 0, 0);
-                AddControlToGrid(_thisGrid, ThisSingle, x - 5, 2);
+                var thisSingle = new SinglePileUI();
+                var thisPile = _thisMod.PileList[x - 1];
+                thisSingle.Init(thisPile, _thisMod); //no reverse anymore.
+                thisSingle.Margin = new Thickness(20, 0, 0, 0);
+                AddControlToGrid(_thisGrid, thisSingle, x - 5, 2);
             }
-            
+
             Content = _thisGrid;
         }
     }

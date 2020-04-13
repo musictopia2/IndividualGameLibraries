@@ -1,5 +1,5 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using FlinchCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using FlinchCP.Cards;
 namespace FlinchWPF
 {
     public class CardGraphicsWPF : BaseColorCardsWPF<FlinchCardInformation, FlinchGraphicsCP> { }

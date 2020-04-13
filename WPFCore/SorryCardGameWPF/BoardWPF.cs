@@ -1,13 +1,17 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+﻿using BasicGameFrameworkLibrary.CommandClasses;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using SorryCardGameCP;
+using SorryCardGameCP.Cards;
+using SorryCardGameCP.Data;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 namespace SorryCardGameWPF
 {
     public class BoardWPF : BaseFrameWPF
@@ -15,12 +19,12 @@ namespace SorryCardGameWPF
         private SorryCardGamePlayerItem? _thisPlayer;
         private CustomBasicList<CardGraphicsWPF>? _thisList;
         private ICommand? _clickCommand;
-        public void LoadList(SorryCardGamePlayerItem tempPlayer)
+        public void LoadList(SorryCardGamePlayerItem tempPlayer, CommandContainer command)
         {
             _thisPlayer = tempPlayer;
             StackPanel thisStack = new StackPanel();
             thisStack.Orientation = Orientation.Horizontal;
-            _clickCommand = _thisPlayer.ClickCommand;
+            _clickCommand = tempPlayer.GetPlainCommand(command, nameof(SorryCardGamePlayerItem.SorryPlayerAsync)); //not just player anymore.
             _thisList = new CustomBasicList<CardGraphicsWPF>();
             for (int x = 1; x <= 4; x++)
             {
@@ -42,6 +46,12 @@ namespace SorryCardGameWPF
             MouseUp += BoardWPF_MouseUp;
             _thisPlayer.PropertyChanged += ThisPlayerPropertyChange;
             RefreshList();
+        }
+        public void Dispose()
+        {
+            MouseUp -= BoardWPF_MouseUp;
+            _thisPlayer!.PropertyChanged -= ThisPlayerPropertyChange;
+            _clickCommand!.CanExecuteChanged -= ClickCommandChange;
         }
         private void ThisPlayerPropertyChange(object sender, PropertyChangedEventArgs e)
         {

@@ -1,13 +1,14 @@
-using BasicGameFramework.DIContainers;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.DIContainers;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using SkiaSharpGeneralLibrary.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
-using ThinkTwiceCP;
+using ThinkTwiceCP.Data;
+using ThinkTwiceCP.Logic;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace ThinkTwiceWPF
 {
@@ -48,7 +49,7 @@ namespace ThinkTwiceWPF
         public static string GetDiceTag => "StandardDice"; //same as other dice.
         public void SendDiceInfo(Multiplier thisDice) //it did send dice
         {
-            IGamePackageResolver thisR = (IGamePackageResolver)cons;
+            IGamePackageResolver thisR = (IGamePackageResolver)cons!;
             IProportionImage thisP = thisR.Resolve<IProportionImage>(GetDiceTag);
             _mains = new ButtonDiceGraphicsCP();
             _mains.PaintUI = this;
@@ -77,7 +78,9 @@ namespace ThinkTwiceWPF
         private void ThisDraw_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
             if (_mains == null)
+            {
                 return;
+            }
             BeforePainting();
             _mains.DrawDice(e.Surface.Canvas);
         }

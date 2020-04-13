@@ -1,10 +1,11 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using SkiaSharp;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using ThreeLetterFunCP;
+using ThreeLetterFunCP.Data;
+using ThreeLetterFunCP.GraphicsCP;
 namespace ThreeLetterFunWPF
 {
     public class CardGraphicsWPF : BaseDeckGraphicsWPF<ThreeLetterFunCardData, ThreeLetterFunCardGraphicsCP>

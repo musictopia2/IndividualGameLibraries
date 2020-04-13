@@ -1,4 +1,4 @@
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
 namespace MillebournesWPF
 {
     public class CustomProportion : IProportionImage

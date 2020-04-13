@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -9,20 +9,20 @@
     <PackageReference Include="SkiaSharp.Views" Version="1.68.0">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SkiaSharpGeneralLibrary" Version="1.0.0" />
-    <PackageReference Include="BasicControlsAndWindowsCore" Version="1.0.0" />
+    <PackageReference Include="CommonBasicStandardLibraries" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SkiaSharpGeneralLibrary" Version="2.0.0" />
+    <PackageReference Include="BasicControlsAndWindowsCore" Version="3.0.5" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BasicGameFramework">
-      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    <Reference Include="BasicGameFrameworkLibrary">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFrameworkLibrary\bin\Release\netstandard2.1\BasicGameFrameworkLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="BaseGPXWindowsAndControlsCore">
-      <HintPath>..\..\..\GamingPackXBasicLibraries\WPF\BaseGPXWindowsAndControlsCore\bin\Release\netcoreapp3.0\BaseGPXWindowsAndControlsCore.dll</HintPath>
+    <Reference Include="BasicGamingUIWPFLibrary">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\WPF\BasicGamingUIWPFLibrary\bin\Release\netcoreapp3.1\BasicGamingUIWPFLibrary.dll</HintPath>
     </Reference>
     <Reference Include="DeadDie96CP">
-      <HintPath>..\..\CrossPlatform\DeadDie96CP\bin\Release\netstandard2.0\DeadDie96CP.dll</HintPath>
+      <HintPath>..\..\CrossPlatform\DeadDie96CP\bin\Release\netstandard2.1\DeadDie96CP.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

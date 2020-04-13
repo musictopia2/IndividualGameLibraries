@@ -1,9 +1,10 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicControlsAndWindowsCore.Helpers;
-using BladesOfSteelCP;
+﻿using BasicControlsAndWindowsCore.Helpers;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
+using BladesOfSteelCP.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+
 namespace BladesOfSteelWPF
 {
     public class ScoringGuideWPF : BaseFrameWPF

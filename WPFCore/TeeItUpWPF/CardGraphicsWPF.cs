@@ -1,9 +1,9 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using System.Windows;
-using TeeItUpCP;
+using TeeItUpCP.Cards;
 namespace TeeItUpWPF
 {
-    public class CardGraphicsWPF : BaseDeckGraphicsWPF<TeeItUpCardInformation, TeeItUpGraphicsCP>
+    public class CardGraphicsWPF : BaseDeckGraphicsWPF<TeeItUpCardInformation, TeeItUpGraphicsCP>//begin
     {
         public static readonly DependencyProperty PointsProperty = DependencyProperty.Register("Points", typeof(int), typeof(CardGraphicsWPF), new FrameworkPropertyMetadata(-6, (new PropertyChangedCallback(PointsPropertyChanged))));
         public int Points

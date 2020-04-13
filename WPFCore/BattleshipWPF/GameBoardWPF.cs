@@ -1,5 +1,5 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
-using BattleshipCP;
+﻿using BasicGamingUIWPFLibrary.BasicControls.GameBoards;
+using BattleshipCP.Data;
 using System.Windows.Controls;
 using System.Windows.Data;
 namespace BattleshipWPF

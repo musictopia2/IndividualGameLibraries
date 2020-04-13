@@ -1,4 +1,5 @@
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+
 namespace PaydayWPF
 {
     public class CustomProportionWPF : IProportionImage

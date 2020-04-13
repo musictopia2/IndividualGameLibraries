@@ -1,21 +1,39 @@
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BasicControlsAndWindowsCore.Helpers;
-using CommonBasicStandardLibraries.CollectionClasses;
+﻿using System;
+using System.Text;
 using CommonBasicStandardLibraries.Exceptions;
-using PokerCP;
-using System.Collections.Specialized;
-using System.Windows;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
 using System.Windows.Controls;
+using CommonBasicStandardLibraries.Messenging;
+using PokerCP.EventModels;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using PokerCP.Data;
+using PokerCP.ViewModels;
+using System.Windows;
 using System.Windows.Data;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using BasicControlsAndWindowsCore.Helpers;
+using BasicGamingUIWPFLibrary.Helpers;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+using System.Collections.Specialized;
+using System.Reflection;
+using BasicGameFrameworkLibrary.CommandClasses;
+using PokerWPF.Views;
+using BasicGameFrameworkLibrary.BasicEventModels;
+using System.Threading;
+
 namespace PokerWPF
 {
-    public class HandUI : UserControl, INewCard
+    public class HandUI : UserControl, IHandle<PokerCP.EventModels.NewCardEventModel>
     {
         private CustomBasicCollection<DisplayCard>? _thisList;
         private Grid? _thisGrid;
-        private PokerViewModel? _thisMod;
+        private PokerMainViewModel? _thisMod;
         private DeckOfCardsWPF<PokerCardInfo>? FindControl(int index)
         {
             foreach (UIElement? thisCon in _thisGrid!.Children)
@@ -25,13 +43,13 @@ namespace PokerWPF
             }
             throw new BasicBlankException("No control found");
         }
-        private Binding GetCommandBinding(string path)
-        {
-            Binding ThisBind = new Binding(path);
-            ThisBind.Source = _thisMod;
-            return ThisBind;
-        }
 
+        public HandUI(IEventAggregator aggregator)
+        {
+            aggregator.Subscribe(this);
+            _aggregator = aggregator;
+            //_view = view;
+        }
         private void PopulateControls()
         {
             _thisGrid!.Children.Clear(); // i think
@@ -40,17 +58,24 @@ namespace PokerWPF
             if (_thisList.Count != 5)
                 throw new BasicBlankException("Must have 5 cards for poker hand.");
             int x = 0;
-            foreach (var ThisPoker in _thisList)
+            foreach (var display in GlobalClass.PokerList)
             {
-                var ThisGraphics = GetNewCard(ThisPoker);
-                GridHelper.AddControlToGrid(_thisGrid, ThisGraphics, 0, x);
-                var ThisLabel = SharedWindowFunctions.GetDefaultLabel();
-                ThisLabel.FontSize = 20; // can always be adjusted as needed
-                ThisLabel.HorizontalAlignment = HorizontalAlignment.Center;
-                ThisLabel.FontWeight = FontWeights.Bold;
-                ThisLabel.DataContext = ThisPoker;
-                ThisLabel.SetBinding(TextBlock.TextProperty, new Binding(nameof(DisplayCard.Text)));
-                GridHelper.AddControlToGrid(_thisGrid, ThisLabel, 1, x);
+                var graphics = GetNewCard(display);
+                graphics.CommandParameter = display;
+                //var button = new Button()
+                //{
+                //    Name = nameof(PokerMainViewModel.HoldUnhold),
+                //    Content = "Test"
+                //};
+                //GridHelper.AddControlToGrid(_thisGrid, button, 0, x);
+                GridHelper.AddControlToGrid(_thisGrid, graphics, 0, x);
+                var label = SharedUIFunctions.GetDefaultLabel();
+                label.FontSize = 20; // can always be adjusted as needed
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                label.FontWeight = FontWeights.Bold;
+                label.DataContext = display;
+                label.SetBinding(TextBlock.TextProperty, new Binding(nameof(DisplayCard.Text)));
+                GridHelper.AddControlToGrid(_thisGrid, label, 1, x);
                 x += 1;
             }
         }
@@ -58,27 +83,40 @@ namespace PokerWPF
         {
             DeckOfCardsWPF<PokerCardInfo> thisCard = new DeckOfCardsWPF<PokerCardInfo>();
             thisCard.SendSize(ts.TagUsed, thisPoker.CurrentCard);
-            var thisBind = GetCommandBinding(nameof(PokerViewModel.HoldUnHoldCardCommand));
-            thisCard.SetBinding(DeckOfCardsWPF<PokerCardInfo>.CommandProperty, thisBind);
-            thisCard.CommandParameter = thisPoker;
+
+
+            //thisCard.Name = nameof(PokerMainViewModel.HoldUnhold);
+
+            
+
+            thisCard.Command = _command!;
             return thisCard;
         }
 
         private void ThisList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             PopulateControls();
+            //await _view.RefreshBindingsAsync(_aggregator);
         }
-        void INewCard.NewCard(int index)
-        {
-            if (_thisList!.Count == 0)
-                return;
-            var newCard = _thisList[index];
-            var thisControl = FindControl(index);
-            thisControl!.DataContext = newCard.CurrentCard; //hopefully this is enough (?)
-        }
-        public void Init(PokerViewModel thisMod)
+        private PlainCommand? _command;
+        private readonly IEventAggregator _aggregator;
+        //private readonly PokerMainView _view;
+
+        public void Init(PokerMainViewModel thisMod)
         {
             _thisMod = thisMod;
+            Type type = _thisMod!.GetType();
+            MethodInfo? method = type.GetMethod(nameof(PokerMainViewModel.HoldUnhold));
+            PropertyInfo? fun = type.GetProperty(nameof(PokerMainViewModel.CanHoldUnhold));
+            if (method == null)
+            {
+                throw new BasicBlankException("Method not found for hand.  Rethink");
+            }
+            if (fun == null)
+            {
+                throw new BasicBlankException("Function not found for hand.  Rethink");
+            }
+            _command = new PlainCommand(_thisMod, method, fun, _thisMod.CommandContainer);
             _thisGrid = new Grid();
             GridHelper.AddAutoColumns(_thisGrid, 5);
             GridHelper.AddAutoRows(_thisGrid, 2);
@@ -86,6 +124,15 @@ namespace PokerWPF
             _thisList.CollectionChanged += ThisList_CollectionChanged;
             Content = _thisGrid;
             PopulateControls();
+        }
+
+        void IHandle<PokerCP.EventModels.NewCardEventModel>.Handle(PokerCP.EventModels.NewCardEventModel message)
+        {
+            if (_thisList!.Count == 0)
+                return;
+            var newCard = _thisList[message.Index];
+            var thisControl = FindControl(message.Index);
+            thisControl!.DataContext = newCard.CurrentCard; //hopefully this is enough (?)
         }
     }
 }

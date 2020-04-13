@@ -1,6 +1,7 @@
-using BasicGameFramework.DIContainers;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.DIContainers;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using CommonBasicStandardLibraries.Exceptions;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
@@ -8,9 +9,12 @@ using SkiaSharpGeneralLibrary.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ThinkTwiceCP;
-using static BasicControlsAndWindowsCore.BasicWindows.Misc.WindowHelper;
+using ThinkTwiceCP.Data;
+using ThinkTwiceCP.Logic;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+
+//i think this is the most common things i like to do
 namespace ThinkTwiceWPF
 {
     public class CategoryWPF : UserControl, IRepaintControl
@@ -60,12 +64,14 @@ namespace ThinkTwiceWPF
             thisItem._mains!.WillHold = (bool)e.NewValue; // hopefully will be that simple  this will trigger the paint event.  hoepfully this way will still work out.
         }
         private static void DiceSizePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
+        private ThinkTwiceGameContainer? _gameContainer;
         public static string GetDiceTag => "StandardDice"; //same as other dice.
-        private ICommand? Command;
-        public void SendDiceInfo(CategoriesDice thisDice) //it did send dice
+        //private ICommand? Command;
+        public void SendDiceInfo(CategoriesDice thisDice, ThinkTwiceGameContainer gameContainer) //it did send dice
         {
-            IGamePackageResolver thisR = (IGamePackageResolver)cons;
+            IGamePackageResolver thisR = (IGamePackageResolver)cons!;
             IProportionImage thisP = thisR.Resolve<IProportionImage>(GetDiceTag);
+            _gameContainer = gameContainer;
             _mains = new ButtonDiceGraphicsCP();
             _mains.PaintUI = this;
             _mains.MinimumWidthHeight = thisDice.HeightWidth;
@@ -74,7 +80,7 @@ namespace ThinkTwiceWPF
             SetBinding(VisibilityProperty, GetVisibleBinding(nameof(CategoriesDice.Visible)));
             SKSize TempSize = new SKSize(thisDice.HeightWidth, thisDice.HeightWidth);
             DiceSize = TempSize.GetSizeUsed(thisP.Proportion);
-            Command = thisDice.CategoryClickCommand!;
+            //Command = thisDice.CategoryClickCommand!;
             Height = DiceSize.Height;
             Width = DiceSize.Width;
             DataContext = thisDice;
@@ -111,14 +117,22 @@ namespace ThinkTwiceWPF
         {
             _thisDraw.InvalidateVisual();
         }
-        private void BaseGraphics_MouseUp(object sender, MouseButtonEventArgs e)
+        private async void BaseGraphics_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var tempCommand = Command;
-            if (tempCommand != null)
+            var dice = (CategoriesDice)DataContext;
+            if (dice.Visible == false)
             {
-                if (tempCommand.CanExecute(null) == true)
-                    tempCommand.Execute(null);
+                return;
             }
+            if (_gameContainer!.Command.IsExecuting)
+            {
+                return;
+            }
+            if (_gameContainer.CategoryClicked == null)
+            {
+                throw new BasicBlankException("Nobody is handling the game category clicked.  Rethink");
+            }
+            await _gameContainer.ProcessCustomCommandAsync(_gameContainer.CategoryClicked);
         }
     }
 }

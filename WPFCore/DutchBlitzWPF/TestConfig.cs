@@ -1,23 +1,22 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using DutchBlitzCP;
-using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.TestUtilities;
+using DutchBlitzCP.Cards;
+using DutchBlitzCP.Data;
+using System.Threading.Tasks;
+
 namespace DutchBlitzWPF
 {
     public class TestConfig : ITestCardSetUp<DutchBlitzCardInformation, DutchBlitzPlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<DutchBlitzPlayerItem> playerList, IListShuffler<DutchBlitzCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<DutchBlitzPlayerItem> playerlist, IListShuffler<DutchBlitzCardInformation> decklist)
         {
-            DutchBlitzPlayerItem thisPlayer = playerList.GetSelf();
-            thisPlayer.StartUpList = new DeckRegularDict<DutchBlitzCardInformation>(); //sample too.
+            //DutchBlitzPlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-            //this was example with regular deck of card.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

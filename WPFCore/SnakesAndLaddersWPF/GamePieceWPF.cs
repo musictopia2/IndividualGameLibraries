@@ -1,7 +1,7 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
-using SnakesAndLaddersCP;
+using SnakesAndLaddersCP.GraphicsCP;
 using System.Windows;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
@@ -10,10 +10,10 @@ namespace SnakesAndLaddersWPF
     public class GamePieceWPF : BaseGraphicsWPF<PieceGraphicsCP>
     {
         public bool NeedsSubscribe { get; set; } = true;
-        private static EventAggregator? _thisE;
+        private static IEventAggregator? _aggregator;
         public GamePieceWPF()
         {
-            _thisE = Resolve<EventAggregator>();
+            _aggregator = Resolve<IEventAggregator>();
         }
         public static readonly DependencyProperty NumberProperty = DependencyProperty.Register("Number", typeof(int), typeof(GamePieceWPF), new FrameworkPropertyMetadata(0, new PropertyChangedCallback(NumberPropertyChanged)));
         public int Number
@@ -32,7 +32,7 @@ namespace SnakesAndLaddersWPF
             var thisItem = (GamePieceWPF)sender;
             thisItem.Mains.Number = (int)e.NewValue;
             if (thisItem.NeedsSubscribe == true)
-                _thisE!.Publish(thisItem);
+                _aggregator!.Publish(thisItem);
         }
         public static readonly DependencyProperty IndexProperty = DependencyProperty.Register("Index", typeof(int), typeof(GamePieceWPF), new FrameworkPropertyMetadata(0, new PropertyChangedCallback(IndexPropertyChanged)));
         public int Index

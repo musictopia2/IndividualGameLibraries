@@ -1,7 +1,8 @@
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.MultiplePilesViewModels;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
 using CommonBasicStandardLibraries.CollectionClasses;
-using DutchBlitzCP;
+using DutchBlitzCP.Cards;
+using DutchBlitzCP.Piles;
 using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Media;

@@ -1,23 +1,24 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using RageCardGameCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.TestUtilities;
+using RageCardGameCP.Cards;
+using RageCardGameCP.Data;
 using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Threading.Tasks;
+
 namespace RageCardGameWPF
 {
     public class TestConfig : ITestCardSetUp<RageCardGameCardInformation, RageCardGamePlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<RageCardGamePlayerItem> playerList, IListShuffler<RageCardGameCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<RageCardGamePlayerItem> playerlist, IListShuffler<RageCardGameCardInformation> decklist)
         {
-            RageCardGamePlayerItem thisPlayer = playerList.GetSelf();
-            thisPlayer.StartUpList = new DeckRegularDict<RageCardGameCardInformation>(); //sample too.
+            RageCardGamePlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-            //this was example with regular deck of card.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+            player.StartUpList.AddRange(decklist.Where(x => x.Color == EnumColor.Purple && x.Value == 15).Take(1).ToRegularDeckDict());
+            
             //can be anything you want.
             return Task.CompletedTask;
         }

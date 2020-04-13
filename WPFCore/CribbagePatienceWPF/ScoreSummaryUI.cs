@@ -1,18 +1,18 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+﻿using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.CollectionClasses;
-using CribbagePatienceCP;
+using CribbagePatienceCP.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 namespace CribbagePatienceWPF
 {
     public class ScoreSummaryUI : BaseFrameWPF
     {
         private Grid? _thisGrid;
         private CustomBasicCollection<int>? _scoreList;
-        private CribbagePatienceViewModel? _thisMod;
-        public void Init(CribbagePatienceViewModel thisMod)
+        private CribbagePatienceMainViewModel? _thisMod;
+        public void Init(CribbagePatienceMainViewModel thisMod)
         {
             _thisMod = thisMod;
             Text = "Score Summary";

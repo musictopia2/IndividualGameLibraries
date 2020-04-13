@@ -1,7 +1,7 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
+﻿using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIWPFLibrary.BasicControls.GameBoards;
 using CommonBasicStandardLibraries.Messenging;
-using RollEmCP;
+using RollEmCP.Logic;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System.Windows.Controls;
@@ -11,35 +11,40 @@ namespace RollEmWPF
 {
     public class GameBoardWPF : UserControl, IHandle<RepaintEventModel>
     {
-        internal SkiaSharpGameBoard ThisElement;
+        internal SkiaSharpGameBoard Element { get; set; }
+        internal void Dispose()
+        {
+            EventAggregator thisT = Resolve<EventAggregator>();
+            thisT.Unsubscribe(this);
+        }
         public void LoadBoard()
         {
             GameBoardGraphicsCP privateBoard = Resolve<GameBoardGraphicsCP>();
             MouseUp += GameboardWPF_MouseUp;
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element.PaintSurface += ThisElement_PaintSurface;
             SKSize thisSize = privateBoard.SuggestedSize();
             Width = thisSize.Width;
             Height = thisSize.Height;
             EventAggregator thisT = Resolve<EventAggregator>();
-            thisT.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString());
-            Content = ThisElement;
+            thisT.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString());
+            Content = Element;
         }
         public GameBoardWPF()
         {
-            ThisElement = new SkiaSharpGameBoard();
+            Element = new SkiaSharpGameBoard();
         }
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         private void GameboardWPF_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var thisPos = e.GetPosition(ThisElement);
-            ThisElement.StartClick(thisPos.X, thisPos.Y);
+            var thisPos = e.GetPosition(Element);
+            Element.StartClick(thisPos.X, thisPos.Y);
         }
         public void Handle(RepaintEventModel message)
         {
-            ThisElement.InvalidateVisual();
+            Element.InvalidateVisual();
         }
     }
 }

@@ -1,17 +1,17 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.MultipleFrameContainers;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BasicGameFramework.MultiplePilesViewModels;
+﻿using BasicGameFrameworkLibrary.MultiplePilesObservable;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGamingUIWPFLibrary.BasicControls.MultipleFrameContainers;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using LittleSpiderSolitaireCP;
+using LittleSpiderSolitaireCP.Logic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace LittleSpiderSolitaireWPF
 {
     public class CustomWasteUI : UserControl

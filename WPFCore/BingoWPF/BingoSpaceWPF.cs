@@ -1,34 +1,48 @@
-using BingoCP;
+﻿using System;
+using System.Text;
 using CommonBasicStandardLibraries.Exceptions;
-using SkiaSharp.Views.Desktop;
-using SkiaSharp.Views.WPF;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using BingoCP.Data;
+using SkiaSharp.Views.WPF;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Media;
+using System.ComponentModel;
+using System.Windows.Input;
+using SkiaSharp.Views.Desktop;
+using BingoCP.Logic;
+using BingoCP.ViewModels;
+using BasicGamingUIWPFLibrary.Helpers;
+using System.Windows.Data;
+//i think this is the most common things i like to do
 namespace BingoWPF
 {
-    public class BingoSpaceWPF : UserControl
+    public class BingoSpaceWPF : GraphicsCommand
     {
         public SpaceInfoCP? ThisSpace;
         private SKElement? _thisDraw;
-        private BingoViewModel? _thisMod;
         private BingoMainGameClass? _mainGame;
         public void Init()
         {
             if (ThisSpace == null)
                 throw new BasicBlankException("Must send in the space");
-            _thisMod = Resolve<BingoViewModel>();
             _mainGame = Resolve<BingoMainGameClass>();
             _thisDraw = new SKElement();
             _thisDraw.PaintSurface += ThisDraw_PaintSurface;
             ThisSpace.PropertyChanged += ThisSpace_PropertyChanged;
-            MouseUp += BingoSpaceWPF_MouseUp;
             Width = 100;
+            CommandParameter = ThisSpace;
             Height = 100;
+            Name = nameof(BingoMainViewModel.SelectSpace);
+            GamePackageViewModelBinder.ManuelElements.Add(this);
             Grid thisGrid = new Grid();
             thisGrid.Children.Add(_thisDraw);
             TextBlock thisLabel = new TextBlock();
@@ -38,13 +52,11 @@ namespace BingoWPF
             thisLabel.FontWeight = FontWeights.Bold;
             if (ThisSpace.IsEnabled == false)
             {
-                // ThisLabel.Background = Brushes.Black
                 thisLabel.Foreground = Brushes.White;
                 thisLabel.FontSize = 40;
             }
             else
             {
-                // ThisLabel.Background = Brushes.White
                 thisLabel.Foreground = Brushes.Black; // otherwise, can't do the other part.
                 if (ThisSpace.Text == "Free")
                     thisLabel.FontSize = 34;
@@ -57,11 +69,6 @@ namespace BingoWPF
             Content = thisGrid;
         }
 
-        private void BingoSpaceWPF_MouseUp(object? sender, MouseButtonEventArgs e)
-        {
-            if (_thisMod!.SelectSpaceCommand!.CanExecute(ThisSpace!))
-                _thisMod.SelectSpaceCommand.Execute(ThisSpace!);
-        }
 
         private void ThisSpace_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

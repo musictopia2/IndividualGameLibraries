@@ -1,64 +1,44 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using FroggiesCP;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using FroggiesCP.Logic;
+using FroggiesCP.Data;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicControlsAndWindowsCore.Controls.NavigationControls;
+using FroggiesCP.ViewModels;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace FroggiesWPF
 {
-    public class GamePage : SinglePlayerWindow<FroggiesViewModel>
+    public class GamePage : SinglePlayerShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+
+        public GamePage(IGameInfo gameData, BasicData basicData, IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
+            
+
         }
-        public override Task HandleAsync(LoadEventModel message)
+
+        protected override Task PopulateUIAsync()
         {
+            ParentSingleUIContainer parent = new ParentSingleUIContainer()
+            {
+                Name = nameof(FroggiesShellViewModel.OpeningScreen)
+            };
+            AddMain(parent); //hopefully this simple (?)
             return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            return Task.CompletedTask;
-        }
-        protected override void AfterGameButton()
-        {
-            StackPanel thisStack = new StackPanel();
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Center;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            thisStack.Children.Add(GameButton);
-            Grid thisGrid = new Grid();
-            AddAutoColumns(thisGrid, 2);
-            AddLeftOverColumn(thisGrid, 1);
-            AddControlToGrid(thisGrid, thisStack, 0, 1);
-            GameBoardWPF thisBoard = new GameBoardWPF(ThisMod!);
-            thisBoard.Margin = new Thickness(5, 5, 5, 5);
-            thisStack.Margin = new Thickness(5, 5, 5, 5);
-            AddControlToGrid(thisGrid, thisBoard, 0, 0);
-            Button redoButton = GetGamingButton("Redo Game", nameof(FroggiesViewModel.RedoGameCommand));
-            thisStack.Children.Add(redoButton);
-            SimpleLabelGrid thisLab = new SimpleLabelGrid();
-            thisLab.AddRow("Moves Left", nameof(FroggiesViewModel.MovesLeft));
-            thisLab.AddRow("How Many Frogs", nameof(FroggiesViewModel.NumberOfFrogs));
-            thisStack.Children.Add(thisLab.GetContent);
-            NumberChooserWPF picker = new NumberChooserWPF();
-            picker.Columns = 8;
-            picker.LoadLists(ThisMod!.LevelPicker!);
-            AddControlToGrid(thisGrid, picker, 0, 2);
-            Content = thisGrid; //if not doing this, rethink.
-            ThisMod.NewGameVisible = true;
-            ThisMod.CommandContainer!.IsExecuting = false;
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterNonSavedClasses<FroggiesViewModel>(); //go ahead and use the custom processes for this.  decided to mention non saved classes.
-            OurContainer!.RegisterType<StandardWidthHeight>(); //i think this should be fine.
         }
     }
 }

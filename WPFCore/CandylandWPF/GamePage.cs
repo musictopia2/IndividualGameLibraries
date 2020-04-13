@@ -1,94 +1,41 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BasicControlsAndWindowsCore.Helpers;
-using BasicGameFramework.BasicDrawables.BasicClasses;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.BasicDrawables.MiscClasses;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.MultiplayerClasses.LoadingClasses;
-using CandylandCP;
-using CommonBasicStandardLibraries.Messenging;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using CandylandCP.Logic;
+using CandylandCP.Data;
 using System.Windows.Controls;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicGameFrameworkLibrary.TestUtilities;
 using System.Windows.Media;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace CandylandWPF
 {
-    public class GamePage : MultiPlayerWindow<CandylandViewModel, CandylandPlayerItem, CandylandSaveInfo>, IHandle<CandylandCardData>, IHandle<NewTurnEventModel>
+    public class GamePage : MultiplayerBasicShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+        public GamePage(IGameInfo gameData,
+            BasicData basicData, 
+            IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
+            
         }
-        public override Task HandleAsync(LoadEventModel message)
+
+
+        protected override Task PopulateUIAsync()
         {
-            _ourBoard!.LoadBoard();
+            //if any exceptions to the shell, do here or override other things.
             return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            return Task.CompletedTask;
-        }
-        private CardGraphicsWPF? _ourCard;
-        private GameboardWPF? _ourBoard;
-        private PieceWPF? _ourPiece;
-        protected async override void AfterGameButton()
-        {
-            StackPanel thisStack = new StackPanel();
-            BasicSetUp();
-            MainGrid!.Background = Brushes.White;
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Center;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            thisStack.Children.Add(GameButton);
-            StackPanel otherStack = new StackPanel();
-            _ourBoard = new GameboardWPF();
-            OurContainer!.RegisterSingleton(_ourBoard.ThisElement, "main"); //i think
-            _ourCard = new CardGraphicsWPF(); // bindings are finished
-            _ourCard.SendSize("main", new CandylandCardData());
-            otherStack.Margin = new Thickness(5, 5, 5, 5);
-            otherStack.Orientation = Orientation.Horizontal;
-            StackPanel firstStack = new StackPanel();
-            otherStack.Children.Add(firstStack);
-            firstStack.Children.Add(_ourCard); //you already subscribed.  just hook up another event for this.
-            _ourPiece = new PieceWPF();
-            _ourPiece.Margin = new Thickness(0, 5, 0, 0);
-            _ourPiece.SetSizes();
-            BaseLabelGrid firstInfo = new BaseLabelGrid();
-            firstInfo.AddRow("Turn", nameof(CandylandViewModel.NormalTurn));
-            firstInfo.AddRow("Status", nameof(CandylandViewModel.Status));
-            firstStack.Children.Add(firstInfo.GetContent);
-            firstStack.Children.Add(_ourPiece);
-            _ourBoard.HorizontalAlignment = HorizontalAlignment.Left;
-            _ourBoard.VerticalAlignment = VerticalAlignment.Top;
-            _ourBoard.Margin = new Thickness(5, 0, 0, 0);
-            otherStack.Children.Add(_ourBoard);
-            thisStack.Children.Add(otherStack);
-            MainGrid.Children.Add(thisStack);
-            AddRestoreCommand(otherStack);
-            await FinishUpAsync();
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterType<BasicGameLoader<CandylandPlayerItem, CandylandSaveInfo>>(); //i think basic game loader gets done here still.
-            OurContainer!.RegisterNonSavedClasses<CandylandViewModel>();
-            OurContainer.RegisterSingleton<IProportionBoard, ProportionWPF>("main"); //here too.
-            OurContainer.RegisterSingleton<IProportionImage, StandardProportion>("main");
-            OurContainer.RegisterType<DrawShuffleClass<CandylandCardData, CandylandPlayerItem>>();
-            OurContainer.RegisterType<GenericCardShuffler<CandylandCardData>>();
-            OurContainer.RegisterSingleton<IDeckCount, CandylandCount>();
-        }
-        public void Handle(NewTurnEventModel message)
-        {
-            _ourPiece!.MainColor = _ourBoard!.PieceForCurrentPlayer(); //hopefully that is it.
-        }
-        public void Handle(CandylandCardData message)
-        {
-            _ourCard!.DataContext = null;
-            _ourCard.DataContext = message;
         }
     }
 }

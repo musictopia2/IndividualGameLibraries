@@ -1,10 +1,10 @@
-using CommonBasicStandardLibraries.CollectionClasses;
-using RummyDiceCP;
+﻿using CommonBasicStandardLibraries.CollectionClasses;
+using RummyDiceCP.Data;
+using RummyDiceCP.Logic;
 using System;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 namespace RummyDiceWPF
 {
     public class RummyDiceListWPF : UserControl
@@ -22,12 +22,12 @@ namespace RummyDiceWPF
             }
             return null;
         }
-        private Binding GetCommandBinding(string path)
-        {
-            Binding thisBind = new Binding(path);
-            thisBind.Source = _thisMod;
-            return thisBind;
-        }
+        //private Binding GetCommandBinding(string path)
+        //{
+        //    Binding thisBind = new Binding(path);
+        //    thisBind.Source = _thisMod;
+        //    return thisBind;
+        //}
         private void RefreshItems()
         {
             CustomBasicList<RummyDiceGraphicsWPF> tempList = new CustomBasicList<RummyDiceGraphicsWPF>();
@@ -43,23 +43,25 @@ namespace RummyDiceWPF
         private void DiceBindings(RummyDiceGraphicsWPF thisGraphics, RummyDiceInfo thisDice) // needs the dice for the data context
         {
             thisGraphics.DataContext = thisDice;
-            thisGraphics.CommandParameter = thisDice;
-            var ThisBind = GetCommandBinding(nameof(RummyBoardCP.DiceCommand));
-            thisGraphics.SetBinding(RummyDiceGraphicsWPF.CommandProperty, ThisBind);
+            //thisGraphics.CommandParameter = thisDice;
+            //var ThisBind = GetCommandBinding(nameof(RummyBoardCP.DiceCommand));
+            //thisGraphics.SetBinding(RummyDiceGraphicsWPF.CommandProperty, ThisBind);
         }
         private void PopulateList()
         {
             foreach (var firstDice in _diceList!)
             {
                 RummyDiceGraphicsWPF thisGraphics = new RummyDiceGraphicsWPF(); // this does the bindings already as well
-                thisGraphics.SendDiceInfo(firstDice); //i think this too now.
+                thisGraphics.SendDiceInfo(firstDice, _board!); //i think this too now.
                 DiceBindings(thisGraphics, firstDice);
                 _thisStack!.Children.Add(thisGraphics);
             }
         }
+        private RummyBoardCP? _board;
         public void LoadDiceViewModel(RummyDiceMainGameClass mainGame)
         {
             _thisMod = mainGame.MainBoard1;
+            _board = mainGame.MainBoard1;
             Margin = new Thickness(3, 3, 3, 3);
             DataContext = _thisMod;
             _diceList = mainGame.SaveRoot!.DiceList;
@@ -88,7 +90,7 @@ namespace RummyDiceWPF
                     var newDice = (RummyDiceInfo)ThisItem!;
                     RummyDiceGraphicsWPF thisD = new RummyDiceGraphicsWPF();
                     DiceBindings(thisD, newDice); // well see what we need
-                    thisD.SendDiceInfo(newDice);
+                    thisD.SendDiceInfo(newDice, _board!);
                     _thisStack!.Children.Add(thisD);
                 }
             }

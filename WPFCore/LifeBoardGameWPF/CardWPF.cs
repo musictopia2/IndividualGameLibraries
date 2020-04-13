@@ -1,5 +1,7 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using LifeBoardGameCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using LifeBoardGameCP.Cards;
+using LifeBoardGameCP.Data;
+using LifeBoardGameCP.Graphics;
 using System.Windows;
 using System.Windows.Data;
 namespace LifeBoardGameWPF

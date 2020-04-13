@@ -1,5 +1,6 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using Phase10CP;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using Phase10CP.Cards;
+using Phase10CP.Data;
 using System.Windows;
 using System.Windows.Data;
 namespace Phase10WPF

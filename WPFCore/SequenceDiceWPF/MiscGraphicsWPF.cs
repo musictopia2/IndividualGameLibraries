@@ -1,6 +1,7 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using SequenceDiceCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using SequenceDiceCP.Logic;
 using System.Windows;
+
 namespace SequenceDiceWPF
 {
     public class MiscGraphicsWPF : BaseGraphicsWPF<MiscGraphicsCP>

@@ -1,14 +1,15 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BasicGameFramework.RegularDeckOfCards;
-using CaptiveQueensSolitaireCP;
+﻿using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using CaptiveQueensSolitaireCP.Logic;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+
 namespace CaptiveQueensSolitaireWPF
 {
     public class SimpleWasteUI : UserControl

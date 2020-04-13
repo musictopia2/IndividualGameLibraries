@@ -1,7 +1,10 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using PaydayCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using PaydayCP.Cards;
+using PaydayCP.Data;
+using PaydayCP.Graphics;
 using System.Windows;
 using System.Windows.Data;
+
 namespace PaydayWPF
 {
     public abstract class PaydayBaseCardWPF<CA, CP> : BaseDeckGraphicsWPF<CA, CP>

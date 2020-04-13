@@ -1,11 +1,12 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using MonopolyCardGameCP;
+﻿using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
+using MonopolyCardGameCP.Data;
+using MonopolyCardGameCP.Logic;
+using MonopolyCardGameCP.ViewModels;
 using SkiaSharp;
 using System.Windows;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //usually needs this as well for grid helpers.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 namespace MonopolyCardGameWPF
 {
     public class ShowCardUI : BaseFrameWPF, IChangeCard
@@ -13,12 +14,11 @@ namespace MonopolyCardGameWPF
         private CardGraphicsWPF? _thisG;
         private DetailCardViewModel? _thisDetail;
         private TextBlock? _thisLabel;
-        public void LoadControls()
+        public void LoadControls(MonopolyCardGameVMData model)
         {
-            MonopolyCardGameViewModel thisMod = Resolve<MonopolyCardGameViewModel>();
-            _thisDetail = thisMod.AdditionalInfo1;
+            _thisDetail = model.AdditionalInfo1;
             Text = "Card Information";
-            _thisDetail!.ThisChange = this;
+            _thisDetail!.Change = this;
             Grid tempGrid = new Grid();
             SKRect thisRect = ThisFrame.GetControlArea();
             SetUpMarginsOnParentControl(tempGrid, thisRect); //i think.

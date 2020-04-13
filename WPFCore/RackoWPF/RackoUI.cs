@@ -1,11 +1,14 @@
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicControlsAndWindowsCore.Helpers;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.Extensions;
+﻿using BasicControlsAndWindowsCore.Helpers;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.MultiplayerClasses.InterfacesForHelpers;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
+using BasicGamingUIWPFLibrary.Helpers;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using RackoCP;
+using RackoCP.Cards;
+using RackoCP.Data;
+using RackoCP.ViewModels;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -18,7 +21,7 @@ namespace RackoWPF
     {
         private DeckObservableDict<RackoCardInformation>? _cardList;
         private StackPanel? _thisStack;
-        private ICommand? thisCommand;
+        private ICommand? _thisCommand;
         private Grid? FindControl(RackoCardInformation thisCard)
         {
             foreach (var thisCon in _thisStack!.Children)
@@ -29,29 +32,38 @@ namespace RackoWPF
             }
             return null;
         }
-        public void Init(RackoMainGameClass mainGame)
+        public void Dispose()
         {
-            mainGame.SingleInfo = mainGame!.PlayerList!.GetSelf();
-            _cardList = mainGame.SingleInfo.MainHandList;
-            thisCommand = mainGame.ThisMod!.PlayOnPileCommand;
+            if (_cardList == null)
+            {
+                return;
+            }
+            _cardList.CollectionChanged -= CardList_CollectionChanged;
+        }
+        public void Init(RackoMainViewModel viewModel, RackoVMData model, RackoGameContainer gameContainer)
+        {
+            gameContainer.SingleInfo = gameContainer!.PlayerList!.GetSelf();
+            _cardList = gameContainer.SingleInfo.MainHandList;
+            _thisCommand = viewModel.GetBasicGameCommand(nameof(RackoMainViewModel.PlayOnPileAsync)); //needs the view model for the command.
             Grid mainGrid = new Grid();
+            IsEnabled = false;
             _thisStack = new StackPanel();
             Text = "Your Card List";
             var thisRect = ThisFrame.GetControlArea();
             _thisStack.Margin = new Thickness(thisRect.Left + 3, thisRect.Top + 10, 3, 3);
-            if (mainGame.SingleInfo.MainHandList.Count != 10)
+            if (gameContainer.SingleInfo.MainHandList.Count != 10)
                 throw new BasicBlankException("Must have 10 cards before i can init.  Rethink now.");
-            thisCommand!.CanExecuteChanged += ThisCommand_CanExecuteChanged;
+            _thisCommand!.CanExecuteChanged += ThisCommand_CanExecuteChanged;
             _cardList.CollectionChanged += CardList_CollectionChanged;
-            PopulateControls(mainGame);
+            PopulateControls(gameContainer);
             mainGrid.Children.Add(ThisDraw);
             mainGrid.Children.Add(_thisStack);
             Content = mainGrid;
         }
-        private void PopulateControls(RackoMainGameClass mainGame)
+        private void PopulateControls(RackoGameContainer gameContainer)
         {
             _thisStack!.Children.Clear();
-            int starts = mainGame.PlayerList.Count() + 2;
+            int starts = gameContainer.PlayerList.Count() + 2;
             int diffs = starts;
             var tempList = _cardList!.ToRegularDeckDict();
             tempList.Reverse();
@@ -69,20 +81,23 @@ namespace RackoWPF
                 thisGrid.DataContext = thisCard; // i think
                 GridHelper.AddPixelColumn(thisGrid, 100);
                 GridHelper.AddAutoColumns(thisGrid, 1);
-                var thisLabel = SharedWindowFunctions.GetDefaultLabel();
+                var thisLabel = SharedUIFunctions.GetDefaultLabel();
                 thisLabel.HorizontalAlignment = HorizontalAlignment.Center;
                 thisLabel.VerticalAlignment = VerticalAlignment.Center;
                 thisLabel.Text = otherList[tempList.IndexOf(thisCard)].ToString();
                 thisLabel.FontSize = 40;
                 thisLabel.Margin = new Thickness(0, 3, 0, 0);
                 GridHelper.AddControlToGrid(thisGrid, thisLabel, 0, 0);
-                CardGraphicsWPF ThisGraphics = new CardGraphicsWPF();
-                ThisGraphics.SendSize("", thisCard); //hopefully this simple.
-                GridHelper.AddControlToGrid(thisGrid, ThisGraphics, 0, 1);
-                RowClickerWPF ThisCustom = new RowClickerWPF();
-                ThisCustom.Command = mainGame.ThisMod!.PlayOnPileCommand;
-                GridHelper.AddControlToGrid(thisGrid, ThisCustom, 0, 0);
-                Grid.SetColumnSpan(ThisCustom, 2); // so it spans the entire control.
+                CardGraphicsWPF graphics = new CardGraphicsWPF();
+                graphics.SendSize("", thisCard); //hopefully this simple.
+                GridHelper.AddControlToGrid(thisGrid, graphics, 0, 1);
+                RowClickerWPF custom = new RowClickerWPF();
+                custom.Command = _thisCommand!;
+                custom.CommandParameter = thisCard;
+                //custom.Name = nameof(RackoMainViewModel.PlayOnPileAsync);
+                //custom.Command = mainGame.ThisMod!.PlayOnPileCommand;
+                GridHelper.AddControlToGrid(thisGrid, custom, 0, 0);
+                Grid.SetColumnSpan(custom, 2); // so it spans the entire control.
                 _thisStack.Children.Add(thisGrid);
             }
         }
@@ -97,6 +112,9 @@ namespace RackoWPF
                 CardGraphicsWPF nextControl = (CardGraphicsWPF)oldGrid!.Children[1];
                 nextControl.DataContext = null;
                 nextControl.DataContext = e.NewItems[0];
+                //nextControl.CommandParameter = e.NewItems[0]!;
+                var row = (RowClickerWPF)oldGrid!.Children[2];
+                row.CommandParameter = e.NewItems[0]!;
                 oldGrid.DataContext = e.NewItems[0]; // i think i forgot the 0
                 return;
             }
@@ -115,22 +133,25 @@ namespace RackoWPF
                     thisGrid.DataContext = tempList[x];
                     CardGraphicsWPF nextControl = (CardGraphicsWPF)thisGrid.Children[1];
                     nextControl.DataContext = null;
+                    //nextControl.CommandParameter = tempList[x];
                     nextControl.DataContext = tempList[x];
+                    var row = (RowClickerWPF)thisGrid!.Children[2];
+                    row.CommandParameter = e.NewItems[0]!;
                     x += 1;
                 }
             }
         }
         private void ThisCommand_CanExecuteChanged(object? sender, EventArgs e)
         {
-            IsEnabled = thisCommand!.CanExecute(null); //was forced to do this way now.
+            IsEnabled = _thisCommand!.CanExecute(null); //was forced to do this way now.
         }
-        public void Update(RackoMainGameClass mainGame)
-        {
-            mainGame.SingleInfo = mainGame.PlayerList!.GetSelf();
-            _cardList!.CollectionChanged -= CardList_CollectionChanged;
-            _cardList = mainGame.SingleInfo.MainHandList;
-            _cardList.CollectionChanged += CardList_CollectionChanged;
-            PopulateControls(mainGame);
-        }
+        //public void Update(RackoMainGameClass mainGame)
+        //{
+        //    mainGame.SingleInfo = mainGame.PlayerList!.GetSelf();
+        //    _cardList!.CollectionChanged -= CardList_CollectionChanged;
+        //    _cardList = mainGame.SingleInfo.MainHandList;
+        //    _cardList.CollectionChanged += CardList_CollectionChanged;
+        //    PopulateControls(mainGame);
+        //}
     }
 }

@@ -1,6 +1,8 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using LifeCardGameCP;
+using BasicGamingUIWPFLibrary.BasicControls.GameFrames;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using LifeCardGameCP.Cards;
+using LifeCardGameCP.Data;
+using LifeCardGameCP.Logic;
 using System.Windows;
 using System.Windows.Data;
 namespace LifeCardGameWPF

@@ -1,5 +1,6 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using SorryCardGameCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using SorryCardGameCP.Cards;
+using SorryCardGameCP.Data;
 using System.Windows;
 using System.Windows.Data;
 namespace SorryCardGameWPF

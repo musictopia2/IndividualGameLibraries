@@ -1,4 +1,4 @@
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
 namespace CandylandWPF
 {
     public class ProportionWPF : IProportionBoard

@@ -1,13 +1,14 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.MultipleFrameContainers;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BasicGameFramework.MultiplePilesViewModels;
-using CaptiveQueensSolitaireCP;
+﻿using BasicGameFrameworkLibrary.MultiplePilesObservable;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGamingUIWPFLibrary.BasicControls.MultipleFrameContainers;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using CaptiveQueensSolitaireCP.Logic;
 using System.Windows;
 using System.Windows.Controls;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+//i think this is the most common things i like to do
 namespace CaptiveQueensSolitaireWPF
 {
     public class MainUI : UserControl

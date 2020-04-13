@@ -1,5 +1,6 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using RageCardGameCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using RageCardGameCP.Cards;
+using RageCardGameCP.Data;
 using System.Windows;
 using System.Windows.Data;
 namespace RageCardGameWPF

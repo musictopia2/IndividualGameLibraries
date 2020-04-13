@@ -1,15 +1,17 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.MultiplePilesViewModels;
+﻿using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
-using HeapSolitaireCP;
+using HeapSolitaireCP.Data;
+using HeapSolitaireCP.ViewModels;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+
 namespace HeapSolitaireWPF
 {
     public class SinglePileUI : UserControl
@@ -19,7 +21,7 @@ namespace HeapSolitaireWPF
         private BasicMultiplePilesCP<HeapSolitaireCardInfo>? _mainMod;
         private HeapSolitaireCardInfo? _currentCard;
         private Grid? _thisGrid;
-        private int pixels;
+        private int _pixels;
         private DeckOfCardsWPF<HeapSolitaireCardInfo> FindControl(HeapSolitaireCardInfo? thisCard)
         {
             foreach (DeckOfCardsWPF<HeapSolitaireCardInfo>? thisChild in _thisGrid!.Children)
@@ -35,13 +37,13 @@ namespace HeapSolitaireWPF
             output.SendSize(ts.TagUsed, thisCard);
             return output; //hopefully this simple.
         }
-        public void Init(HeapSolitaireViewModel thisMod, BasicPileInfo<HeapSolitaireCardInfo> thisPile)
+        public void Init(HeapSolitaireMainViewModel thisMod, BasicPileInfo<HeapSolitaireCardInfo> thisPile)
         {
             _mainMod = thisMod.Waste1;
             _privateMod = thisPile;
             _cardList = _privateMod.ObjectList;
             var tempDeck = GetNewCard(new HeapSolitaireCardInfo());
-            pixels = (int)tempDeck.ObjectSize.Width / 4;
+            _pixels = (int)tempDeck.ObjectSize.Width / 4;
             _cardList.CollectionChanged += CollectionChanged;
             Background = Brushes.Transparent; //learned from old version of belegured castle that if not set to transparent, clicking does not work.
             MouseUp += SinglePileUI_MouseUp;
@@ -104,7 +106,7 @@ namespace HeapSolitaireWPF
             int times = _cardList.Count + 3;
             times.Times(x =>
             {
-                AddPixelColumn(_thisGrid, pixels);
+                AddPixelColumn(_thisGrid, _pixels);
             });
             int y = 0;
             _cardList.ForEach(thisCard =>

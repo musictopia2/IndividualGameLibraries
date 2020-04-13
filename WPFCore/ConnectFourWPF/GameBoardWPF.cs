@@ -1,11 +1,14 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
-using BaseGPXWindowsAndControlsCore.GameGraphics.GamePieces;
-using ConnectFourCP;
+﻿using BasicGamingUIWPFLibrary.BasicControls.GameBoards;
+using BasicGamingUIWPFLibrary.GameGraphics.GamePieces;
+using BasicGamingUIWPFLibrary.Helpers;
+using ConnectFourCP.Data;
+using ConnectFourCP.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
+
 namespace ConnectFourWPF
 {
     public class GameBoardWPF : ImageGameBoard<SpaceInfoCP>
@@ -39,7 +42,9 @@ namespace ConnectFourWPF
             output.Margin = new Thickness(0, 0, 5, 0);
             output.Height = 95;
             output.Width = 95;
-            output.SetBinding(CheckerPiecesWPF.CommandProperty, GetCommandBinding(nameof(ConnectFourViewModel.ColumnCommand)));
+            GamePackageViewModelBinder.ManuelElements.Add(output); //just in case.
+            output.Name = nameof(ConnectFourMainViewModel.ColumnAsync);
+            //output.SetBinding(CheckerPiecesWPF.CommandProperty, GetCommandBinding(nameof(ConnectFourViewModel.ColumnCommand)));
             output.SetBinding(CheckerPiecesWPF.MainColorProperty, new Binding(nameof(SpaceInfoCP.Color)));
             output.SetBinding(CheckerPiecesWPF.HasImageProperty, new Binding(nameof(SpaceInfoCP.HasImage)));
             output.BlankColor = cs.Aqua;

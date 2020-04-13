@@ -1,7 +1,8 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.MultiplePilesViewModels;
+﻿using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
 using CommonBasicStandardLibraries.Exceptions;
-using DutchBlitzCP;
+using DutchBlitzCP.Cards;
+using DutchBlitzCP.Piles;
 using SkiaSharp;
 using System;
 using System.Collections.Specialized;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+
 namespace DutchBlitzWPF
 {
     public class IndividualPileWPF : UserControl

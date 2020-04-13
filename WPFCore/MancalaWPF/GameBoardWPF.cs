@@ -1,7 +1,7 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
+﻿using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIWPFLibrary.BasicControls.GameBoards;
 using CommonBasicStandardLibraries.Messenging;
-using MancalaCP;
+using MancalaCP.Logic;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System.Windows.Controls;
@@ -11,35 +11,35 @@ namespace MancalaWPF
 {
     public class GameBoardWPF : UserControl, IHandle<RepaintEventModel>
     {
-        internal SkiaSharpGameBoard ThisElement;
+        internal SkiaSharpGameBoard Element { get; set; }
         public void LoadBoard()
         {
             GameBoardGraphicsCP privateBoard = Resolve<GameBoardGraphicsCP>();
             MouseUp += GameboardWPF_MouseUp;
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element.PaintSurface += ThisElement_PaintSurface;
             SKSize thisSize = privateBoard.SuggestedSize();
             Width = thisSize.Width;
             Height = thisSize.Height;
-            EventAggregator ThisT = Resolve<EventAggregator>();
-            ThisT.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString());
-            Content = ThisElement;
+            EventAggregator aggregator = Resolve<EventAggregator>();
+            aggregator.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString());
+            Content = Element;
         }
         public GameBoardWPF()
         {
-            ThisElement = new SkiaSharpGameBoard();
+            Element = new SkiaSharpGameBoard();
         }
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         private void GameboardWPF_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var ThisPos = e.GetPosition(ThisElement);
-            ThisElement.StartClick(ThisPos.X, ThisPos.Y);
+            var ThisPos = e.GetPosition(Element);
+            Element.StartClick(ThisPos.X, ThisPos.Y);
         }
         public void Handle(RepaintEventModel message)
         {
-            ThisElement.InvalidateVisual();
+            Element.InvalidateVisual();
         }
     }
 }

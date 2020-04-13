@@ -1,4 +1,5 @@
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+
 namespace DominosMexicanTrainWPF
 {
     public class CustomProportions : IProportionImage, IProportionBoard

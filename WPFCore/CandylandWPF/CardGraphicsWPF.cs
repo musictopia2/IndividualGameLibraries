@@ -1,7 +1,9 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using CandylandCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using CandylandCP.Data;
+using CandylandCP.GraphicsCP;
 using System.Windows;
 using System.Windows.Data;
+
 namespace CandylandWPF
 {
     public class CardGraphicsWPF : BaseDeckGraphicsWPF<CandylandCardData, CandylandCardGraphicsCP>
@@ -42,8 +44,8 @@ namespace CandylandWPF
         }
         protected override void DoCardBindings()
         {
-            SetBinding(CardGraphicsWPF.WhichTypeProperty, new Binding(nameof(CandylandCardData.WhichCard)));
-            SetBinding(CardGraphicsWPF.HowManyProperty, new Binding(nameof(CandylandCardData.HowMany)));
+            SetBinding(WhichTypeProperty, new Binding(nameof(CandylandCardData.WhichCard)));
+            SetBinding(HowManyProperty, new Binding(nameof(CandylandCardData.HowMany)));
         }
         protected override void PopulateInitObject() //this is needed too.
         {

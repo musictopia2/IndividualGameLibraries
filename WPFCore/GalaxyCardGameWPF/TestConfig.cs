@@ -1,23 +1,27 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using GalaxyCardGameCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGameFrameworkLibrary.TestUtilities;
+using GalaxyCardGameCP.Cards;
+using GalaxyCardGameCP.Data;
 using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Threading.Tasks;
+
 namespace GalaxyCardGameWPF
 {
     public class TestConfig : ITestCardSetUp<GalaxyCardGameCardInformation, GalaxyCardGamePlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<GalaxyCardGamePlayerItem> playerList, IListShuffler<GalaxyCardGameCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<GalaxyCardGamePlayerItem> playerlist, IListShuffler<GalaxyCardGameCardInformation> decklist)
         {
-            GalaxyCardGamePlayerItem thisPlayer = playerList.GetSelf();
-            thisPlayer.StartUpList = new DeckRegularDict<GalaxyCardGameCardInformation>(); //sample too.
+            GalaxyCardGamePlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-            //this was example with regular deck of card.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+            player.StartUpList.AddRange(decklist.Where(x => x.Value == EnumCardValueList.HighAce));
+
+            player.StartUpList.AddRange(decklist.Where(x => x.Value == EnumCardValueList.Five && x.Suit == EnumSuitList.Clubs));
+            player.StartUpList.AddRange(decklist.Where(x => x.Value == EnumCardValueList.Eight));
+
             //can be anything you want.
             return Task.CompletedTask;
         }

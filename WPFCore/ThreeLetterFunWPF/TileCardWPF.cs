@@ -1,7 +1,8 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using System.Windows;
 using System.Windows.Data;
-using ThreeLetterFunCP;
+using ThreeLetterFunCP.Data;
+using ThreeLetterFunCP.GraphicsCP;
 namespace ThreeLetterFunWPF
 {
     public class TileCardWPF : BaseDeckGraphicsWPF<TileInformation, TileCP>

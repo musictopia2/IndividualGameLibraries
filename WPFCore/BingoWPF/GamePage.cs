@@ -1,81 +1,39 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.MultiplayerClasses.LoadingClasses;
-using BasicGameFramework.NetworkingClasses.Data;
-using BingoCP;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using BingoCP.Logic;
+using BingoCP.Data;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicGameFrameworkLibrary.TestUtilities;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace BingoWPF
 {
-    public class GamePage : MultiPlayerWindow<BingoViewModel, BingoPlayerItem, BingoSaveInfo>
+    public class GamePage : MultiplayerBasicShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+        public GamePage(IGameInfo gameData,
+            BasicData basicData, 
+            IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
         }
-        public override Task HandleAsync(LoadEventModel message)
-        {
-            _thisBoard!.CreateControls(_mainGame!.SaveRoot!.BingoBoard);
-            return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            _thisBoard!.UpdateControls(_mainGame!.SaveRoot!.BingoBoard); //hopefully still okay.
-            return Task.CompletedTask;
-        }
-        private BingoBoardWPF? _thisBoard;
-        private BingoMainGameClass? _mainGame;
-        protected async override void AfterGameButton()
-        {
 
-            //NetworkMessage output = new NetworkMessage();
-            //output.SpecificPlayer = "hello";
-            //output.YourNickName = "test";
-            //output.Message = await js.SerializeObjectAsync(message);
 
-            StackPanel thisStack = new StackPanel(); //will usually start with a stack panel.  if i am wrong, rethink
-            _mainGame = OurContainer!.Resolve<BingoMainGameClass>();
-            BasicSetUp();
-            _thisBoard = new BingoBoardWPF();
-            AddAutoColumns(MainGrid!, 2);
-            StackPanel tempStack = new StackPanel();
-            SimpleLabelGrid secondInfo = new SimpleLabelGrid();
-            secondInfo.FontSize = 40;
-            secondInfo.AddRow("Number Called", nameof(BingoViewModel.NumberCalled));
-            tempStack.Children.Add(secondInfo.GetContent);
-            _thisBoard = new BingoBoardWPF();
-            _thisBoard.Margin = new Thickness(5, 5, 5, 5);
-            tempStack.Children.Add(_thisBoard);
-            AddControlToGrid(MainGrid!, tempStack, 0, 0);
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Center;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            thisStack.Children.Add(GameButton);
-            SimpleLabelGrid firstInfo = new SimpleLabelGrid();
-            firstInfo.AddRow("Status", nameof(BingoViewModel.Status));
-            thisStack.Children.Add(firstInfo.GetContent);
-            AddControlToGrid(MainGrid!, thisStack, 0, 1);
-            var endButton = GetGamingButton("Bingo", nameof(BingoViewModel.BingoCommand)); // its bingo instead.
-            endButton.HorizontalAlignment = HorizontalAlignment.Left;
-            thisStack.Children.Add(endButton);
-            AddRestoreCommand(thisStack); //usually to this.  can be to another control if needed.
-            await FinishUpAsync();
-        }
-        //protected override void RegisterTests()
-        //{
-        //    ThisTest!.AllowAnyMove = true; //for now to see if clicking works.
-        //}
-        protected override void RegisterInterfaces()
+        protected override Task PopulateUIAsync()
         {
-            OurContainer!.RegisterType<BasicGameLoader<BingoPlayerItem, BingoSaveInfo>>(); //i think basic game loader gets done here still.
-            OurContainer!.RegisterNonSavedClasses<BingoViewModel>();
-            //anything else that needs to be registered will be here.
+            //if any exceptions to the shell, do here or override other things.
+            return Task.CompletedTask;
         }
     }
 }

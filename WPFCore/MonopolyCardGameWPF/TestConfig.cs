@@ -1,23 +1,22 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using MonopolyCardGameCP;
-using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.TestUtilities;
+using MonopolyCardGameCP.Cards;
+using MonopolyCardGameCP.Data;
+using System.Threading.Tasks;
+
 namespace MonopolyCardGameWPF
 {
     public class TestConfig : ITestCardSetUp<MonopolyCardGameCardInformation, MonopolyCardGamePlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<MonopolyCardGamePlayerItem> playerList, IListShuffler<MonopolyCardGameCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<MonopolyCardGamePlayerItem> playerlist, IListShuffler<MonopolyCardGameCardInformation> decklist)
         {
-            MonopolyCardGamePlayerItem thisPlayer = playerList.GetSelf();
-            thisPlayer.StartUpList = new DeckRegularDict<MonopolyCardGameCardInformation>(); //sample too.
+            //MonopolyCardGamePlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-            //this was example with regular deck of card.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

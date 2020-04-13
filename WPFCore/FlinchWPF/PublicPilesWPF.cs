@@ -1,19 +1,21 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.GameGraphicsCP.Animations;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.MultiplePilesViewModels;
+﻿using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Animations;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
-using FlinchCP;
+using FlinchCP.Cards;
+using FlinchCP.Piles;
 using SkiaSharp;
 using System.Collections.Specialized;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+
 namespace FlinchWPF
 {
     public class PublicPilesWPF : UserControl, IHandleAsync<AnimateCardInPileEventModel<FlinchCardInformation>>
@@ -46,7 +48,7 @@ namespace FlinchWPF
             _animates = new AnimateImageClass();
             _animates.LongestTravelTime = 200;
             _animates.GameBoard = _thisCanvas;
-            EventAggregator thisE = Resolve<EventAggregator>();
+            IEventAggregator thisE = Resolve<IEventAggregator>();
             thisE.Subscribe(this, animationTag);
         }
         private SKPoint GetStartLocation()
@@ -200,7 +202,7 @@ namespace FlinchWPF
                 }
                 return;
             }
-            if ((int)e.Action == (int)NotifyCollectionChangedAction.Add)
+            if (e.Action == (int)NotifyCollectionChangedAction.Add)
             {
                 foreach (var thisItem in e.NewItems)
                 {

@@ -1,7 +1,10 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using ClueBoardGameCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using ClueBoardGameCP.Cards;
+using ClueBoardGameCP.Data;
+using ClueBoardGameCP.Graphics;
 using System.Windows;
 using System.Windows.Data;
+
 namespace ClueBoardGameWPF
 {
     public class CardWPF : BaseDeckGraphicsWPF<CardInfo, CardCP>

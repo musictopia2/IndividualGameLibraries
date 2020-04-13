@@ -1,10 +1,11 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using FiveCrownsCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using FiveCrownsCP.Cards;
+using FiveCrownsCP.Data;
 using System.Windows;
 using System.Windows.Data;
 namespace FiveCrownsWPF
 {
-    public class CardGraphicsWPF : BaseDeckGraphicsWPF<FiveCrownsCardInformation, FiveCrownsGraphicsCP>
+    public class CardGraphicsWPF : BaseDeckGraphicsWPF<FiveCrownsCardInformation, FiveCrownsGraphicsCP>//begin
     {
         public static readonly DependencyProperty CardValueProperty = DependencyProperty.Register("CardValue", typeof(EnumCardValueList), typeof(CardGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(CardValuePropertyChanged)));
         public EnumCardValueList CardValue

@@ -1,10 +1,11 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using MillebournesCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using MillebournesCP.Cards;
+using MillebournesCP.Data;
 using System.Windows;
 using System.Windows.Data;
 namespace MillebournesWPF
 {
-    public class CardGraphicsWPF : BaseDeckGraphicsWPF<MillebournesCardInformation, MillebournesGraphicsCP>
+    public class CardGraphicsWPF : BaseDeckGraphicsWPF<MillebournesCardInformation, MillebournesGraphicsCP>//begin
     {
         public static readonly DependencyProperty CategoryProperty = DependencyProperty.Register("Category", typeof(EnumCompleteCategories), typeof(CardGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(CategoryPropertyChanged)));
         public EnumCompleteCategories Category

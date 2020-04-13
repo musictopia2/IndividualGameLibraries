@@ -1,19 +1,18 @@
-using BasicControlsAndWindowsCore.BasicWindows.BasicConverters;
-using BasicControlsAndWindowsCore.Helpers;
-using BattleshipCP;
+﻿using BasicControlsAndWindowsCore.Helpers;
+using BasicGamingUIWPFLibrary.Helpers;
+using BattleshipCP.Data;
+using BattleshipCP.ViewModels;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace BattleshipWPF
 {
     public class ShipInfoWPF : UserControl
     {
-        public void CreateShip(ShipInfoCP thisShip)
+        public void CreateShip(ShipInfoCP thisShip, BattleshipMainViewModel model)
         {
-            BattleshipViewModel thisMod = Resolve<BattleshipViewModel>();
             DataContext = thisShip;
             Grid thisGrid = new Grid();
             float labelSize;
@@ -30,19 +29,19 @@ namespace BattleshipWPF
             thisBut.FontSize = 14;
             thisBut.Content = thisShip.ShipName;
             IValueConverter thisConv;
-            thisConv = new VisibilityConverter();
+            thisConv = new BooleanToVisibilityConverter();
             var thisBind = new Binding(nameof(ShipInfoCP.Visible));
             thisBind.Converter = thisConv;
-            thisBut.SetBinding(Button.VisibilityProperty, thisBind);
+            thisBut.SetBinding(VisibilityProperty, thisBind);
             if (thisShip.ShipCategory == EnumShipList.None)
                 throw new BasicBlankException("Can't be none");
-            thisBind = new Binding(nameof(BattleshipViewModel.ChooseShipCommand));
-            thisBind.Source = thisMod; // i think
-            thisBut.SetBinding(Button.CommandProperty, thisBind);
+
+            thisBut.Name = nameof(BattleshipMainViewModel.ChooseShip);
+            GamePackageViewModelBinder.ManuelElements.Add(thisBut); //try this one as well.
             thisBut.CommandParameter = thisShip.ShipCategory;
             thisBut.Margin = new Thickness(5, 0, 0, 0);
-            thisBind = new Binding(nameof(BattleshipViewModel.ShipSelected));
-            thisBind.Source = thisMod;
+            thisBind = new Binding(nameof(BattleshipMainViewModel.ShipSelected));
+            thisBind.Source = model; //try this for now.  otherwise, i have to create custom button control.
             thisConv = new ChooseShipConverter();
             thisBind.Converter = thisConv;
             thisBind.ConverterParameter = thisShip.ShipCategory;

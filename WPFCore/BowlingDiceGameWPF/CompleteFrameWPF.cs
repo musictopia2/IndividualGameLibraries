@@ -1,5 +1,5 @@
-using BasicControlsAndWindowsCore.Helpers;
-using BowlingDiceGameCP;
+﻿using BasicControlsAndWindowsCore.Helpers;
+using BowlingDiceGameCP.Data;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Windows;
 using System.Windows.Controls;

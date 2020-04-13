@@ -1,23 +1,13 @@
-using System;
-using System.Text;
-using CommonBasicStandardLibraries.Exceptions;
+﻿using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGameFrameworkLibrary.SolitaireClasses.GraphicsObservable;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using System.Linq;
-using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using CommonBasicStandardLibraries.CollectionClasses;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
-using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
-using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
 using System.Windows.Controls;
-using BaseSolitaireClassesCP.GraphicsViewModels;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BaseSolitaireClassesCP.Cards;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
 using System.Windows.Media;
 using static BasicControlsAndWindowsCore.Helpers.GridHelper;
-using SkiaSharp;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace BeleaguredCastleWPF
 {
     public class SinglePileUI : UserControl
@@ -88,7 +78,7 @@ namespace BeleaguredCastleWPF
                 return;
             var pixels = _widthUsed / 4;
             int totals = _cardList.Count + 3;
-            totals.Times(x => AddPixelColumn(_thisGrid, (int) pixels));
+            totals.Times(x => AddPixelColumn(_thisGrid, (int)pixels));
             int y, m;
             if (_isReversed)
             {

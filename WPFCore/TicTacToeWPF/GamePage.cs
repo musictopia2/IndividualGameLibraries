@@ -1,58 +1,39 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.MultiplayerClasses.LoadingClasses;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using TicTacToeCP.Logic;
+using TicTacToeCP.Data;
 using System.Windows.Controls;
-using TicTacToeCP;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicGameFrameworkLibrary.TestUtilities;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace TicTacToeWPF
 {
-    public class GamePage : MultiPlayerWindow<TicTacToeViewModel, TicTacToePlayerItem, TicTacToeSaveInfo>
+    public class GamePage : MultiplayerBasicShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+        public GamePage(IGameInfo gameData,
+            BasicData basicData, 
+            IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
         }
-        public override Task HandleAsync(LoadEventModel message)
+
+
+        protected override Task PopulateUIAsync()
         {
-            TicTacToeGraphicsCP tempBoard = OurContainer!.Resolve<TicTacToeGraphicsCP>();
-            TicTacToeSaveInfo thisSave = OurContainer.Resolve<TicTacToeSaveInfo>();
-            tempBoard.SpaceSize = 250;
-            _thisBoard!.CreateControls(thisSave.GameBoard);
+            //if any exceptions to the shell, do here or override other things.
             return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            TicTacToeSaveInfo thisSave = OurContainer!.Resolve<TicTacToeSaveInfo>();
-            _thisBoard!.UpdateControls(thisSave.GameBoard);
-            return Task.CompletedTask;
-        }
-        GameBoardWPF? _thisBoard;
-        protected async override void AfterGameButton()
-        {
-            StackPanel thisStack = new StackPanel(); //will usually start with a stack panel.  if i am wrong, rethink
-            BasicSetUp();
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Center;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            thisStack.Children.Add(GameButton);
-            _thisBoard = new GameBoardWPF();
-            thisStack.Children.Add(_thisBoard);
-            SimpleLabelGrid firstInfo = new SimpleLabelGrid();
-            firstInfo.AddRow("Turn", nameof(TicTacToeViewModel.NormalTurn));
-            firstInfo.AddRow("Status", nameof(TicTacToeViewModel.Status)); // this may have to show the status to begin with (?)
-            thisStack.Children.Add(firstInfo.GetContent);
-            MainGrid!.Children.Add(thisStack);
-            AddRestoreCommand(thisStack); //usually to this.  can be to another control if needed.
-            await FinishUpAsync();
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterType<BasicGameLoader<TicTacToePlayerItem, TicTacToeSaveInfo>>(); //i think basic game loader gets done here still.
-            OurContainer!.RegisterNonSavedClasses<TicTacToeViewModel>();
         }
     }
 }

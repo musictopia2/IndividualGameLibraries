@@ -1,8 +1,8 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.DIContainers;
+﻿using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIWPFLibrary.BasicControls.GameBoards;
 using CommonBasicStandardLibraries.Messenging;
-using CountdownCP;
+using CountdownCP.Data;
+using CountdownCP.Graphics;
 using SkiaSharp;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,28 +11,37 @@ namespace CountdownWPF
 {
     public class PlayerBoardWPF : UserControl, IHandle<RepaintEventModel>
     {
-        internal SkiaSharpGameBoard ThisElement;
+        internal SkiaSharpGameBoard Element { get; set; }
         private bool _hasLoaded = false;
+        internal void Dispose()
+        {
+            if (_aggregator != null)
+            {
+                _aggregator.Unsubscribe(this);
+            }
+        }
         public PlayerBoardWPF()
         {
-            ThisElement = new SkiaSharpGameBoard();
-            ThisElement.MouseUp += ThisElement_MouseUp;
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element = new SkiaSharpGameBoard();
+            Element.MouseUp += ThisElement_MouseUp;
+            Element.PaintSurface += ThisElement_PaintSurface;
         }
         PlayerBoardCP? _privateBoard;
-        public void LoadBoard(CountdownPlayerItem thisPlayer)
+        IEventAggregator? _aggregator;
+        public void LoadBoard(CountdownPlayerItem thisPlayer, CountdownGameContainer gameContainer)
         {
-            _privateBoard = new PlayerBoardCP((IGamePackageResolver)cons, ThisElement, thisPlayer); //hopefully no problem.
+            _privateBoard = new PlayerBoardCP(gameContainer, Element, thisPlayer); //hopefully no problem.
             SKSize thisSize = _privateBoard.SuggestedSize();
             Width = thisSize.Width;
             Height = thisSize.Height;
+            _aggregator = gameContainer.Aggregator;
             HorizontalAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;
             EventAggregator thisT = Resolve<EventAggregator>();
-            thisT.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString()); //i think this is it.  if i am wrong, rethink
-            Content = ThisElement;
+            thisT.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString()); //i think this is it.  if i am wrong, rethink
+            Content = Element;
             _hasLoaded = true;
-            ThisElement.InvalidateVisual(); //i think
+            Element.InvalidateVisual(); //i think
         }
         public void UpdateBoard(CountdownPlayerItem ThisPlayer)
         {
@@ -42,18 +51,18 @@ namespace CountdownWPF
         {
             if (_hasLoaded == false)
                 return;
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         private void ThisElement_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (_hasLoaded == false)
                 return;
-            var ThisPos = e.GetPosition(ThisElement);
-            ThisElement.StartClick(ThisPos.X, ThisPos.Y);
+            var position = e.GetPosition(Element);
+            Element.StartClick(position.X, position.Y);
         }
         public void Handle(RepaintEventModel message)
         {
-            ThisElement.InvalidateVisual();
+            Element.InvalidateVisual();
         }
     }
 }

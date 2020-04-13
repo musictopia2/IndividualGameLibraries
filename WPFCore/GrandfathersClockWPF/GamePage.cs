@@ -1,82 +1,40 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BaseSolitaireClassesCP.Cards;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.DrawableListsViewModels;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.RegularDeckOfCards;
-using GrandfathersClockCP;
-using SolitaireGraphicsWPFCore;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using GrandfathersClockCP.Logic;
+using GrandfathersClockCP.Data;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace GrandfathersClockWPF
 {
-    public class GamePage : SinglePlayerWindow<GrandfathersClockViewModel>
+    public class GamePage : SinglePlayerShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+
+        public GamePage(IGameInfo gameData, BasicGameFrameworkLibrary.BasicGameDataClasses.BasicData basicData, IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
+
+            
+
+
         }
-        public override Task HandleAsync(LoadEventModel message)
+
+        protected override Task PopulateUIAsync()
         {
+            //if any exceptions to the shell, do here or override other things.
             return Task.CompletedTask;
         }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            return Task.CompletedTask;
-        }
-        protected async override void AfterGameButton()
-        {
-            StackPanel thisStack = new StackPanel();
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Left;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            StackPanel otherStack = new StackPanel();
-            otherStack.Orientation = Orientation.Horizontal;
-            var autoBut = GetGamingButton("Auto Make Move", nameof(GrandfathersClockViewModel.AutoMoveCommand));
-            autoBut.HorizontalAlignment = HorizontalAlignment.Left;
-            autoBut.VerticalAlignment = VerticalAlignment.Top;
-            var scoresAlone = new SimpleLabelGrid();
-            scoresAlone.AddRow("Score", nameof(GrandfathersClockViewModel.Score));
-            var tempGrid = scoresAlone.GetContent;
-            var thisWaste = new SolitairePilesWPF();
-            var thisClock = new MainClockWPF();
-            Grid thisGrid = new Grid();
-            thisGrid.Width = 800;
-            otherStack.Children.Add(thisGrid);
-            otherStack.Children.Add(thisWaste);
-            otherStack.Children.Add(tempGrid);
-            thisStack.Children.Add(autoBut);
-            thisStack.Children.Add(GameButton);
-            thisGrid.Children.Add(thisStack);
-            thisGrid.Children.Add(thisClock);
-            Content = otherStack;
-            await ThisMod!.StartNewGameAsync();
-            var tempWaste = (WastePiles)ThisMod.WastePiles1!;
-            thisWaste.Init(tempWaste.Piles);
-            var tempMain = (CustomMain)ThisMod.MainPiles1!;
-            thisClock.LoadControls(tempMain);
-            ThisMod.CommandContainer!.IsExecuting = false;
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterNonSavedClasses<GrandfathersClockViewModel>(); //go ahead and use the custom processes for this.  decided to mention non saved classes.
-            OurContainer!.RegisterSingleton<IProportionImage, CustomProportion>(ts.TagUsed);
-            OurContainer.RegisterType<DeckViewModel<SolitaireCard>>(true); //i think
-            OurContainer.RegisterSingleton<IDeckCount, CustomDeck>(); //forgot to use a custom deck for this one.
-            OurContainer.RegisterSingleton<IRegularAceCalculator, RegularLowAceCalculator>(); //most of the time, aces are low.
-            OurContainer.RegisterType<WastePiles>(); //can't do automatically because we don't know if we will do it or not.
-            OurContainer.RegisterType<CustomMain>();
-        }
-    }
-    public class CustomProportion : IProportionImage
-    {
-        float IProportionImage.Proportion => 1.6f; //2.3 was standard size.  you can either increase or decrease as needed.
     }
 }

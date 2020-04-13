@@ -1,13 +1,14 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BasicGameFramework.BasicDrawables.Dictionary;
+﻿using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.Exceptions;
-using CribbagePatienceCP;
+using CribbagePatienceCP.Data;
 using System.Windows;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+
 namespace CribbagePatienceWPF
 {
     public class ScoreHandCribUI : BaseFrameWPF

@@ -1,5 +1,6 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using FillOrBustCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using FillOrBustCP.Cards;
+using FillOrBustCP.Data;
 using System.Windows;
 using System.Windows.Data;
 namespace FillOrBustWPF

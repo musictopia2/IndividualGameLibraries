@@ -1,6 +1,6 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using BaseMahjongTilesCP;
-using BasicGameFramework.GameGraphicsCP.Tiles;
+﻿using BaseMahjongTilesCP;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Tiles;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using System.Windows;
 using System.Windows.Data;
 namespace MahJongSolitaireWPF

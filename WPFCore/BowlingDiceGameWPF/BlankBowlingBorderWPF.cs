@@ -1,7 +1,7 @@
-using SkiaSharp.Views.Desktop;
+﻿using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System.Windows.Controls;
-using static BowlingDiceGameCP.BowlingGlobalDrawing;
+using static BowlingDiceGameCP.Logic.BowlingGlobalDrawing;
 namespace BowlingDiceGameWPF
 {
     public class BlankBowlingBorderWPF : UserControl

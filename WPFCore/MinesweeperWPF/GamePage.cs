@@ -1,83 +1,50 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BasicControlsAndWindowsCore.BasicWindows.BasicConverters;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using MinesweeperCP;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using MinesweeperCP.Logic;
+using MinesweeperCP.Data;
 using System.Windows.Controls;
-using System.Windows.Data;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper; //just in case
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicControlsAndWindowsCore.Controls.NavigationControls;
+using MinesweeperCP.ViewModels;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace MinesweeperWPF
 {
-    public class GamePage : SinglePlayerWindow<MinesweeperViewModel>
+    public class GamePage : SinglePlayerShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+        //we may have to think about loading information.
+        //until i have some experience, not sure what to do (?)
+        
+        public GamePage(IGameInfo gameData, BasicData basicData, IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
+
+            //TODO:  may need to think about if we need load or update (?)
+
+
         }
-        public override Task HandleAsync(LoadEventModel message)
+
+        protected override Task PopulateUIAsync()
         {
+            //if any exceptions to the shell, do here or override other things.
+            ParentSingleUIContainer parent = new ParentSingleUIContainer()
+            {
+                Name = nameof(MinesweeperShellViewModel.OpeningScreen)
+            };
+            AddMain(parent); //hopefully this works.  since its one or the other but never both the same time.
+
             return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            return Task.CompletedTask;
-        }
-        protected override void AfterGameButton()
-        {
-            StackPanel thisStack = new StackPanel();
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Center;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            thisStack.Children.Add(GameButton);
-            Grid thisGrid = new Grid();
-            AddLeftOverColumn(thisGrid, 50);
-            AddLeftOverColumn(thisGrid, 25);
-            AddLeftOverColumn(thisGrid, 25);
-            AddControlToGrid(thisGrid, thisStack, 0, 1);
-            GameboardWPF thisBoard = new GameboardWPF(ThisMod!);
-            thisBoard.Margin = new Thickness(5, 5, 5, 5);
-            thisStack.Margin = new Thickness(5, 5, 5, 5);
-            AddControlToGrid(thisGrid, thisBoard, 0, 0);
-            SimpleLabelGrid thisLab = new SimpleLabelGrid();
-            thisLab.AddRow("Mines Needed", nameof(MinesweeperViewModel.HowManyMinesNeeded));
-            thisLab.AddRow("Mines Left", nameof(MinesweeperViewModel.NumberOfMinesLeft));
-            thisStack.Children.Add(thisLab.GetContent);
-            ListChooserWPF picker = new ListChooserWPF();
-            picker.LoadLists(ThisMod!.LevelPicker!);
-            picker.Margin = new Thickness(5, 5, 5, 5);
-            AddControlToGrid(thisGrid, picker, 0, 2);
-            VisibilityConverter thisV = new VisibilityConverter();
-            thisV.UseCollapsed = true;
-            var ToggleBut = GetGamingButton("", nameof(MinesweeperViewModel.ChangeFlagCommand));
-            var thisBind = new Binding(nameof(MinesweeperViewModel.ToggleVisible));
-            thisBind.Converter = thisV;
-            ToggleBut.SetBinding(VisibilityProperty, thisBind);
-            IValueConverter thisCon;
-            thisBind = new Binding(nameof(MinesweeperViewModel.IsFlagging));
-            thisCon = new ToggleNameConverter();
-            thisBind.Converter = thisCon;
-            ToggleBut.SetBinding(ContentProperty, thisBind);
-            thisCon = new ToggleColorConverter();
-            thisBind = new Binding(nameof(MinesweeperViewModel.IsFlagging));
-            thisBind.Converter = thisCon;
-            ToggleBut.SetBinding(BackgroundProperty, thisBind);
-            ToggleBut.Margin = new Thickness(5, 5, 5, 5);
-            ToggleBut.HorizontalAlignment = HorizontalAlignment.Left;
-            ToggleBut.VerticalAlignment = VerticalAlignment.Top;
-            thisStack.Children.Add(ToggleBut);
-            Content = thisGrid; //if not doing this, rethink.
-            ThisMod.NewGameVisible = true;
-            ThisMod.CommandContainer!.IsExecuting = false;
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterNonSavedClasses<MinesweeperViewModel>(); //go ahead and use the custom processes for this.  decided to mention non saved classes.
         }
     }
 }

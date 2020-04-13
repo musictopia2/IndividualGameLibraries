@@ -1,20 +1,26 @@
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using OpetongCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGameFrameworkLibrary.TestUtilities;
+using OpetongCP.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Text;
+using System.Threading.Tasks;
+
 namespace OpetongWPF
 {
     public class TestConfig : ITestCardSetUp<RegularRummyCard, OpetongPlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<OpetongPlayerItem> PlayerList, IListShuffler<RegularRummyCard> DeckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<OpetongPlayerItem> playerlist, IListShuffler<RegularRummyCard> decklist)
         {
-            OpetongPlayerItem ThisPlayer = PlayerList.GetSelf();
+            //OpetongPlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

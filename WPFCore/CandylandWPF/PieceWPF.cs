@@ -1,5 +1,5 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using CandylandCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using CandylandCP.GraphicsCP;
 namespace CandylandWPF
 {
     public class PieceWPF : BaseGraphicsWPF<CandylandPieceGraphicsCP>

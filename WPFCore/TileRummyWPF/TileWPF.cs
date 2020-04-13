@@ -1,8 +1,12 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+﻿using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using TileRummyCP;
+using TileRummyCP.Data;
+
 namespace TileRummyWPF
 {
     public class TileWPF : BaseDeckGraphicsWPF<TileInfo, TileCP>

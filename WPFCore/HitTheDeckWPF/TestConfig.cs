@@ -1,27 +1,22 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using HitTheDeckCP;
-using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.TestUtilities;
+using HitTheDeckCP.Cards;
+using HitTheDeckCP.Data;
+using System.Threading.Tasks;
+
 namespace HitTheDeckWPF
 {
     public class TestConfig : ITestCardSetUp<HitTheDeckCardInformation, HitTheDeckPlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<HitTheDeckPlayerItem> playerList, IListShuffler<HitTheDeckCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<HitTheDeckPlayerItem> playerlist, IListShuffler<HitTheDeckCardInformation> decklist)
         {
-            HitTheDeckPlayerItem thisPlayer = playerList.Where(items => items.PlayerCategory == EnumPlayerCategory.OtherHuman).Single(); //assume 2 player game.
-            //HitTheDeckPlayerItem thisPlayer = playerList.GetSelf();
-            thisPlayer.StartUpList = new DeckRegularDict<HitTheDeckCardInformation>(); //sample too.
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CardType == EnumTypeList.Flip).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CardType == EnumTypeList.Cut).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.CardType == EnumTypeList.Draw4).Take(1));
+            //HitTheDeckPlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-            //this was example with regular deck of card.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

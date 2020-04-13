@@ -1,9 +1,10 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using MilkRunCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using MilkRunCP.Cards;
+using MilkRunCP.Data;
 using System.Windows;
 namespace MilkRunWPF
 {
-    public class CardGraphicsWPF : BaseDeckGraphicsWPF<MilkRunCardInformation, MilkRunGraphicsCP>
+    public class CardGraphicsWPF : BaseDeckGraphicsWPF<MilkRunCardInformation, MilkRunGraphicsCP>//begin
     {
         public static readonly DependencyProperty PointsProperty = DependencyProperty.Register("Points", typeof(int), typeof(CardGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(PointsPropertyChanged)));
         public int Points

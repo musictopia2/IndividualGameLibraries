@@ -1,6 +1,7 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
 using System.Windows;
-using UnoCP;
+using UnoCP.Cards;
+using UnoCP.Data;
 namespace UnoWPF
 {
     public class CardGraphicsWPF : BaseColorCardsWPF<UnoCardInformation, UnoGraphicsCP>

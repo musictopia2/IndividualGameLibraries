@@ -1,10 +1,10 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using RackoCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using RackoCP.Cards;
 using System.Windows;
 using System.Windows.Data;
 namespace RackoWPF
 {
-    public class CardGraphicsWPF : BaseDeckGraphicsWPF<RackoCardInformation, RackoGraphicsCP>
+    public class CardGraphicsWPF : BaseDeckGraphicsWPF<RackoCardInformation, RackoGraphicsCP>//begin
     {
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(CardGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(ValuePropertyChanged)));
         public int Value

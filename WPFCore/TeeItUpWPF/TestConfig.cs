@@ -1,31 +1,23 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.TestUtilities;
-using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
-using TeeItUpCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.TestUtilities;
+using TeeItUpCP.Cards;
+using TeeItUpCP.Data;
+using System.Threading.Tasks;
+
 namespace TeeItUpWPF
 {
     public class TestConfig : ITestCardSetUp<TeeItUpCardInformation, TeeItUpPlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<TeeItUpPlayerItem> playerList, IListShuffler<TeeItUpCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<TeeItUpPlayerItem> playerlist, IListShuffler<TeeItUpCardInformation> decklist)
         {
-            TeeItUpPlayerItem thisPlayer = playerList.Last();
-            thisPlayer.StartUpList = new DeckRegularDict<TeeItUpCardInformation>(); //sample too.
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 1).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 2).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 3).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 4).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == -5).Take(1));
-            thisPlayer = playerList.First();
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 5).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 6).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 7).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 8).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Points == 9).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.IsMulligan == true).Take(1));
+            //TeeItUpPlayerItem player = playerlist.GetSelf();
+            //for testing i will get 8 eights.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
 
+
+            //can be anything you want.
             return Task.CompletedTask;
         }
     }

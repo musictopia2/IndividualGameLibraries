@@ -1,6 +1,7 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using MonopolyCardGameCP;
+using BasicGamingUIWPFLibrary.BasicControls.GameFrames;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using MonopolyCardGameCP.Cards;
+using MonopolyCardGameCP.Logic;
 using System.Windows;
 using System.Windows.Data;
 namespace MonopolyCardGameWPF

@@ -1,81 +1,39 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.CommonProportionClasses;
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
-using BaseGPXWindowsAndControlsCore.BasicControls.Misc;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Dice;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.Dice;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.MultiplayerClasses.LoadingClasses;
-using System.Threading.Tasks;
-using System.Windows;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using YachtRaceCP.Logic;
+using YachtRaceCP.Data;
 using System.Windows.Controls;
-using YachtRaceCP;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicGameFrameworkLibrary.TestUtilities;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace YachtRaceWPF
 {
-    public class GamePage : MultiPlayerWindow<YachtRaceViewModel, YachtRacePlayerItem, YachtRaceSaveInfo>
+    public class GamePage : MultiplayerBasicShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+        public GamePage(IGameInfo gameData,
+            BasicData basicData, 
+            IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
         }
-        public override Task HandleAsync(LoadEventModel message)
+
+
+        protected override Task PopulateUIAsync()
         {
-            YachtRaceSaveInfo SaveRoot = OurContainer!.Resolve<YachtRaceSaveInfo>();
-            _thisScore!.LoadLists(SaveRoot.PlayerList);
-            _diceControl!.LoadDiceViewModel(ThisMod!.ThisCup!);
+            //if any exceptions to the shell, do here or override other things.
             return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            YachtRaceSaveInfo SaveRoot = OurContainer!.Resolve<YachtRaceSaveInfo>();
-            _thisScore!.UpdateLists(SaveRoot.PlayerList);
-            _diceControl!.UpdateDice(ThisMod!.ThisCup!);
-            return Task.CompletedTask;
-        }
-        ScoreBoardWPF? _thisScore;
-        DiceListControlWPF<SimpleDice>? _diceControl; //i think.
-        protected async override void AfterGameButton()
-        {
-            StackPanel thisStack = new StackPanel(); //will usually start with a stack panel.  if i am wrong, rethink
-            BasicSetUp();
-            MainGrid!.Children.Add(thisStack);
-            GameButton!.HorizontalAlignment = HorizontalAlignment.Center;
-            GameButton.VerticalAlignment = VerticalAlignment.Center;
-            thisStack.Children.Add(GameButton);
-            var thisRoll = GetGamingButton("Roll Dice", nameof(YachtRaceViewModel.RollCommand));
-            StackPanel otherStack = new StackPanel();
-            otherStack.Orientation = Orientation.Horizontal;
-            _diceControl = new DiceListControlWPF<SimpleDice>();
-            otherStack.Children.Add(_diceControl);
-            otherStack.Children.Add(thisRoll);
-            var thisBut = GetGamingButton("Has 5 Of A Kind", nameof(YachtRaceViewModel.FiveKindCommand));
-            thisBut.HorizontalAlignment = HorizontalAlignment.Left;
-            otherStack.Children.Add(thisBut);
-            thisStack.Children.Add(otherStack);
-            _thisScore = new ScoreBoardWPF();
-            _thisScore.AddColumn("Time", true, nameof(YachtRacePlayerItem.Time));
-            SimpleLabelGrid firstInfo = new SimpleLabelGrid();
-            firstInfo.AddRow("Turn", nameof(YachtRaceViewModel.NormalTurn)); // there is no roll number needed for this game.
-            firstInfo.AddRow("Status", nameof(YachtRaceViewModel.Status));
-            firstInfo.AddRow("Error Message", nameof(YachtRaceViewModel.ErrorMessage));
-            thisStack.Children.Add(firstInfo.GetContent);
-            thisStack.Children.Add(_thisScore);
-            AddRestoreCommand(thisStack); //usually to this.  can be to another control if needed.
-            await FinishUpAsync();
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterType<BasicGameLoader<YachtRacePlayerItem, YachtRaceSaveInfo>>(); //i think basic game loader gets done here still.
-            OurContainer!.RegisterNonSavedClasses<YachtRaceViewModel>();
-            OurContainer.RegisterType<StandardRollProcesses<SimpleDice, YachtRacePlayerItem>>();
-            OurContainer.RegisterSingleton<IProportionImage, StandardProportion>(StandardDiceWPF.GetDiceTag);
-            OurContainer.RegisterSingleton<IGenerateDice<int>, SimpleDice>();
         }
     }
 }

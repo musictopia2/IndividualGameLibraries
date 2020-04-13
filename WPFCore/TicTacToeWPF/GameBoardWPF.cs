@@ -1,6 +1,6 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameBoards;
+﻿using BasicGamingUIWPFLibrary.BasicControls.GameBoards;
 using System.Windows.Controls;
-using TicTacToeCP;
+using TicTacToeCP.Data;
 namespace TicTacToeWPF
 {
     public class GameBoardWPF : BasicGameBoard<SpaceInfoCP>

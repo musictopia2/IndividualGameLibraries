@@ -1,10 +1,10 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+﻿using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using SixtySix2PlayerCP;
+using SixtySix2PlayerCP.Data;
 using System.Windows;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //usually needs this as well for grid helpers.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 namespace SixtySix2PlayerWPF
 {
     public class GuideUI : BaseFrameWPF
@@ -33,7 +33,7 @@ namespace SixtySix2PlayerWPF
             AddControlToGrid(_thisGrid!, output, _rowNumber, 1);
             _rowNumber++;
         }
-        public void LoadList(SixtySix2PlayerViewModel thisMod)
+        public void LoadList(SixtySix2PlayerVMData model)
         {
             Text = "Scoring Guide";
             _thisGrid = new Grid();
@@ -44,7 +44,7 @@ namespace SixtySix2PlayerWPF
             var thisLabel = GetLargestLabel("Point Values:");
             AddControlToGrid(_thisGrid, thisLabel, 0, 0);
             _rowNumber = 1;
-            var thisList = thisMod.GetDescriptionList();
+            var thisList = model.GetDescriptionList();
             thisList.ForEach(thisscore => AddStandardLabel(thisscore));
             Grid finalGrid = new Grid();
             finalGrid.Children.Add(ThisDraw);

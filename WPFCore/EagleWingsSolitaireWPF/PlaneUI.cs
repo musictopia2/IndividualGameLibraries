@@ -1,17 +1,24 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SingleCardFrames;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BaseSolitaireClassesCP.GraphicsViewModels;
-using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using CommonBasicStandardLibraries.CollectionClasses;
+﻿using System;
+using System.Text;
 using CommonBasicStandardLibraries.Exceptions;
-using EagleWingsSolitaireCP;
-using SolitaireGraphicsWPFCore;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using System.Linq;
-using System.Windows;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
 using System.Windows.Controls;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
-//i think this is the most common things i like to do
+using BasicGameFrameworkLibrary.SolitaireClasses.GraphicsObservable;
+using EagleWingsSolitaireCP.Logic;
+using BasicGamingUIWPFLibrary.BasicControls.SolitaireClasses;
+using System.Windows;
+using EagleWingsSolitaireCP.ViewModels;
+using BasicGamingUIWPFLibrary.BasicControls.SingleCardFrames;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace EagleWingsSolitaireWPF
 {
     public class PlaneUI : UserControl
@@ -29,7 +36,7 @@ namespace EagleWingsSolitaireWPF
                 pileG.Init();
             });
         }
-        public void Init(EagleWingsSolitaireViewModel thisMod)
+        public void Init(EagleWingsSolitaireMainViewModel thisMod)
         {
             var thisDeck = new BaseDeckWPF<SolitaireCard, ts, DeckOfCardsWPF<SolitaireCard>>();
             thisDeck.Init(thisMod.Heel1!, ts.TagUsed);

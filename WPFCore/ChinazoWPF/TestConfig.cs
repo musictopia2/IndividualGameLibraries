@@ -1,24 +1,26 @@
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using ChinazoCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGameFrameworkLibrary.TestUtilities;
+using ChinazoCP.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Text;
+using System.Threading.Tasks;
+
 namespace ChinazoWPF
 {
     public class TestConfig : ITestCardSetUp<ChinazoCard, ChinazoPlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<ChinazoPlayerItem> playerList, IListShuffler<ChinazoCard> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<ChinazoPlayerItem> playerlist, IListShuffler<ChinazoCard> decklist)
         {
-            ChinazoPlayerItem thisPlayer = playerList.GetSelf();
+            //ChinazoPlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Value == EnumCardValueList.Eight).Take(3));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Value == EnumCardValueList.Joker).Take(2));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Value == EnumCardValueList.HighAce && items.Suit == EnumSuitList.Spades).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Value == EnumCardValueList.Two && items.Suit == EnumSuitList.Spades).Take(1));
-            thisPlayer.StartUpList.AddRange(deckList.Where(items => items.Value == EnumCardValueList.Three && items.Suit == EnumSuitList.Spades).Take(1));
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

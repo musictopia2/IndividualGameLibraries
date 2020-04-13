@@ -1,78 +1,69 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BaseGPXWindowsAndControlsCore.BaseWindows;
-using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
-using BaseGPXWindowsAndControlsCore.GameGraphics.GamePieces;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.GameGraphicsCP.GamePieces;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
 using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
-using MastermindCP;
-using System.Threading.Tasks;
-using System.Windows;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIWPFLibrary.Shells;
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using MastermindCP.Logic;
+using MastermindCP.Data;
 using System.Windows.Controls;
-using System.Windows.Media;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicControlsAndWindowsCore.Controls.NavigationControls;
+using BasicGameFrameworkLibrary.ViewModels;
+using MastermindCP.ViewModels;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using System.Windows;
+//should not need the view models though.  if i am wrong, rethink.
+//i think this is the most common things i like to do
 namespace MastermindWPF
 {
-    public class GamePage : SinglePlayerWindow<MastermindViewModel>
+    public class GamePage : SinglePlayerShellView
     {
-        public GamePage(IStartUp starts, EnumGamePackageMode mode) //this means something needs to put into here.
+        //we may have to think about loading information.
+        //until i have some experience, not sure what to do (?)
+
+        public GamePage(IGameInfo gameData, BasicData basicData, IStartUp start) : base(gameData, basicData, start)
         {
-            BuildXAML(starts, mode);
+
         }
-        public override Task HandleAsync(LoadEventModel message)
+        protected override void OrganizeMainGrid()
         {
+            AddAutoRows(MainGrid!, 2);
+            base.OrganizeMainGrid();
+        }
+        protected override Task PopulateUIAsync()
+        {
+            ParentSingleUIContainer parent = new ParentSingleUIContainer()
+            {
+                Name = nameof(MastermindShellViewModel.OpeningScreen)
+            };
+            AddControlToGrid(MainGrid!, parent, 0, 0);
+            //looks like we need something else.  because of solution.  plus we need something for the level chosen.
+            //this means the only other thing we need is the solution screen.
+
+            parent = new ParentSingleUIContainer()
+            {
+                Name = nameof(MastermindShellViewModel.SolutionScreen),
+                Margin = new Thickness(10)
+            };
+            AddControlToGrid(MainGrid!, parent, 2, 0);
             return Task.CompletedTask;
         }
-        public override Task HandleAsync(UpdateEventModel message)
+        protected override void AddMain(ParentSingleUIContainer game)
         {
-            return Task.CompletedTask;
+            AddControlToGrid(MainGrid!, game, 3, 0);
         }
-        private readonly BoardUI _gameBoard1 = new BoardUI();
-        private readonly SolutionUI _solution1 = new SolutionUI(); //because of dependency injection.
-        protected override void AfterGameButton()
+        protected override void AddNewGame(ParentSingleUIContainer game)
         {
-            StackPanel thisStack = new StackPanel();
-            LevelUI levels = new LevelUI();
-            EnumPickerWPF<CirclePieceCP<EnumColorPossibilities>, CirclePieceWPF<EnumColorPossibilities>, EnumColorPossibilities, CustomColorClass> colors = new EnumPickerWPF<CirclePieceCP<EnumColorPossibilities>, CirclePieceWPF<EnumColorPossibilities>, EnumColorPossibilities, CustomColorClass>();
-            colors.Rows = 10; //try this way now.
-            colors.HorizontalAlignment = HorizontalAlignment.Center;
-            var acceptBut = GetGamingButton("Accept", nameof(MastermindViewModel.AcceptCommand));
-            var giveUpBut = GetGamingButton("Give Up", nameof(MastermindViewModel.GiveUpCommand));
-            var levelBut = GetGamingButton("Level" + Constants.vbCrLf + "Information", nameof(MastermindViewModel.LevelCommand));
-            _gameBoard1.Width = 820;
-            StackPanel otherStack = new StackPanel();
-            otherStack.Orientation = Orientation.Horizontal;
-            otherStack.Children.Add(_gameBoard1);
-            Grid testGrid = new Grid();
-            testGrid.Background = Brushes.Brown;
-            testGrid.Width = 200;
-            testGrid.Children.Add(colors);
-            testGrid.Margin = new Thickness(10, 10, 10, 10);
-            otherStack.Children.Add(testGrid);
-            otherStack.Children.Add(thisStack);
-            thisStack.Children.Add(GameButton);
-            thisStack.Children.Add(acceptBut);
-            thisStack.Children.Add(giveUpBut);
-            thisStack.Children.Add(levelBut);
-            thisStack = new StackPanel();
-            thisStack.Children.Add(levels);
-            thisStack.Children.Add(_solution1);
-            otherStack.Children.Add(thisStack);
-            Content = otherStack; //if not doing this, rethink.
-            ThisMod!.Finish();
-            _gameBoard1.Init(ThisMod);
-            levels.Init(ThisMod);
-            colors.LoadLists(ThisMod.Color1!);
-            ThisMod.CommandContainer!.IsExecuting = false;
-            ThisMod.NewGameVisible = true;
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterNonSavedClasses<MastermindViewModel>(); //go ahead and use the custom processes for this.  decided to mention non saved classes.
-            OurContainer!.RegisterSingleton(_gameBoard1);
-            OurContainer.RegisterSingleton(_solution1);
+            AddControlToGrid(MainGrid!, game, 1, 0);
         }
     }
 }

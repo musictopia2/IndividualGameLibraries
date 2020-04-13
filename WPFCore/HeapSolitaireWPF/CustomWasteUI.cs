@@ -1,13 +1,13 @@
-using CommonBasicStandardLibraries.Exceptions;
-using HeapSolitaireCP;
+﻿using CommonBasicStandardLibraries.Exceptions;
+using HeapSolitaireCP.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //since i use the grid a lot too.
 namespace HeapSolitaireWPF
 {
     public class CustomWasteUI : UserControl
     {
-        public void Init(HeapSolitaireViewModel thisMod)
+        public void Init(HeapSolitaireMainViewModel thisMod)
         {
             Grid thisGrid = new Grid();
             var tempMod = thisMod.Waste1;

@@ -1,5 +1,5 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using BowlingDiceGameCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using BowlingDiceGameCP.Data;
 using System.Windows;
 namespace BowlingDiceGameWPF
 {

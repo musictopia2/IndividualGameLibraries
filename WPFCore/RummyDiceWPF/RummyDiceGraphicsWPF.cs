@@ -1,7 +1,9 @@
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using RummyDiceCP;
+﻿using BasicGameFrameworkLibrary.CommonInterfaces;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using RummyDiceCP.Data;
+using RummyDiceCP.Logic;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
@@ -10,39 +12,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+
 namespace RummyDiceWPF
 {
     public class RummyDiceGraphicsWPF : UserControl, ISelectableObject, IRepaintControl
     {
         private RummyDiceGraphicsCP? _mains; //just keep mains
-
-        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(RummyDiceGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(CommandPropertyChanged)));
         private readonly SKElement _thisDraw;
-        public ICommand Command
-        {
-            get
-            {
-                return (ICommand)GetValue(CommandProperty);
-            }
-            set
-            {
-                SetValue(CommandProperty, value);
-            }
-        }
-        private static void CommandPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
-        private static void CommandParameterPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
-        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(RummyDiceGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(CommandParameterPropertyChanged)));
-        public object CommandParameter
-        {
-            get
-            {
-                return GetValue(CommandParameterProperty);
-            }
-            set
-            {
-                SetValue(CommandParameterProperty, value);
-            }
-        }
+
         public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(RummyDiceGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(IsSelectedPropertyChanged)));
         public bool IsSelected
         {
@@ -66,9 +43,15 @@ namespace RummyDiceWPF
             _mains!.ActualWidthHeight = (float)thisD;
             _thisDraw.InvalidateVisual();
         }
-        public void SendDiceInfo(RummyDiceInfo thisDice)
+
+        public ICommand? Command { get; set; }
+
+        private RummyBoardCP? _board;
+        public void SendDiceInfo(RummyDiceInfo thisDice, RummyBoardCP board)
         {
             _mains = new RummyDiceGraphicsCP(this);
+            _board = board;
+            MouseUp += RummyDiceGraphicsWPF_MouseUp;
             _mains.MinimumWidthHeight = thisDice.HeightWidth;
             SetBinding(IsSelectedProperty, new Binding(nameof(RummyDiceInfo.IsSelected))); //maybe i forgot this too.
             SetBinding(VisibilityProperty, new Binding(nameof(RummyDiceInfo.Visible))); //i think.
@@ -82,32 +65,45 @@ namespace RummyDiceWPF
             Width = diceSize.Width;
             Init();
         }
+
+        private async void RummyDiceGraphicsWPF_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_board == null && Command == null)
+            {
+                return;
+            }
+            RummyDiceInfo dice = (RummyDiceInfo)DataContext;
+            if (Command != null)
+            {
+                if (Command.CanExecute(null) == false)
+                {
+                    return;
+                }
+                Command.Execute(dice);
+                return;
+            }
+
+            await _board!.SelectDiceAsync((RummyDiceInfo)DataContext);
+        }
+
         public void DoInvalidate()
         {
             _thisDraw.InvalidateVisual();
         }
+        
         public RummyDiceGraphicsWPF()
         {
             _thisDraw = new SKElement();
             _thisDraw.PaintSurface += ThisDraw_PaintSurface;
             HorizontalAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;
-            MouseUp += BaseGraphics_MouseUp;
             Content = _thisDraw;
         }
         private void ThisDraw_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
             _mains!.DrawDice(e.Surface.Canvas);
         }
-        private void BaseGraphics_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            var tempCommand = Command;
-            if (tempCommand != null)
-            {
-                if (tempCommand.CanExecute(CommandParameter) == true)
-                    tempCommand.Execute(CommandParameter);
-            }
-        }
+
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color", typeof(EnumColorType), typeof(RummyDiceGraphicsWPF), new FrameworkPropertyMetadata(new PropertyChangedCallback(ColorPropertyChanged)));
         public EnumColorType Color
         {

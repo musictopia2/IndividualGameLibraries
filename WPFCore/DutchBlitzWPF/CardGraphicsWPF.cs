@@ -1,5 +1,5 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using DutchBlitzCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using DutchBlitzCP.Cards;
 namespace DutchBlitzWPF
 {
     public class CardGraphicsWPF : BaseColorCardsWPF<DutchBlitzCardInformation, DutchBlitzGraphicsCP> { }

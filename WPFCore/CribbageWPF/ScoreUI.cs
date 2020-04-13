@@ -1,21 +1,25 @@
-using CommonBasicStandardLibraries.CollectionClasses;
-using CribbageCP;
+﻿using CommonBasicStandardLibraries.CollectionClasses;
+using CribbageCP.Data;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //usually needs this as well for grid helpers.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+
 namespace CribbageWPF
 {
     public class ScoreUI : UserControl
     {
         private CustomBasicCollection<ScoreInfo>? _scoreList;
         private Grid? _thisGrid;
-        private CribbageViewModel? _thisMod;
-        public void LoadLists(CribbageViewModel thisMod)
+        private CribbageVMData? _model;
+        public void LoadLists(CribbageVMData model)
         {
-            _thisMod = thisMod;
+            _model = model;
             _thisGrid = new Grid();
-            _scoreList = thisMod.ScoreBoard1!.ScoreList;
+            _scoreList = model.ScoreBoard1!.ScoreList;
             _scoreList.CollectionChanged += ScoreList_CollectionChanged;
             AddPixelColumn(_thisGrid, 300);
             AddAutoColumns(_thisGrid, 1);
@@ -67,7 +71,7 @@ namespace CribbageWPF
             AddControlToGrid(_thisGrid, thisLabel, x, 0);
             thisLabel = GetDefaultLabel(); //at least for this.
             thisLabel.FontWeight = FontWeights.Bold;
-            thisLabel.Text = _thisMod!.TotalScore.ToString();
+            thisLabel.Text = _model!.TotalScore.ToString();
             AddControlToGrid(_thisGrid, thisLabel, x, 1);
         }
     }

@@ -1,29 +1,31 @@
-using BattleshipCP;
+﻿using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using BasicGamingUIWPFLibrary.Helpers;
+using BattleshipCP.Data;
+using BattleshipCP.Logic;
+using BattleshipCP.ViewModels;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using v = BasicGameFramework.MiscProcesses;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
+using v = BasicGameFrameworkLibrary.MiscProcesses;
 namespace BattleshipWPF
 {
-    public class SpaceWPF : UserControl
+    public class SpaceWPF : GraphicsCommand
     {
         private readonly SKElement _thisDraw;
         private readonly v.Vector _space;
         private readonly GameBoardCP _gameBoard1;
-        private readonly BattleshipViewModel _thisMod;
         public SpaceWPF(FieldInfoCP field)
         {
             DataContext = field; // needs to be this way so if somethign changes,can act accordingly
             _thisDraw = new SKElement();
             _space = field.Vector;
+            CommandParameter = _space;
             _gameBoard1 = Resolve<GameBoardCP>();
-            _thisMod = Resolve<BattleshipViewModel>();
             _thisDraw.PaintSurface += ThisDraw_PaintSurface;
-            MouseUp += SpaceWPF_MouseUp;
+            Name = nameof(BattleshipMainViewModel.MakeMoveAsync);
+            GamePackageViewModelBinder.ManuelElements.Add(this); //just in case.  because i have seen patterns where ones i get later never get picked up.
             Width = _gameBoard1.SpaceSize;
             Height = _gameBoard1.SpaceSize; // used the idea from tic tac toe.
             Content = _thisDraw;
@@ -67,10 +69,6 @@ namespace BattleshipWPF
             var thisSpace = (FieldInfoCP)DataContext;
             _gameBoard1.DrawSpace(e.Surface.Canvas, thisSpace, e.Info.Width, e.Info.Height);
         }
-        private void SpaceWPF_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (_thisMod.GameBoardCommand!.CanExecute(_space) == true)
-                _thisMod.GameBoardCommand.Execute(_space);
-        }
+
     }
 }

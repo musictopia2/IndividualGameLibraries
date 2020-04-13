@@ -1,4 +1,4 @@
-using RummyDiceCP;
+﻿using RummyDiceCP.ViewModels;
 using System.Windows.Data;
 namespace RummyDiceWPF
 {

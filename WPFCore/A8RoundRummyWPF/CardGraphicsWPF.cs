@@ -1,10 +1,11 @@
-using A8RoundRummyCP;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
+using A8RoundRummyCP.Cards;
+using A8RoundRummyCP.Data;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
 using System.Windows;
 using System.Windows.Data;
 namespace A8RoundRummyWPF
 {
-    public class CardGraphicsWPF : BaseDeckGraphicsWPF<A8RoundRummyCardInformation, A8RoundRummyGraphicsCP>
+    public class CardGraphicsWPF : BaseDeckGraphicsWPF<A8RoundRummyCardInformation, A8RoundRummyGraphicsCP>//begin
     {
         public static readonly DependencyProperty CardTypeProperty = DependencyProperty.Register("CardType", typeof(EnumCardType), typeof(CardGraphicsWPF), new FrameworkPropertyMetadata(EnumCardType.None, new PropertyChangedCallback(CardTypePropertyChanged)));
         public EnumCardType CardType

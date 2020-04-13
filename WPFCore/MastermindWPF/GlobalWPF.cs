@@ -1,4 +1,4 @@
-namespace MastermindWPF
+﻿namespace MastermindWPF
 {
     public static class GlobalWPF //rethink for tablets.
     {

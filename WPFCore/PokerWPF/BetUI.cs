@@ -1,12 +1,12 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.ChoicePickers;
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
-using PokerCP;
+﻿using BasicGamingUIWPFLibrary.BasicControls.ChoicePickers;
+using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
+using PokerCP.ViewModels;
 using System.Windows.Controls;
 namespace PokerWPF
 {
     public class BetUI : BaseFrameWPF
     {
-        public void Init(PokerViewModel thisMod)
+        public void Init(PokerMainViewModel thisMod)
         {
             NumberChooserWPF thisNumber = new NumberChooserWPF();
             thisNumber.Columns = 3;

@@ -1,8 +1,9 @@
-using ConnectFourCP;
+﻿using ConnectFourCP.Logic;
 using SkiaSharp.Views.WPF;
 using System.Windows;
 using System.Windows.Controls;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+//i think this is the most common things i like to do
 namespace ConnectFourWPF
 {
     public class BlankBoardWPF : UserControl

@@ -1,23 +1,22 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using PickelCardGameCP;
-using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.TestUtilities;
+using PickelCardGameCP.Cards;
+using PickelCardGameCP.Data;
+using System.Threading.Tasks;
+
 namespace PickelCardGameWPF
 {
     public class TestConfig : ITestCardSetUp<PickelCardGameCardInformation, PickelCardGamePlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<PickelCardGamePlayerItem> playerList, IListShuffler<PickelCardGameCardInformation> deckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<PickelCardGamePlayerItem> playerlist, IListShuffler<PickelCardGameCardInformation> decklist)
         {
-            PickelCardGamePlayerItem thisPlayer = playerList.GetSelf();
-            thisPlayer.StartUpList = new DeckRegularDict<PickelCardGameCardInformation>(); //sample too.
+            //PickelCardGamePlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            //ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-            //this was example with regular deck of card.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

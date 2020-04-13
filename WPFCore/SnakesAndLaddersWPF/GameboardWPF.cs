@@ -1,27 +1,32 @@
-using BasicGameFramework.BasicEventModels;
+﻿using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using BasicGamingUIWPFLibrary.Helpers;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
+using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
-using SnakesAndLaddersCP;
+using SnakesAndLaddersCP.Data;
+using SnakesAndLaddersCP.GraphicsCP;
+using SnakesAndLaddersCP.Logic;
+using SnakesAndLaddersCP.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace SnakesAndLaddersWPF
 {
-    public class GameboardWPF : UserControl, IHandle<NewTurnEventModel>, IHandle<GamePieceWPF>
+    public class GameboardWPF : GraphicsCommand, IHandle<NewTurnEventModel>, IHandle<GamePieceWPF>
     {
-        private SKElement? _thisElement;
+        private SKElement? _element;
         private GameBoardGraphicsCP? _privateBoard;
         private Canvas? _turnCanvas;
         private Canvas? _otherCanvas;
         private CustomBasicList<GamePieceWPF>? _pieceList;
         private EventAggregator? _thisE;
         private SnakesAndLaddersMainGameClass? _mainGame;
-        private SnakesAndLaddersViewModel? _thisMod;
         public void Handle(NewTurnEventModel message)
         {
             NewTurnProcesses();
@@ -46,9 +51,10 @@ namespace SnakesAndLaddersWPF
         {
             _thisE = Resolve<EventAggregator>();
             _thisE.Subscribe(this);
-            _thisElement = new SKElement();
-            _thisElement.PaintSurface += ThisElement_PaintSurface;
-            _thisElement.MouseUp += ThisElement_MouseUp;
+            GamePackageViewModelBinder.ManuelElements.Add(this);
+            Name = nameof(SnakesAndLaddersMainViewModel.MakeMoveAsync);
+            _element = new SKElement();
+            _element.PaintSurface += ThisElement_PaintSurface;
             _privateBoard = new GameBoardGraphicsCP();
             _privateBoard.HeightWidth = 50; // i think
             _privateBoard.LoadBoard();
@@ -57,7 +63,6 @@ namespace SnakesAndLaddersWPF
             _turnCanvas.IsHitTestVisible = false; //this means won't consider this which is what i want.
             _otherCanvas.IsHitTestVisible = false;
             _mainGame = Resolve<SnakesAndLaddersMainGameClass>();
-            _thisMod = Resolve<SnakesAndLaddersViewModel>();
             _pieceList = new CustomBasicList<GamePieceWPF>();
             int index = default;
             foreach (var thisItem in _mainGame.PlayerList!)
@@ -73,7 +78,7 @@ namespace SnakesAndLaddersWPF
                 _pieceList.Add(thisGraphics);
             }
             Grid thisGrid = new Grid();
-            thisGrid.Children.Add(_thisElement);
+            thisGrid.Children.Add(_element);
             thisGrid.Children.Add(_otherCanvas);
             thisGrid.Children.Add(_turnCanvas);
             Content = thisGrid;
@@ -116,14 +121,20 @@ namespace SnakesAndLaddersWPF
             _turnCanvas.Children.Add(otherControl);
             ChangePiece(otherControl);
         }
-        private void ThisElement_MouseUp(object sender, MouseButtonEventArgs e)
+        protected override void BeforeProcessCommand(SKPoint point)
         {
-            int index;
-            var thisPoint = e.GetPosition(_thisElement);
-            index = _privateBoard!.SpaceClicked((float)thisPoint.X, (float)thisPoint.Y);
-            if (_thisMod!.SpaceClickCommand!.CanExecute(index) == true)
-                _thisMod.SpaceClickCommand.Execute(index);
+            int index = _privateBoard!.SpaceClicked(point.X, point.Y);
+            CommandParameter = index; //so it changes over time for this case.
         }
+        
+        //private void ThisElement_MouseUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    int index;
+        //    var thisPoint = e.GetPosition(_element);
+        //    index = _privateBoard!.SpaceClicked((float)thisPoint.X, (float)thisPoint.Y);
+        //    if (_thisMod!.SpaceClickCommand!.CanExecute(index) == true)
+        //        _thisMod.SpaceClickCommand.Execute(index);
+        //}
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
             _privateBoard!.PaintBoard(e.Surface.Canvas);

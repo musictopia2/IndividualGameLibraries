@@ -1,5 +1,5 @@
-using BaseGPXWindowsAndControlsCore.GameGraphics.Cards;
-using RookCP;
+using BasicGamingUIWPFLibrary.GameGraphics.Cards;
+using RookCP.Cards;
 namespace RookWPF
 {
     public class CardGraphicsWPF : BaseColorCardsWPF<RookCardInformation, RookGraphicsCP> { }

@@ -1,10 +1,10 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.SimpleControls;
+﻿using BasicGamingUIWPFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using Pinochle2PlayerCP;
+using Pinochle2PlayerCP.Data;
 using System.Windows;
 using System.Windows.Controls;
-using static BaseGPXWindowsAndControlsCore.BaseWindows.SharedWindowFunctions;
-using static BasicControlsAndWindowsCore.Helpers.GridHelper;
+using static BasicControlsAndWindowsCore.Helpers.GridHelper; //usually needs this as well for grid helpers.
+using static BasicGamingUIWPFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 namespace Pinochle2PlayerWPF
 {
     public class GuideUI : BaseFrameWPF
@@ -42,7 +42,7 @@ namespace Pinochle2PlayerWPF
             AddControlToGrid(_thisGrid!, output, _rowNumber, 1);
             _rowNumber++;
         }
-        public void LoadList(Pinochle2PlayerViewModel thisMod)
+        public void LoadList(Pinochle2PlayerVMData model)
         {
             Text = "Scoring Guide";
             _thisGrid = new Grid();
@@ -53,22 +53,22 @@ namespace Pinochle2PlayerWPF
             var thisLabel = GetLargestLabel("Point Values:");
             AddControlToGrid(_thisGrid, thisLabel, 0, 0);
             _rowNumber = 1;
-            thisMod.Guide1!.PointValueList.ForEach(thisScore => AddStandardLabel(thisScore));
+            model.Guide1!.PointValueList.ForEach(thisScore => AddStandardLabel(thisScore));
             thisLabel = GetLargestLabel("Value Of Melds:");
             AddControlToGrid(_thisGrid, thisLabel, _rowNumber, 0);
             _rowNumber++;
             thisLabel = GetClassLabel("A");
             AddControlToGrid(_thisGrid, thisLabel, _rowNumber, 0);
             _rowNumber++;
-            thisMod.Guide1.ClassAList.ForEach(thisScore => AddStandardLabel(thisScore));
+            model.Guide1.ClassAList.ForEach(thisScore => AddStandardLabel(thisScore));
             thisLabel = GetClassLabel("B");
             AddControlToGrid(_thisGrid, thisLabel, _rowNumber, 0);
             _rowNumber++;
-            thisMod.Guide1.ClassBList.ForEach(thisScore => AddStandardLabel(thisScore));
+            model.Guide1.ClassBList.ForEach(thisScore => AddStandardLabel(thisScore));
             thisLabel = GetClassLabel("C");
             AddControlToGrid(_thisGrid, thisLabel, _rowNumber, 0);
             _rowNumber++;
-            thisMod.Guide1.ClassCList.ForEach(thisScore => AddStandardLabel(thisScore));
+            model.Guide1.ClassCList.ForEach(thisScore => AddStandardLabel(thisScore));
             Grid finalGrid = new Grid();
             finalGrid.Children.Add(ThisDraw);
             finalGrid.Children.Add(_thisGrid);

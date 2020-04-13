@@ -1,6 +1,6 @@
-using BaseGPXWindowsAndControlsCore.BasicControls.GameFrames;
-using BaseGPXWindowsAndControlsCore.GameGraphics.Base;
-using FluxxCP;
+using BasicGamingUIWPFLibrary.BasicControls.GameFrames;
+using BasicGamingUIWPFLibrary.GameGraphics.Base;
+using FluxxCP.Cards;
 using System.Windows;
 using System.Windows.Data;
 namespace FluxxWPF
