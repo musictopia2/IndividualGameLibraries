@@ -1,7 +1,7 @@
-using AggravationCP;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using AggravationCP.Graphics;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace AggravationXF
 {
     public class BoardPosition : IBoardPosition

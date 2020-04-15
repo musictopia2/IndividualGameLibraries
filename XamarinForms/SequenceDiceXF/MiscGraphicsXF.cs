@@ -1,5 +1,5 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using SequenceDiceCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using SequenceDiceCP.Logic;
 using Xamarin.Forms;
 namespace SequenceDiceXF
 {

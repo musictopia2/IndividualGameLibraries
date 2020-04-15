@@ -1,21 +1,24 @@
-using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
-using BasicGameFramework.ChooserClasses;
-using BasicGameFramework.GameGraphicsCP.GamePieces;
-using BasicGameFramework.RegularDeckOfCards;
-using PickelCardGameCP;
+using BasicGameFrameworkLibrary.GameGraphicsCP.GamePieces;
+using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGamingUIXFLibrary.BasicControls.ChoicePickers;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.GameGraphics.GamePieces;
+using BasicGamingUIXFLibrary.Helpers;
+using PickelCardGameCP.Data;
+using PickelCardGameCP.ViewModels;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+
 namespace PickelCardGameXF
 {
     public class BidControl : BaseFrameXF
     {
-        public void LoadLists(PickelCardGameViewModel thisMod)
+        public void LoadLists(PickelCardGameVMData thisMod)
         {
+            GamePackageViewModelBinder.ManuelElements.Clear();
             NumberChooserXF firstBid = new NumberChooserXF();
             Text = "Bid Info";
-            EnumPickerXF<DeckPieceCP, DeckPieceXF, EnumSuitList, SuitListChooser> firstSuit = new EnumPickerXF<DeckPieceCP, DeckPieceXF, EnumSuitList, SuitListChooser>();
+            EnumPickerXF<DeckPieceCP, DeckPieceXF, EnumSuitList> firstSuit = new EnumPickerXF<DeckPieceCP, DeckPieceXF, EnumSuitList>();
             StackLayout thisStack = new StackLayout();
             SetUpMarginsOnParentControl(thisStack);
             firstBid.Margin = new Thickness(3, 3, 3, 3);
@@ -28,9 +31,11 @@ namespace PickelCardGameXF
             thisStack.Children.Add(firstSuit);
             StackLayout otherStack = new StackLayout();
             otherStack.Orientation = StackOrientation.Horizontal;
-            Button thisBut = GetGamingButton("Place Bid", nameof(PickelCardGameViewModel.ProcessBidCommand));
+            Button thisBut = GetGamingButton("Place Bid", nameof(PickelBidViewModel.ProcessBidAsync));
+            GamePackageViewModelBinder.ManuelElements.Add(thisBut);
             otherStack.Children.Add(thisBut);
-            thisBut = GetGamingButton("Pass", nameof(PickelCardGameViewModel.PassCommand));
+            thisBut = GetGamingButton("Pass", nameof(PickelBidViewModel.PassAsync));
+            GamePackageViewModelBinder.ManuelElements.Add(thisBut);
             otherStack.Children.Add(thisBut);
             thisStack.Children.Add(otherStack);
             Grid thisGrid = new Grid();

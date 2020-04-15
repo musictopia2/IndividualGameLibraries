@@ -1,9 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using FillOrBustCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using FillOrBustCP.Cards;
+using FillOrBustCP.Data;
 using Xamarin.Forms;
+
 namespace FillOrBustXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<FillOrBustCardInformation, FillOrBustGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<FillOrBustCardInformation, FillOrBustGraphicsCP>//begin
     {
         public static readonly BindableProperty CategoryProperty = BindableProperty.Create(propertyName: "Category", returnType: typeof(EnumCardStatusList), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCardStatusList.Unknown, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CategoryPropertyChanged);
         public EnumCardStatusList Category
@@ -37,7 +39,7 @@ namespace FillOrBustXF
         private static void ValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var thisItem = (CardGraphicsXF)bindable;
-            thisItem.MainObject!.Value = (int) newValue;
+            thisItem.MainObject!.Value = (int)newValue;
         }
         protected override void PopulateInitObject()
         {

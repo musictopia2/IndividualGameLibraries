@@ -1,16 +1,21 @@
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.DIContainers;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using SkiaSharp;
 using System.Collections.Specialized;
 using XactikaCP;
+using XactikaCP.Data;
+using XactikaCP.Logic;
+using XactikaCP.MiscImages;
 using Xamarin.Forms;
 namespace XactikaXF
 {
     public class ChooseShapeXF : ContentView
     {
         private CustomBasicCollection<PieceCP>? _shapeList;
-        private ChooseShapeViewModel? _tempMod;
+        private ChooseShapeObservable? _tempMod;
         private void PieceBindings(XactikaPieceXF thisGraphics, PieceCP thisPiece)
         {
             thisGraphics.WidthRequest = _sizeUsed.Width;
@@ -18,8 +23,8 @@ namespace XactikaXF
             thisGraphics.Margin = new Thickness(5, 0, 5, 5); // i do like the idea of margins this time as well.
             thisGraphics.IsVisible = true; // has to manually be set
             thisGraphics.BindingContext = thisPiece;
-            var thisBind = GetCommandBinding(nameof(ChooseShapeViewModel.ShapeSelectedCommand));
-            thisGraphics.SetBinding(XactikaPieceXF.CommandProperty, thisBind);
+            var thisBind = GetCommandBinding(nameof(ChooseShapeObservable.ShapeSelectedCommand));
+            thisGraphics.SetBinding(GraphicsCommand.CommandProperty, thisBind);
             thisGraphics.CommandParameter = thisPiece; // i think
             thisGraphics.SetBinding(XactikaPieceXF.ShapeUsedProperty, nameof(PieceCP.ShapeUsed));
             thisGraphics.SetBinding(XactikaPieceXF.HowManyProperty, nameof(PieceCP.HowMany));
@@ -35,16 +40,16 @@ namespace XactikaXF
         }
         private StackLayout? _thisStack;
         private SKSize _sizeUsed;
-        public void Init(XactikaViewModel thisMod)
+        public void Init(XactikaVMData thisMod, IGamePackageResolver resolver)
         {
-            IProportionImage thisP = thisMod.MainContainer!.Resolve<IProportionImage>("");
             SKSize firstSize = new SKSize(60, 138);
+            IProportionImage thisP = resolver.Resolve<IProportionImage>("");
             _sizeUsed = firstSize.GetSizeUsed(thisP.Proportion);
             _tempMod = thisMod.ShapeChoose1;
             _shapeList = _tempMod!.PieceList;
             Margin = new Thickness(10, 10, 10, 10);
             BindingContext = _tempMod; // i think
-            var thisBind = new Binding(nameof(ChooseShapeViewModel.Visible));
+            var thisBind = new Binding(nameof(ChooseShapeObservable.Visible));
             SetBinding(IsVisibleProperty, thisBind); // i think
             _thisStack = new StackLayout();
             _thisStack.Orientation = StackOrientation.Horizontal; // for this time, must be horizontal.

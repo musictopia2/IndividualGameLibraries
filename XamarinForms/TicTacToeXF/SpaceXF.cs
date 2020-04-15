@@ -1,35 +1,31 @@
-using BasicGameFramework.BasicEventModels;
+using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using BasicGamingUIXFLibrary.Helpers;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
 using CommonBasicStandardLibraries.Messenging;
 using SkiaSharp.Views.Forms;
-using TicTacToeCP;
+using TicTacToeCP.Data;
+using TicTacToeCP.Logic;
+using TicTacToeCP.ViewModels;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace TicTacToeXF
 {
-    public class SpaceXF : ContentView, IHandle<RepaintEventModel>
+    public class SpaceXF : GraphicsCommand, IHandle<RepaintEventModel>
     {
-        private readonly SKCanvasView _thisDraw;
-        private readonly TicTacToeViewModel _thisMod;
         private readonly TicTacToeGraphicsCP _gameBoard1;
         public SpaceXF(SpaceInfoCP space)
         {
-            _thisDraw = new SKCanvasView();
-            _thisDraw.PaintSurface += DrawPaint;
-            _thisDraw.EnableTouchEvents = true;
-            _thisDraw.Touch += DrawTouch;
-            _thisMod = Resolve<TicTacToeViewModel>();
+            ThisDraw.PaintSurface += DrawPaint;
             _gameBoard1 = Resolve<TicTacToeGraphicsCP>();
+            this.SetName(nameof(TicTacToeMainViewModel.MakeMoveAsync));
+            CommandParameter = space;
+            GamePackageViewModelBinder.ManuelElements.Add(this); //hopefully this simple.
             EventAggregator thisE = Resolve<EventAggregator>();
             BindingContext = space;
             WidthRequest = _gameBoard1.SpaceSize;
             HeightRequest = _gameBoard1.SpaceSize;
-            thisE.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString());
-            Content = _thisDraw;
-        }
-        private void DrawTouch(object sender, SKTouchEventArgs e)
-        {
-            if (_thisMod.SpaceCommand!.CanExecute(BindingContext) == true)
-                _thisMod.SpaceCommand.Execute(BindingContext);
+            thisE.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString());
         }
         private void DrawPaint(object? sender, SKPaintSurfaceEventArgs e)
         {
@@ -38,7 +34,7 @@ namespace TicTacToeXF
         }
         public void Handle(RepaintEventModel message)
         {
-            _thisDraw.InvalidateSurface();
+            ThisDraw.InvalidateSurface();
         }
     }
 }

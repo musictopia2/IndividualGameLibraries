@@ -1,15 +1,16 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SingleCardFrames;
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BaseSolitaireClassesCP.GraphicsViewModels;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGameFrameworkLibrary.SolitaireClasses.GraphicsObservable;
+using BasicGamingUIXFLibrary.BasicControls.SingleCardFrames;
+using BasicGamingUIXFLibrary.BasicControls.SolitaireClasses;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using EagleWingsSolitaireCP;
-using SolitaireGraphicsXF;
+using EagleWingsSolitaireCP.Logic;
+using EagleWingsSolitaireCP.ViewModels;
 using System.Linq;
 using Xamarin.Forms;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace EagleWingsSolitaireXF
 {
     public class PlaneUI : ContentView
@@ -17,6 +18,7 @@ namespace EagleWingsSolitaireXF
         private StackLayout? _thisStack;
         private void LoadPiles(CustomBasicList<PileInfoCP> thisList, WastePiles thisWaste)
         {
+
             thisList.ForEach(thisPile =>
             {
                 var pileG = new IndividualSolitairePileXF();
@@ -24,10 +26,11 @@ namespace EagleWingsSolitaireXF
                 pileG.ThisPile = thisPile;
                 pileG.Margin = new Thickness(0, 13, 0, 0);
                 _thisStack!.Children.Add(pileG);
-                pileG.Init();
+                pileG.Init(_needsPopulating);
             });
         }
-        public void Init(EagleWingsSolitaireViewModel thisMod)
+        private static bool _needsPopulating = true;
+        public void Init(EagleWingsSolitaireMainViewModel thisMod)
         {
             var thisDeck = new BaseDeckXF<SolitaireCard, ts, DeckOfCardsXF<SolitaireCard>>();
             thisDeck.Init(thisMod.Heel1!, ts.TagUsed);
@@ -42,6 +45,7 @@ namespace EagleWingsSolitaireXF
             var lastList = tempWaste.Piles.PileList.Skip(4).ToCustomBasicList();
             LoadPiles(lastList, tempWaste);
             Content = _thisStack;
+            _needsPopulating = false;
         }
     }
 }

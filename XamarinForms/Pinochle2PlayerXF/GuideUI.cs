@@ -1,8 +1,8 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using Pinochle2PlayerCP;
+using Pinochle2PlayerCP.Data;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 using static BasicXFControlsAndPages.Helpers.GridHelper;
 namespace Pinochle2PlayerXF
 {
@@ -40,7 +40,7 @@ namespace Pinochle2PlayerXF
             AddControlToGrid(_thisGrid!, output, _rowNumber, 1);
             _rowNumber++;
         }
-        public void LoadList(Pinochle2PlayerViewModel thisMod)
+        public void LoadList(Pinochle2PlayerVMData thisMod)
         {
             Text = "Scoring Guide";
             _thisGrid = new Grid();

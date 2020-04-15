@@ -1,9 +1,11 @@
-using A8RoundRummyCP;
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
+using A8RoundRummyCP.Cards;
+using A8RoundRummyCP.Data;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using Xamarin.Forms;
+
 namespace A8RoundRummyXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<A8RoundRummyCardInformation, A8RoundRummyGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<A8RoundRummyCardInformation, A8RoundRummyGraphicsCP>//begin
     {
         public static readonly BindableProperty CardTypeProperty = BindableProperty.Create(propertyName: "CardType", returnType: typeof(EnumCardType), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCardType.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CardTypePropertyChanged);
         public EnumCardType CardType

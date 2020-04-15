@@ -1,5 +1,5 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using BowlingDiceGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using BowlingDiceGameCP.Data;
 using Xamarin.Forms;
 namespace BowlingDiceGameXF
 {

@@ -1,7 +1,7 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using ChessCP;
+using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
+using ChessCP.Logic;
 using CommonBasicStandardLibraries.Messenging;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
@@ -15,38 +15,38 @@ namespace ChessXF
     }
     public class GameBoardXF : ContentView, IHandle<RepaintEventModel>
     {
-        internal SkiaSharpGameBoardXF ThisElement;
+        internal SkiaSharpGameBoardXF Element { get; set; }
         public void LoadBoard()
         {
             GameBoardGraphicsCP PrivateBoard = Resolve<GameBoardGraphicsCP>();
 
-            ThisElement.EnableTouchEvents = true;
-            ThisElement.Touch += ThisElement_Touch;
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element.EnableTouchEvents = true;
+            Element.Touch += ThisElement_Touch;
+            Element.PaintSurface += ThisElement_PaintSurface;
             SKSize thisSize = PrivateBoard.SuggestedSize();
             WidthRequest = thisSize.Width;
             VerticalOptions = LayoutOptions.Start;
             HorizontalOptions = LayoutOptions.Start;
             HeightRequest = thisSize.Height;
             EventAggregator thisT = Resolve<EventAggregator>();
-            thisT.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString());
-            Content = ThisElement;
+            thisT.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString());
+            Content = Element;
         }
         private void ThisElement_Touch(object sender, SKTouchEventArgs e)
         {
-            ThisElement.StartClick(e.Location.X, e.Location.Y);
+            Element.StartClick(e.Location.X, e.Location.Y);
         }
         public GameBoardXF()
         {
-            ThisElement = new SkiaSharpGameBoardXF();
+            Element = new SkiaSharpGameBoardXF();
         }
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         public void Handle(RepaintEventModel message)
         {
-            ThisElement.InvalidateSurface();
+            Element.InvalidateSurface();
         }
     }
 }

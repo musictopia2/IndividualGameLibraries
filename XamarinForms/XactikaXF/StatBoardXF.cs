@@ -1,38 +1,39 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
+using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
 using CommonBasicStandardLibraries.Messenging;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
-using XactikaCP;
+using XactikaCP.MiscImages;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+
 namespace XactikaXF
 {
     public class StatBoardXF : ContentView, IHandle<RepaintEventModel>
     {
-        internal SkiaSharpGameBoardXF ThisElement;
+        internal SkiaSharpGameBoardXF Element { get; set; }
         public void LoadBoard()
         {
             StatsBoardCP privateBoard = Resolve<StatsBoardCP>();
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element.PaintSurface += ThisElement_PaintSurface;
             SKSize thisSize = privateBoard.SuggestedSize(); //hopefully this simple (?)
             WidthRequest = thisSize.Width;
             HeightRequest = thisSize.Height;
             EventAggregator thisT = Resolve<EventAggregator>();
-            thisT.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString());
-            Content = ThisElement;
+            thisT.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString());
+            Content = Element;
         }
         public StatBoardXF()
         {
-            ThisElement = new SkiaSharpGameBoardXF();
+            Element = new SkiaSharpGameBoardXF();
         }
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         public void Handle(RepaintEventModel message)
         {
-            ThisElement.InvalidateSurface();
+            Element.InvalidateSurface();
         }
     }
 }

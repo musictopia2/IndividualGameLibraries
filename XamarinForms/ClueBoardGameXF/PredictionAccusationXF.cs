@@ -1,17 +1,18 @@
-using ClueBoardGameCP;
+using BasicGamingUIXFLibrary.Helpers;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
+using ClueBoardGameCP.Data;
+using ClueBoardGameCP.ViewModels;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Linq;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace ClueBoardGameXF
 {
     public class PredictionAccusationXF : ContentView
     {
-        public void LoadControls(Button predictionButton, Button accusationButton)
+        public void LoadControls(Button predictionButton, Button accusationButton, ClueBoardGameGameContainer gameContainer)
         {
-            ClueBoardGameViewModel thisMod = Resolve<ClueBoardGameViewModel>();
             Grid thisGrid = new Grid();
             AddAutoRows(thisGrid, 2);
             AddAutoColumns(thisGrid, 3);
@@ -29,8 +30,9 @@ namespace ClueBoardGameXF
             Grid.SetColumnSpan(finalStack, 2);
             finalStack.Children.Add(predictionButton);
             finalStack.Children.Add(accusationButton);
-            GlobalClass thisG = Resolve<GlobalClass>();
-            var thisList = thisG.DetectiveList.Values.Where(items => items.Category == EnumCardType.IsRoom).ToCustomBasicList();
+            GamePackageViewModelBinder.ManuelElements.Add(predictionButton);
+            GamePackageViewModelBinder.ManuelElements.Add(accusationButton);
+            var thisList = gameContainer.DetectiveList.Values.Where(items => items.Category == EnumCardType.IsRoom).ToCustomBasicList();
             Button thisBut;
             var thisLabel = GetLabel(EnumCardType.IsRoom);
             firstRow.Children.Add(thisLabel);
@@ -39,7 +41,7 @@ namespace ClueBoardGameXF
                 thisBut = GetButton(thisItem);
                 firstRow.Children.Add(thisBut);
             });
-            thisList = thisG.DetectiveList.Values.Where(items => items.Category == EnumCardType.IsCharacter).ToCustomBasicList();
+            thisList = gameContainer.DetectiveList.Values.Where(items => items.Category == EnumCardType.IsCharacter).ToCustomBasicList();
             thisLabel = GetLabel(EnumCardType.IsCharacter);
             secondRow.Children.Add(thisLabel);
             thisList.ForEach(thisItem =>
@@ -47,7 +49,7 @@ namespace ClueBoardGameXF
                 thisBut = GetButton(thisItem);
                 secondRow.Children.Add(thisBut);
             });
-            thisList = thisG.DetectiveList.Values.Where(items => items.Category == EnumCardType.IsWeapon).ToCustomBasicList();
+            thisList = gameContainer.DetectiveList.Values.Where(items => items.Category == EnumCardType.IsWeapon).ToCustomBasicList();
             thisLabel = GetLabel(EnumCardType.IsWeapon);
             thirdRow.Children.Add(thisLabel);
             thisList.ForEach(thisItem =>
@@ -87,20 +89,20 @@ namespace ClueBoardGameXF
             output.FontSize = 10;
             PredictionConverter thisC = new PredictionConverter();
             Binding firstBind;
-            Binding secondBind;
+            string secondName;
             switch (thisDet.Category)
             {
                 case EnumCardType.IsRoom:
-                    firstBind = new Binding(nameof(ClueBoardGameViewModel.CurrentRoomName));
-                    secondBind = new Binding(nameof(ClueBoardGameViewModel.CurrentRoomCommand));
+                    firstBind = new Binding(nameof(ClueBoardGameMainViewModel.CurrentRoomName));
+                    secondName = nameof(ClueBoardGameMainViewModel.CurrentRoomClick);
                     break;
                 case EnumCardType.IsWeapon:
-                    firstBind = new Binding(nameof(ClueBoardGameViewModel.CurrentWeaponName));
-                    secondBind = new Binding(nameof(ClueBoardGameViewModel.CurrentWeaponCommand));
+                    firstBind = new Binding(nameof(ClueBoardGameMainViewModel.CurrentWeaponName));
+                    secondName = nameof(ClueBoardGameMainViewModel.CurrentWeaponClick);
                     break;
                 case EnumCardType.IsCharacter:
-                    firstBind = new Binding(nameof(ClueBoardGameViewModel.CurrentCharacterName));
-                    secondBind = new Binding(nameof(ClueBoardGameViewModel.CurrentCharacterCommand));
+                    firstBind = new Binding(nameof(ClueBoardGameMainViewModel.CurrentCharacterName));
+                    secondName = nameof(ClueBoardGameMainViewModel.CurrentCharacterClick);
                     break;
                 default:
                     throw new BasicBlankException("Not Supported");
@@ -109,7 +111,8 @@ namespace ClueBoardGameXF
             firstBind.Converter = thisC;
             firstBind.ConverterParameter = thisDet.Name;
             output.SetBinding(BackgroundColorProperty, firstBind);
-            output.SetBinding(Button.CommandProperty, secondBind);
+            output.SetName(secondName);
+            GamePackageViewModelBinder.ManuelElements.Add(output);
             return output;
         }
     }

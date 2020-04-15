@@ -1,5 +1,5 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using LifeBoardGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using LifeBoardGameCP.Graphics;
 namespace LifeBoardGameXF
 {
     public class CarPieceXF : BaseGraphicsXF<CarPieceCP> { }

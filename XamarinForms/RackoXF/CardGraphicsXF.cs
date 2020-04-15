@@ -1,9 +1,10 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using RackoCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using RackoCP.Cards;
 using Xamarin.Forms;
+
 namespace RackoXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<RackoCardInformation, RackoGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<RackoCardInformation, RackoGraphicsCP>//begin
     {
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(propertyName: "Value", returnType: typeof(int), declaringType: typeof(CardGraphicsXF), defaultValue: 0, defaultBindingMode: BindingMode.TwoWay, propertyChanged: ValuePropertyChanged);
         public int Value

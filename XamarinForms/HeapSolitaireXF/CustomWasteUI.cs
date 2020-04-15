@@ -1,12 +1,12 @@
 using CommonBasicStandardLibraries.Exceptions;
-using HeapSolitaireCP;
+using HeapSolitaireCP.ViewModels;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
 namespace HeapSolitaireXF
 {
     public class CustomWasteUI : ContentView
     {
-        public void Init(HeapSolitaireViewModel thisMod)
+        public void Init(HeapSolitaireMainViewModel thisMod)
         {
             Grid thisGrid = new Grid();
             var tempMod = thisMod.Waste1;

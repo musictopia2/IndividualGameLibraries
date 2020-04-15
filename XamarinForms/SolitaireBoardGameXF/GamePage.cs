@@ -1,44 +1,42 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
-using SolitaireBoardGameCP;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using SolitaireBoardGameCP.Logic;
+using SolitaireBoardGameCP.Data;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicGamingUIXFLibrary.Shells;
+using BasicGameFrameworkLibrary.StandardImplementations.XamarinForms.Interfaces;
 using Xamarin.Forms;
 namespace SolitaireBoardGameXF
 {
-    public class GamePage : SinglePlayerGamePage<SolitaireBoardGameViewModel>
+    public class GamePage : SinglePlayerShellView
     {
-        public GamePage(IGamePlatform customPlatform, IStartUp starts, EnumGamePackageMode mode) : base(customPlatform, starts, mode) { }
+        public GamePage(
+            IGamePlatform customPlatform,
+            IGameInfo gameData,
+            BasicData basicData,
+            IStartUp start,
+            IStandardScreen screen) : base(customPlatform, gameData, basicData, start, screen)
+        {
+            //TODO:  may need to think about if we need load or update (?)
+        }
 
-        public override Task HandleAsync(LoadEventModel message)
+        
+
+        protected override Task PopulateUIAsync()
         {
-            SolitaireBoardGameSaveInfo ThisSave = OurContainer!.Resolve<SolitaireBoardGameSaveInfo>();
-            _thisBoard!.CreateControls(ThisSave.SpaceList);
+            //if any exceptions to the shell, do here or override other things.
             return Task.CompletedTask;
-        }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            return Task.CompletedTask;
-        }
-        private SolitaireGameBoard? _thisBoard;
-        protected override async Task AfterGameButtonAsync()
-        {
-            StackLayout thisStack = new StackLayout();
-            GameButton!.HorizontalOptions = LayoutOptions.Center;
-            GameButton!.VerticalOptions = LayoutOptions.Center;
-            _thisBoard = new SolitaireGameBoard();
-            thisStack.Children.Add(GameButton);
-            thisStack.Children.Add(_thisBoard);
-            Content = thisStack;
-            ThisMod!.NewGameVisible = true;
-            await ThisMod.StartNewGameAsync(); //can't put true because no autosave currently.
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterNonSavedClasses<SolitaireBoardGameViewModel>(); //go ahead and use the custom processes for this.
         }
     }
 }

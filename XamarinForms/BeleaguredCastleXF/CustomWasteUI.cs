@@ -1,11 +1,11 @@
-using BaseGPXPagesAndControlsXF.BasicControls.MultipleFrameContainers;
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BaseSolitaireClassesCP.GraphicsViewModels;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGameFrameworkLibrary.SolitaireClasses.GraphicsObservable;
+using BasicGamingUIXFLibrary.BasicControls.MultipleFrameContainers;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.Exceptions;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace BeleaguredCastleXF
 {
     public class CustomWasteUI : ContentView

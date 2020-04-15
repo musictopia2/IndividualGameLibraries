@@ -1,9 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using RageCardGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using RageCardGameCP.Cards;
+using RageCardGameCP.Data;
 using Xamarin.Forms;
+
 namespace RageCardGameXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<RageCardGameCardInformation, RageCardGameGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<RageCardGameCardInformation, RageCardGameGraphicsCP>//begin
     {
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(propertyName: "Color", returnType: typeof(EnumColor), declaringType: typeof(CardGraphicsXF), defaultValue: EnumColor.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: ColorPropertyChanged);
         public EnumColor Color
@@ -20,14 +22,14 @@ namespace RageCardGameXF
         private static void ColorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var thisItem = (CardGraphicsXF)bindable;
-            thisItem.MainObject!.Color = (EnumColor) newValue;
+            thisItem.MainObject!.Color = (EnumColor)newValue;
         }
         public static readonly BindableProperty SpecialTypeProperty = BindableProperty.Create(propertyName: "SpecialType", returnType: typeof(EnumSpecialType), declaringType: typeof(CardGraphicsXF), defaultValue: EnumSpecialType.Blank, defaultBindingMode: BindingMode.TwoWay, propertyChanged: SpecialTypePropertyChanged);
         public EnumSpecialType SpecialType
         {
             get
             {
-                return (EnumSpecialType) GetValue(SpecialTypeProperty);
+                return (EnumSpecialType)GetValue(SpecialTypeProperty);
             }
             set
             {
@@ -37,14 +39,14 @@ namespace RageCardGameXF
         private static void SpecialTypePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var thisItem = (CardGraphicsXF)bindable;
-            thisItem.MainObject!.SpecialType = (EnumSpecialType) newValue;
+            thisItem.MainObject!.SpecialType = (EnumSpecialType)newValue;
         }
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(propertyName: "Value", returnType: typeof(int), declaringType: typeof(CardGraphicsXF), defaultValue: 0, defaultBindingMode: BindingMode.TwoWay, propertyChanged: ValuePropertyChanged);
         public int Value
         {
             get
             {
-                return (int) GetValue(ValueProperty);
+                return (int)GetValue(ValueProperty);
             }
             set
             {
@@ -54,7 +56,7 @@ namespace RageCardGameXF
         private static void ValuePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var thisItem = (CardGraphicsXF)bindable;
-            thisItem.MainObject!.Value = (int) newValue;
+            thisItem.MainObject!.Value = (int)newValue;
         }
         protected override void DoCardBindings()
         {

@@ -1,8 +1,11 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BasicGameFrameworkLibrary.CommandClasses;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using SorryCardGameCP;
+using SorryCardGameCP.Cards;
+using SorryCardGameCP.Data;
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -14,12 +17,12 @@ namespace SorryCardGameXF
         private SorryCardGamePlayerItem? _thisPlayer;
         private CustomBasicList<CardGraphicsXF>? _thisList;
         private ICommand? _clickCommand;
-        public void LoadList(SorryCardGamePlayerItem tempPlayer)
+        public void LoadList(SorryCardGamePlayerItem tempPlayer, CommandContainer command)
         {
             _thisPlayer = tempPlayer;
             StackLayout thisStack = new StackLayout();
             thisStack.Orientation = StackOrientation.Horizontal;
-            _clickCommand = _thisPlayer.ClickCommand;
+            _clickCommand = tempPlayer.GetPlainCommand(command, nameof(SorryCardGamePlayerItem.SorryPlayerAsync)); //not just player anymore.
             thisStack.InputTransparent = true;
             _thisList = new CustomBasicList<CardGraphicsXF>();
             for (int x = 1; x <= 4; x++)
@@ -44,6 +47,12 @@ namespace SorryCardGameXF
             _clickCommand!.CanExecuteChanged += ClickCommandChange;
             _thisPlayer.PropertyChanged += ThisPlayerPropertyChange;
             RefreshList();
+        }
+        public void Dispose()
+        {
+            ThisDraw.Touch -= ThisDraw_Touch;
+            _thisPlayer!.PropertyChanged -= ThisPlayerPropertyChange;
+            _clickCommand!.CanExecuteChanged -= ClickCommandChange;
         }
         private void ThisDraw_Touch(object sender, SkiaSharp.Views.Forms.SKTouchEventArgs e)
         {

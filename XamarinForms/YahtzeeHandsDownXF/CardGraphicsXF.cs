@@ -1,12 +1,8 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
-using BaseGPXPagesAndControlsXF.BasicControls.SingleCardFrames;
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using System;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using Xamarin.Forms;
-using YahtzeeHandsDownCP;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using YahtzeeHandsDownCP.Cards;
+using YahtzeeHandsDownCP.Data;
+
 namespace YahtzeeHandsDownXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<YahtzeeHandsDownCardInformation, YahtzeeHandsDownGraphicsCP>
@@ -91,75 +87,5 @@ namespace YahtzeeHandsDownXF
             MainObject!.Init();
         }
     }
-    public class ChanceCardXF : BaseDeckGraphicsXF<ChanceCardInfo, ChanceGraphicsCP>
-    {
-        public static readonly BindableProperty PointsProperty = BindableProperty.Create(propertyName: "Points", returnType: typeof(int), declaringType: typeof(ChanceCardXF), defaultValue: 0, defaultBindingMode: BindingMode.TwoWay, propertyChanged: PointsPropertyChanged);
-        public int Points
-        {
-            get
-            {
-                return (int)GetValue(PointsProperty);
-            }
-            set
-            {
-                SetValue(PointsProperty, Points);
-            }
-        }
-        private static void PointsPropertyChanged(BindableObject bindable, object oldPoints, object newPoints)
-        {
-            var thisItem = (ChanceCardXF)bindable;
-            thisItem.MainObject!.Points = (int)newPoints;
-        }
-        protected override void DoCardBindings()
-        {
-            SetBinding(PointsProperty, new Binding(nameof(ChanceCardInfo.Points)));
-        }
-        protected override void PopulateInitObject()
-        {
-            MainObject!.Init();
-        }
-    }
-    public class ComboCardWPF : BaseDeckGraphicsXF<ComboCardInfo, ComboCP>
-    {
-        public ComboCardInfo? CurrentCombo //taking a risk.
-        {
-            get
-            {
-                return MainObject!.ThisCombo;
-            }
-            set
-            {
-                MainObject!.ThisCombo = value;
-            }
-        }
-        protected override void DoCardBindings()
-        {
-            //hopefully the risk pays off this time.  if not rethink this one.
-        }
 
-        protected override void PopulateInitObject()
-        {
-            MainObject!.Init();
-        }
-    }
-    public class ComboHandXF : BaseHandXF<ComboCardInfo, ComboCP, ComboCardWPF>
-    {
-        protected override void FinishBindings(ComboCardWPF thisDeck, ComboCardInfo thisCard)
-        {
-            thisDeck.CurrentCombo = thisCard;
-        }
-    }
-    public class ChanceSinglePileXF : BasePileXF<ChanceCardInfo, ChanceGraphicsCP, ChanceCardXF> { }
-    public class ComboProportion : IProportionImage
-    {
-        float IProportionImage.Proportion
-        {
-            get
-            {
-                if (ScreenUsed == EnumScreen.LargeTablet)
-                    return 0.9f;
-                return .7f; //experiment to see what works for this case.
-            }
-        }
-    }
 }

@@ -1,6 +1,6 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using CommonBasicStandardLibraries.CollectionClasses;
-using ThreeLetterFunCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using ThreeLetterFunCP.Data;
+using ThreeLetterFunCP.GraphicsCP;
 using Xamarin.Forms;
 namespace ThreeLetterFunXF
 {

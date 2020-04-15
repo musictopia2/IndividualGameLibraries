@@ -1,20 +1,7 @@
-using System;
-using System.Text;
-using CommonBasicStandardLibraries.Exceptions;
-using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using System.Linq;
-using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using CommonBasicStandardLibraries.CollectionClasses;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
-using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
-using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using TileRummyCP.Data;
 using Xamarin.Forms;
-using TileRummyCP;
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+
 namespace TileRummyXF
 {
     public class TileXF : BaseDeckGraphicsXF<TileInfo, TileCP>
@@ -99,16 +86,5 @@ namespace TileRummyXF
             MainObject!.Init();
         }
     }
-    public class CustomProportion : IProportionImage
-    {
-        float IProportionImage.Proportion
-        {
-            get
-            {
-                if (ScreenUsed == EnumScreen.LargeTablet)
-                    return 1.1f;
-                return .8f; //experiment to see what makes most sense.
-            }
-        }
-    }
+
 }

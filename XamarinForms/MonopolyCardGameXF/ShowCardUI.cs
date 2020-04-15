@@ -1,9 +1,10 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using MonopolyCardGameCP;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using MonopolyCardGameCP.Data;
+using MonopolyCardGameCP.Logic;
+using MonopolyCardGameCP.ViewModels;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace MonopolyCardGameXF
 {
     public class ShowCardUI : BaseFrameXF, IChangeCard
@@ -11,12 +12,11 @@ namespace MonopolyCardGameXF
         private CardGraphicsXF? _thisG;
         private DetailCardViewModel? _thisDetail;
         private Label? _thisLabel;
-        public void LoadControls()
+        public void LoadControls(MonopolyCardGameVMData model)
         {
-            MonopolyCardGameViewModel thisMod = Resolve<MonopolyCardGameViewModel>();
-            _thisDetail = thisMod.AdditionalInfo1;
+            _thisDetail = model.AdditionalInfo1;
             Text = "Card Information";
-            _thisDetail!.ThisChange = this;
+            _thisDetail!.Change = this;
             Grid tempGrid = new Grid();
             HorizontalOptions = LayoutOptions.Start;
             SetUpMarginsOnParentControl(tempGrid); //i think.

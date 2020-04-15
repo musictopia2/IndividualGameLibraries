@@ -1,12 +1,13 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using BasicGameFramework.BasicDrawables.Dictionary;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
 using CommonBasicStandardLibraries.Exceptions;
-using CribbagePatienceCP;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+using CribbagePatienceCP.Data;
+
 namespace CribbagePatienceXF
 {
     public class ScoreHandCribUI : BaseFrameXF

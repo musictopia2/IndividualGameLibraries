@@ -1,11 +1,14 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFrameworkLibrary.CommandClasses;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using MillebournesCP;
+using MillebournesCP.Data;
+using MillebournesCP.Logic;
 using System.Collections.Specialized;
 using Xamarin.Forms;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 namespace MillebournesXF
 {
     public class SafetiesXF : ContentView
@@ -18,9 +21,11 @@ namespace MillebournesXF
         private CustomBasicCollection<SafetyInfo>? _safetyList;
         private TeamCP? _safetyMod;
         private StackLayout? _safetyStack;
-        public void Init(TeamCP mod, MillebournesMainGameClass mainGame)
+        private CommandContainer? _commandContainer;
+        public void Init(TeamCP mod, MillebournesMainGameClass mainGame, CommandContainer commandContainer)
         {
             _safetyMod = mod;
+            _commandContainer = commandContainer;
             _safetyList = _safetyMod.SafetyList;
             _safetyList.CollectionChanged += SafetyList_CollectionChanged;
             StackLayout thisStack = new StackLayout();
@@ -29,7 +34,7 @@ namespace MillebournesXF
             _safetyStack.Spacing = 0;
             StackLayout tempStack = new StackLayout();
             tempStack.Orientation = StackOrientation.Horizontal;
-            var thisBut = GetButton("Safety", nameof(TeamCP.SafetyCommand), nameof(TeamCP.SafetyEnabled), EnumModel.Safety, mainGame);
+            var thisBut = GetButton("Safety", nameof(TeamCP.SafetyClickAsync), nameof(TeamCP.SafetyEnabled), mainGame);
             tempStack.Children.Add(thisBut);
             thisStack.Children.Add(_safetyStack);
             thisStack.Children.Add(tempStack);
@@ -55,9 +60,9 @@ namespace MillebournesXF
             thisLabel.SetBinding(Label.FontAttributesProperty, binds);
             _safetyStack!.Children.Add(thisLabel);
         }
-        private Button GetButton(string text, string command, string visible, EnumModel model, MillebournesMainGameClass mainGame)
+        private Button GetButton(string text, string commandName, string visible, MillebournesMainGameClass mainGame)
         {
-            var output = GetGamingButton(text, command);
+            var output = GetGamingButton(text, "");
             if (mainGame.SingleInfo!.Team == _safetyMod!.TeamNumber)
             {
                 Binding binding = new Binding(visible);
@@ -65,7 +70,7 @@ namespace MillebournesXF
             }
             else
                 output.IsVisible = false;
-            if (model == EnumModel.Main)
+            if (mainGame.SingleInfo!.Team == _safetyMod!.TeamNumber)
             {
                 if (ScreenUsed == EnumScreen.SmallPhone)
                     output.FontSize = 20;
@@ -73,11 +78,9 @@ namespace MillebournesXF
                     output.FontSize = 30;
                 else
                     output.FontSize = 40;
-                output.BindingContext = mainGame.ThisMod;
             }
             else
             {
-                output.BindingContext = _safetyMod;
                 if (ScreenUsed == EnumScreen.SmallPhone)
                 {
                     output.FontSize = 10;
@@ -88,6 +91,8 @@ namespace MillebournesXF
                 else
                     output.FontSize = 20;
             }
+            output.BindingContext = _safetyMod; //hopefully its okay no matter what (?)
+            output.Command = _safetyMod.GetPlainCommand(_commandContainer!, commandName);
             return output;
         }
         private void SafetyList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

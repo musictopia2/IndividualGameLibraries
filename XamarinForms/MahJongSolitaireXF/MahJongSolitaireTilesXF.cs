@@ -1,6 +1,6 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using BaseMahjongTilesCP;
-using BasicGameFramework.GameGraphicsCP.Tiles;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Tiles;
 using Xamarin.Forms;
 namespace MahJongSolitaireXF
 {

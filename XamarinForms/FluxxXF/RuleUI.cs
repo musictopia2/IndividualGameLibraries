@@ -1,51 +1,49 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using FluxxCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using FluxxCP.Cards;
+using FluxxCP.Containers;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
+
 namespace FluxxXF
 {
     public class RuleUI : BaseFrameXF
     {
+
         private DeckObservableDict<RuleCard>? _ruleList;
-        private StackLayout? _thisStack;
-        private FluxxMainGameClass? _mainGame;
+        private StackLayout? _stack;
+
+
+
         private void LoadRules()
         {
-            _thisStack!.Children.Clear();
+            _stack!.Children.Clear();
             _ruleList!.ForEach(thisRule =>
             {
-                var thisLabel = GetDefaultLabel();
-                thisLabel.Text = thisRule.Text();
-                _thisStack.Children.Add(thisLabel);
+                var label = GetDefaultLabel();
+                label.Text = thisRule.Text();
+                _stack.Children.Add(label);
             });
         }
-        public void LoadControls()
+
+        public void LoadControls(FluxxGameContainer gameContainer)
         {
-            _mainGame = Resolve<FluxxMainGameClass>();
             Text = "Rule Information";
-            _ruleList = _mainGame.SaveRoot!.RuleList;
+            _ruleList = gameContainer.SaveRoot!.RuleList;
             _ruleList.CollectionChanged += RuleListChange;
-            _thisStack = new StackLayout();
-            Grid thisGrid = new Grid();
-            WidthRequest = 200; //may have to be adjusted.  iffy.
-            SetUpMarginsOnParentControl(_thisStack); //i think.
-            thisGrid.Children.Add(ThisDraw);
-            thisGrid.Children.Add(_thisStack);
-            Content = thisGrid;
+            _stack = new StackLayout();
+            Grid grid = new Grid();
+            WidthRequest = 200;
+            SetUpMarginsOnParentControl(_stack); //i think.
+            grid.Children.Add(ThisDraw);
+            grid.Children.Add(_stack);
+            Content = grid;
             LoadRules();
         }
         private void RuleListChange(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             LoadRules();
         }
-        public void UpdateControls()
-        {
-            _ruleList!.CollectionChanged -= RuleListChange;
-            _ruleList = _mainGame!.SaveRoot!.RuleList;
-            _ruleList.CollectionChanged += RuleListChange;
-            LoadRules();
-        }
+
     }
 }

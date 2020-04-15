@@ -9,9 +9,9 @@ using CommonBasicStandardLibraries.CollectionClasses;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
 using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
 namespace PaydayXF
 {
     public class CustomProportionXF : IProportionImage, IProportionBoard
@@ -26,6 +26,6 @@ namespace PaydayXF
             }
         }
 
-        float IProportionBoard.Proportion => 1.4f;
+        float IProportionBoard.Proportion => 1.2f;
     }
 }

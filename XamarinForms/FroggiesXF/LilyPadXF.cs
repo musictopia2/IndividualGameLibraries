@@ -1,37 +1,31 @@
-using FroggiesCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
+using FroggiesCP.Data;
+using FroggiesCP.ViewModels;
 using SkiaSharp.Views.Forms;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 namespace FroggiesXF
 {
-    public class LilyPadXF : ContentView
+    public class LilyPadXF : GraphicsCommand
     {
-        private readonly SKCanvasView _thisDraw;
-        public LilyPadCP? ThisLily;
-        public FroggiesViewModel? ThisMod;
-        public void Redraw() => _thisDraw.InvalidateSurface();
-        public LilyPadXF()
+        //private readonly SKCanvasView _thisDraw;
+        private readonly LilyPadCP _lily;
+        public void Redraw() => ThisDraw.InvalidateSurface();
+        public LilyPadXF(LilyPadCP lily)
         {
-            _thisDraw = new SKCanvasView();
-            _thisDraw.PaintSurface += PaintSurface;
-            _thisDraw.Touch += Touch;
-            _thisDraw.EnableTouchEvents = true;
-            Content = _thisDraw;
+            _lily = lily;
+            this.SetName(nameof(FroggiesMainViewModel.MakeMoveAsync));
+            CommandParameter = lily; //has to be this way now.
+            ThisDraw.PaintSurface += PaintSurface;
         }
-        private async void Touch(object sender, SKTouchEventArgs e)
-        {
-            if (ThisMod == null)
-                return;
-            if (ThisMod.LilyClickedCommand!.CanExecute(ThisLily!) == false)
-                return;
-            await Task.Delay(10);
-            ThisMod.LilyClickedCommand.Execute(ThisLily!);
-        }
+        
         private void PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (_thisDraw == null)
+
+            if (ThisDraw == null)
                 return;
-            ThisLily!.DrawImage(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            _lily.DrawImage(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
     }
 }

@@ -1,10 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using HitTheDeckCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using HitTheDeckCP.Cards;
+using HitTheDeckCP.Data;
 using Xamarin.Forms;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
 namespace HitTheDeckXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<HitTheDeckCardInformation, HitTheDeckGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<HitTheDeckCardInformation, HitTheDeckGraphicsCP>//begin
     {
         public static readonly BindableProperty CardColorProperty = BindableProperty.Create(propertyName: "CardColor", returnType: typeof(string), declaringType: typeof(CardGraphicsXF), defaultValue: cs.White, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CardColorPropertyChanged);
         public string CardColor

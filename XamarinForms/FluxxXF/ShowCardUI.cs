@@ -1,70 +1,64 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.Exceptions;
-using FluxxCP;
+using FluxxCP.Containers;
+using FluxxCP.UICP;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace FluxxXF
 {
-    public enum EnumShowCategory
-    {
-        MainScreen = 1, CurrentAction, MainAction, KeeperScreen
-    }
     public class ShowCardUI : BaseFrameXF, IChangeCard
     {
-        private CardGraphicsXF? _thisG;
-        private DetailCardViewModel? _thisDetail;
-        private Label? _thisLabel;
-        public void LoadControls(EnumShowCategory category)
+        private readonly CardGraphicsXF? _graphics;
+        private readonly DetailCardObservable _detail;
+        private readonly Label? _label;
+
+        public ShowCardUI(FluxxVMData model, ActionContainer actionContainer, KeeperContainer keeperContainer, EnumShowCategory category)
         {
-            FluxxViewModel thisMod = Resolve<FluxxViewModel>();
-            BindingContext = (ActionViewModel)thisMod.Action1!; //try this.
+            BindingContext = actionContainer;
             switch (category)
             {
                 case EnumShowCategory.MainScreen:
                     Text = "Card Information";
-                    _thisDetail = thisMod.ThisDetail;
+                    _detail = model.CardDetail;
                     break;
                 case EnumShowCategory.CurrentAction:
                     Text = "Current Card Information";
-                    var thisAction1 = (ActionViewModel)thisMod.Action1!;
-                    _thisDetail = thisAction1.CurrentDetail;
+                    _detail = actionContainer.CurrentDetail;
                     break;
                 case EnumShowCategory.MainAction:
-                    SetBinding(TextProperty, new Binding(nameof(ActionViewModel.ActionFrameText)));
-                    var thisAction2 = (ActionViewModel)thisMod.Action1!;
-                    _thisDetail = thisAction2.ActionDetail;
+                    SetBinding(TextProperty, new Binding(nameof(ActionContainer.ActionFrameText)));
+                    _detail = actionContainer.ActionDetail;
                     break;
                 case EnumShowCategory.KeeperScreen:
                     Text = "Current Card Information";
-                    var thisKeeper = (KeeperViewModel)thisMod.KeeperControl1!;
-                    _thisDetail = thisKeeper.ThisDetail;
+                    _detail = keeperContainer.CardDetail;
                     break;
                 default:
                     throw new BasicBlankException("Category Not Found");
             }
-            _thisDetail!.ThisChange = this;
+            _detail!.Card = this;
             Grid tempGrid = new Grid();
             SetUpMarginsOnParentControl(tempGrid); //i think.
             AddAutoColumns(tempGrid, 1);
             AddLeftOverColumn(tempGrid, 1);
-            _thisG = new CardGraphicsXF();
-            _thisLabel = GetDefaultLabel();
-            _thisLabel.Text = _thisDetail.CurrentCard.Description;
-            _thisG.SendSize("", _thisDetail.CurrentCard);
-            AddControlToGrid(tempGrid, _thisG, 0, 0);
-            _thisLabel.Margin = new Thickness(10, 3, 5, 3);
-            AddControlToGrid(tempGrid, _thisLabel, 0, 1);
-            Grid thisGrid = new Grid();
-            thisGrid.Children.Add(ThisDraw);
-            thisGrid.Children.Add(tempGrid);
-            Content = thisGrid;
+            _graphics = new CardGraphicsXF();
+            _label = GetDefaultLabel();
+            _label.Text = _detail.CurrentCard.Description; //no wrap unfortunately.
+            _graphics.SendSize("", _detail.CurrentCard);
+            AddControlToGrid(tempGrid, _graphics, 0, 0);
+            _label.Margin = new Thickness(10, 3, 5, 3);
+            AddControlToGrid(tempGrid, _label, 0, 1);
+            Grid grid = new Grid();
+            grid.Children.Add(ThisDraw);
+            grid.Children.Add(tempGrid);
+            Content = grid;
         }
+
         public void ShowChangedCard()
         {
-            _thisG!.BindingContext = _thisDetail!.CurrentCard;
-            _thisLabel!.Text = _thisDetail.CurrentCard.Description;
+            _graphics!.BindingContext = _detail!.CurrentCard;
+            _label!.Text = _detail.CurrentCard.Description;
         }
     }
 }

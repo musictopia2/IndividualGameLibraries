@@ -1,6 +1,6 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace RummyDiceXF
 {
     public class CustomProportionXF : IProportionImage

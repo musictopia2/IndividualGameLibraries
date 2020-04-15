@@ -1,9 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using MilkRunCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using MilkRunCP.Cards;
+using MilkRunCP.Data;
 using Xamarin.Forms;
+
 namespace MilkRunXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<MilkRunCardInformation, MilkRunGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<MilkRunCardInformation, MilkRunGraphicsCP>//begin
     {
         public static readonly BindableProperty PointsProperty = BindableProperty.Create(propertyName: "Points", returnType: typeof(int), declaringType: typeof(CardGraphicsXF), defaultValue: 0, defaultBindingMode: BindingMode.TwoWay, propertyChanged: PointsPropertyChanged);
         public int Points

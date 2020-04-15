@@ -1,9 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using UnoCP;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
+using UnoCP.Cards;
+using UnoCP.Data;
 using Xamarin.Forms;
+
 namespace UnoXF
 {
-    public class CardGraphicsXF : BaseColorCardsXF<UnoCardInformation, UnoGraphicsCP>
+    public class CardGraphicsXF : BaseColorCardsXF<UnoCardInformation, UnoGraphicsCP>//begin
     {
         public static readonly BindableProperty WhichTypeProperty = BindableProperty.Create(propertyName: "WhichType", returnType: typeof(EnumCardTypeList), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCardTypeList.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: WhichTypePropertyChanged);
         public EnumCardTypeList WhichType

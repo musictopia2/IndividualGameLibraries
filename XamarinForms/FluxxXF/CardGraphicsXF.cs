@@ -1,6 +1,6 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using FluxxCP;
+using BasicGamingUIXFLibrary.BasicControls.GameFrames;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using FluxxCP.Cards;
 using Xamarin.Forms;
 namespace FluxxXF
 {

@@ -1,26 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
-    <PackageReference Include="CommonBasicStandardLibraries" Version="1.0.80" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SkiaSharpGeneralLibrary" Version="1.0.0" />
-    <PackageReference Include="BasicXFControlsAndPages" Version="1.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="CommonBasicStandardLibraries" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SkiaSharpGeneralLibrary" Version="2.0.0" />
+    <PackageReference Include="BasicXFControlsAndPages" Version="2.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BasicGameFramework">
-      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFramework\bin\Release\netstandard2.0\BasicGameFramework.dll</HintPath>
+    <Reference Include="BasicGameFrameworkLibrary">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\CP\BasicGameFrameworkLibrary\bin\Release\netstandard2.1\BasicGameFrameworkLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="BaseGPXPagesAndControlsXF">
-      <HintPath>..\..\..\GamingPackXBasicLibraries\XF\BaseGPXPagesAndControlsXF\bin\Release\netstandard2.0\BaseGPXPagesAndControlsXF.dll</HintPath>
+    <Reference Include="BasicGamingUIXFLibrary">
+      <HintPath>..\..\..\GamingPackXBasicLibraries\XF\BasicGamingUIXFLibrary\bin\Release\netstandard2.1\BasicGamingUIXFLibrary.dll</HintPath>
     </Reference>
     <Reference Include="FlinchCP">
-      <HintPath>..\..\CrossPlatform\FlinchCP\bin\Release\netstandard2.0\FlinchCP.dll</HintPath>
+      <HintPath>..\..\CrossPlatform\FlinchCP\bin\Release\netstandard2.1\FlinchCP.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

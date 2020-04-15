@@ -1,10 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using BasicGameFramework.GameGraphicsCP.BaseGraphics;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using SkiaSharp;
 using System.Windows.Input;
-using ThreeLetterFunCP;
+using ThreeLetterFunCP.Data;
+using ThreeLetterFunCP.GraphicsCP;
 using Xamarin.Forms;
+
 namespace ThreeLetterFunXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<ThreeLetterFunCardData, ThreeLetterFunCardGraphicsCP>
@@ -66,12 +67,15 @@ namespace ThreeLetterFunXF
             SetBinding(CharListProperty, new Binding(nameof(ThreeLetterFunCardData.CharList)));
             SetBinding(TilesProperty, new Binding(nameof(ThreeLetterFunCardData.Tiles)));
         }
-        protected override void BeforeProcessClick(ICommand thisCommand, BaseDeckGraphicsCP thisObj, object thisParameter, SKPoint clickPoint)
+        //could be iffy.  if worse comes to worst, could cause problems on this game (?)
+        protected override void BeforeProcessClick(ICommand thisCommand, object thisParameter, SKPoint clickPoint)
         {
             var thisValue = MainObject!.GetClickLocation(clickPoint);
             var thisCard = (ThreeLetterFunCardData)thisParameter;
             thisCard.ClickLocation = thisValue; // i think this simple.
+
         }
+
         protected override void PopulateInitObject() //this is needed too.
         {
             MainObject!.Init();

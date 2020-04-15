@@ -1,28 +1,18 @@
-using System;
-using System.Text;
-using CommonBasicStandardLibraries.Exceptions;
-using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using System.Linq;
-using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.CollectionClasses;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
-using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
-using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using CribbagePatienceCP;
+using CribbagePatienceCP.ViewModels;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+
 namespace CribbagePatienceXF
 {
     public class ScoreSummaryUI : BaseFrameXF
     {
         private Grid? _thisGrid;
         private CustomBasicCollection<int>? _scoreList;
-        private CribbagePatienceViewModel? _thisMod;
-        public void Init(CribbagePatienceViewModel thisMod)
+        private CribbagePatienceMainViewModel? _thisMod;
+        public void Init(CribbagePatienceMainViewModel thisMod)
         {
             _thisMod = thisMod;
             Text = "Score Summary";

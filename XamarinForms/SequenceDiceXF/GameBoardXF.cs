@@ -1,8 +1,11 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using SequenceDiceCP;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
+using BasicGamingUIXFLibrary.Helpers;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
+using SequenceDiceCP.Data;
+using SequenceDiceCP.ViewModels;
 using Xamarin.Forms;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace SequenceDiceXF
 {
     public class GameBoardXF : BasicGameBoardXF<SpaceInfoCP>
@@ -14,7 +17,7 @@ namespace SequenceDiceXF
             thisCon.SetBinding(MiscGraphicsXF.WasPreviousProperty, new Binding(nameof(SpaceInfoCP.WasRecent)));
             thisCon.SetBinding(MiscGraphicsXF.NumberProperty, new Binding(nameof(SpaceInfoCP.Number)));
             thisCon.SetBinding(MiscGraphicsXF.MainColorProperty, new Binding(nameof(SpaceInfoCP.Color)));
-            thisCon.SetBinding(MiscGraphicsXF.CommandProperty, GetCommandBinding(nameof(SequenceDiceViewModel.SpaceCommand)));
+            thisCon.SetName(nameof(SequenceDiceMainViewModel.MakeMoveAsync));
             if (ScreenUsed == EnumScreen.SmallPhone)
             {
                 thisCon.WidthRequest = 52;
@@ -30,6 +33,7 @@ namespace SequenceDiceXF
                 thisCon.WidthRequest = 130;
                 thisCon.HeightRequest = 130;
             }
+            GamePackageViewModelBinder.ManuelElements.Add(thisCon);
             thisCon.Init(); //maybe this too.
             thisCon.CommandParameter = thisItem;
             return thisCon; //hopefully this simple.

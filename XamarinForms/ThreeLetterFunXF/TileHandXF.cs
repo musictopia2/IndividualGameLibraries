@@ -1,34 +1,26 @@
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using ThreeLetterFunCP;
+using ThreeLetterFunCP.Data;
+using ThreeLetterFunCP.GraphicsCP;
+using ThreeLetterFunCP.Logic;
 using Xamarin.Forms;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace ThreeLetterFunXF
 {
     public class TileHandXF : ContentView
     {
         private CustomBasicCollection<TileInformation>? _tileList;
-        private TileBoardViewModel? _tempMod;
+        private TileBoardObservable? _tempMod;
         private StackLayout? _thisStack;
-        public void Init()
+        public void Init(ThreeLetterFunVMData model)
         {
-            ThreeLetterFunViewModel thisMod = Resolve<ThreeLetterFunViewModel>();
-            _tempMod = thisMod.TileBoard1;
+            _tempMod = model.TileBoard1;
             _tileList = _tempMod!.HandList;
             _tileList.CollectionChanged += TileList_CollectionChanged;
             _thisStack = new StackLayout();
             _thisStack.Orientation = StackOrientation.Horizontal;
             Content = _thisStack;
             PopulateControls();
-        }
-        public void Update()
-        {
-            ThreeLetterFunViewModel thisMod = Resolve<ThreeLetterFunViewModel>();
-            _tempMod = thisMod.TileBoard1;
-            _tileList = _tempMod!.HandList; //hook up again.
-            _tileList.CollectionChanged -= TileList_CollectionChanged;
-            _tileList.CollectionChanged += TileList_CollectionChanged;
-            PopulateControls(); //this too.
         }
         private void TileList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -50,8 +42,8 @@ namespace ThreeLetterFunXF
         private TileCardXF GetGraphics(TileInformation thisTile)
         {
             TileCardXF thisGraphics = new TileCardXF();
-            var thisBind = GetCommandBinding(nameof(TileBoardViewModel.ObjectSingleClickCommand));
-            thisGraphics.SetBinding(TileCardXF.CommandProperty, thisBind);
+            var thisBind = GetCommandBinding(nameof(TileBoardObservable.ObjectSingleClickCommand));
+            thisGraphics.SetBinding(GraphicsCommand.CommandProperty, thisBind);
             thisGraphics.CommandParameter = thisTile;
             thisGraphics.SendSize(TileCP.TagUsed, thisTile);
             return thisGraphics; //well see what else we need.

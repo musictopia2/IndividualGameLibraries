@@ -1,5 +1,7 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using LifeBoardGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using LifeBoardGameCP.Cards;
+using LifeBoardGameCP.Data;
+using LifeBoardGameCP.Graphics;
 using Xamarin.Forms;
 namespace LifeBoardGameXF
 {

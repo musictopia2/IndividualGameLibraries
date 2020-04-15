@@ -1,9 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using MillebournesCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using MillebournesCP.Cards;
+using MillebournesCP.Data;
 using Xamarin.Forms;
+
 namespace MillebournesXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<MillebournesCardInformation, MillebournesGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<MillebournesCardInformation, MillebournesGraphicsCP>//begin
     {
         public static readonly BindableProperty CategoryProperty = BindableProperty.Create(propertyName: "Category", returnType: typeof(EnumCompleteCategories), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCompleteCategories.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CategoryPropertyChanged);
         public EnumCompleteCategories Category

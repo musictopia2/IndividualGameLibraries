@@ -1,18 +1,20 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BaseGPXPagesAndControlsXF.GameGraphics.Dominos;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.Dominos;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.DIContainers;
+using BasicGameFrameworkLibrary.Dominos;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.GameGraphics.Dominos;
 using CommonBasicStandardLibraries.Exceptions;
-using DominosRegularCP;
+using DominosRegularCP.Data;
+using DominosRegularCP.Logic;
 using SkiaSharp;
 using System.Collections.Specialized;
 using System.Linq;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using ts = BasicGameFramework.GameGraphicsCP.Dominos.DominosCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Dominos.DominosCP;
+
 namespace DominosRegularXF
 {
     public class GameBoardUI : BaseFrameXF
@@ -22,25 +24,25 @@ namespace DominosRegularXF
         private DominosXF<SimpleDominoInfo>? _centerGraphics;
         private Grid? _thisGrid;
         private DeckObservableDict<SimpleDominoInfo>? _dominoList;
-        private DominosRegularViewModel? _thisMod;
+        private DominosRegularVMData? _model;
         private DominosXF<SimpleDominoInfo> CreateGraphics(SimpleDominoInfo thisD)
         {
             DominosXF<SimpleDominoInfo> output = new DominosXF<SimpleDominoInfo>();
             output.SendSize(ts.TagUsed, thisD);
             Binding binding = new Binding(nameof(GameBoardCP.DominoCommand));
-            binding.Source = _thisMod!.GameBoard1;
+            binding.Source = _model!.GameBoard1;
             output.SetBinding(DominosXF<SimpleDominoInfo>.CommandProperty, binding);
             output.CommandParameter = thisD;
             return output;
         }
-        public void LoadList()
+        public void LoadList(DominosRegularVMData model, IGamePackageResolver resolver)
         {
-            _thisMod = Resolve<DominosRegularViewModel>();
-            IProportionImage thisP = _thisMod.MainContainer!.Resolve<IProportionImage>(ts.TagUsed);
+            _model = model;
+            IProportionImage thisP = resolver.Resolve<IProportionImage>(ts.TagUsed);
             Text = "Display";
             _thisGrid = new Grid();
             Grid finalGrid = new Grid();
-            _dominoList = _thisMod.GameBoard1!.DominoList;
+            _dominoList = _model.GameBoard1!.DominoList;
             _dominoList.CollectionChanged += DominoCollectionChange;
             if (_dominoList.Count != 3)
                 throw new BasicBlankException("Only 3 dominos are supported");
@@ -60,17 +62,13 @@ namespace DominosRegularXF
         }
         private DominosXF<SimpleDominoInfo> FindControl(int index)
         {
-            switch (index)
+            return index switch
             {
-                case 0:
-                    return _firstGraphics!;
-                case 1:
-                    return _centerGraphics!;
-                case 2:
-                    return _secondGraphics!;
-                default:
-                    throw new BasicBlankException("Only 3 dominos are supported");
-            }
+                0 => _firstGraphics!,
+                1 => _centerGraphics!,
+                2 => _secondGraphics!,
+                _ => throw new BasicBlankException("Only 3 dominos are supported"),
+            };
         }
         private void RepopulateList()
         {

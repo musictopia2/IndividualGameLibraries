@@ -1,6 +1,6 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
 using BasicXFControlsAndPages.Helpers;
-using BladesOfSteelCP;
+using BladesOfSteelCP.Data;
 using Xamarin.Forms;
 namespace BladesOfSteelXF
 {

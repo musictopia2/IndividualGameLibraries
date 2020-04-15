@@ -1,7 +1,8 @@
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.MultiplePilesViewModels;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
 using CommonBasicStandardLibraries.Exceptions;
-using FlinchCP;
+using FlinchCP.Cards;
+using FlinchCP.Piles;
 using SkiaSharp;
 using System;
 using System.Collections.Specialized;

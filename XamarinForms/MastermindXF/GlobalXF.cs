@@ -1,5 +1,5 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace MastermindXF
 {
     public static class GlobalXF

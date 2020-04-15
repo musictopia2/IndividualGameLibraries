@@ -1,7 +1,7 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
-using SnakesAndLaddersCP;
+using SnakesAndLaddersCP.GraphicsCP;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;

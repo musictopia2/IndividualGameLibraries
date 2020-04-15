@@ -1,6 +1,6 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
-using BaseGPXPagesAndControlsXF.BasicControls.SingleCardFrames;
-using LifeBoardGameCP;
+using BasicGamingUIXFLibrary.BasicControls.GameFrames;
+using LifeBoardGameCP.Cards;
+using LifeBoardGameCP.Graphics;
 using System.Linq;
 namespace LifeBoardGameXF
 {
@@ -22,5 +22,4 @@ namespace LifeBoardGameXF
             }
         }
     }
-    public class LifePileXF : BasePileXF<LifeBaseCard, CardCP, CardXF> { }
 }

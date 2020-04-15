@@ -1,18 +1,18 @@
-using A8RoundRummyCP;
+using A8RoundRummyCP.Data;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Collections.Specialized;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
 namespace A8RoundRummyXF
 {
     public class RoundUI : ContentView
     {
         private CustomBasicCollection<RoundClass>? _roundList;
         private StackLayout? _thisStack;
-        public void Init(A8RoundRummyMainGameClass mainGame)
+        public void Init(A8RoundRummyGameContainer gameContainer)
         {
-            _roundList = mainGame.SaveRoot!.RoundList;
+            _roundList = gameContainer.SaveRoot!.RoundList;
             _roundList.CollectionChanged += RoundList_CollectionChanged;
             _thisStack = new StackLayout();
             PopulateList();
@@ -45,12 +45,6 @@ namespace A8RoundRummyXF
                 _thisStack.Children.Add(thisLabel);
             });
         }
-        public void Update(A8RoundRummyMainGameClass mainGame)
-        {
-            _roundList = mainGame.SaveRoot!.RoundList;
-            _roundList.CollectionChanged -= RoundList_CollectionChanged;
-            _roundList.CollectionChanged += RoundList_CollectionChanged;
-            PopulateList();
-        }
+        
     }
 }

@@ -1,9 +1,12 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using BaseGPXPagesAndControlsXF.GameGraphics.GamePieces;
-using ConnectFourCP;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
+using BasicGamingUIXFLibrary.GameGraphics.GamePieces;
+using BasicGamingUIXFLibrary.Helpers;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
+using ConnectFourCP.Data;
+using ConnectFourCP.ViewModels;
 using Xamarin.Forms;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
 namespace ConnectFourXF
 {
@@ -14,20 +17,6 @@ namespace ConnectFourXF
             var mults = oldWidth * column;
             var adds = column * 5;
             return mults + adds;
-            //if (column == 0 || column == 1)
-            //    return base.CalculateLeft(oldWidth, column);
-            //var starts = oldWidth * column;
-            //if (column == 2)
-            //    return starts + 10;
-            //if (column == 3)
-            //    return starts + 20;
-            //if (column == 4)
-            //    return starts + 20;
-            //if (column == 5)
-            //    return starts + 25;
-            //if (column == 6)
-            //    return starts + 30;
-            //throw new Exception("Not found");
         }
         protected override void StartInit()
         {
@@ -49,7 +38,8 @@ namespace ConnectFourXF
                 output.HeightRequest = 95;
                 output.WidthRequest = 95;
             }
-            output.SetBinding(CheckerPiecesXF.CommandProperty, GetCommandBinding(nameof(ConnectFourViewModel.ColumnCommand)));
+            GamePackageViewModelBinder.ManuelElements.Add(output); //just in case.
+            output.SetName(nameof(ConnectFourMainViewModel.ColumnAsync));
             output.SetBinding(CheckerPiecesXF.MainColorProperty, new Binding(nameof(SpaceInfoCP.Color)));
             output.SetBinding(CheckerPiecesXF.HasImageProperty, new Binding(nameof(SpaceInfoCP.HasImage)));
             output.BlankColor = cs.Aqua;

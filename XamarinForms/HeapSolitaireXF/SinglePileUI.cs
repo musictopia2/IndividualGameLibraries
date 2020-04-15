@@ -1,15 +1,17 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.MultiplePilesViewModels;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
-using HeapSolitaireCP;
 using SkiaSharp.Views.Forms;
 using System.Collections.Specialized;
 using System.Linq;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper; //just in case
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
+using HeapSolitaireCP.Data;
+using HeapSolitaireCP.ViewModels;
+
 namespace HeapSolitaireXF
 {
     public class SinglePileUI : ContentView
@@ -19,7 +21,7 @@ namespace HeapSolitaireXF
         private BasicMultiplePilesCP<HeapSolitaireCardInfo>? _mainMod;
         private HeapSolitaireCardInfo? _currentCard;
         private Grid? _thisGrid;
-        private int pixels;
+        private int _pixels;
         private SKCanvasView? _canvas;
         private DeckOfCardsXF<HeapSolitaireCardInfo> FindControl(HeapSolitaireCardInfo? thisCard)
         {
@@ -36,13 +38,13 @@ namespace HeapSolitaireXF
             output.SendSize(ts.TagUsed, thisCard);
             return output; //hopefully this simple.
         }
-        public void Init(HeapSolitaireViewModel thisMod, BasicPileInfo<HeapSolitaireCardInfo> thisPile)
+        public void Init(HeapSolitaireMainViewModel thisMod, BasicPileInfo<HeapSolitaireCardInfo> thisPile)
         {
             _mainMod = thisMod.Waste1;
             _privateMod = thisPile;
             _cardList = _privateMod.ObjectList;
             var tempDeck = GetNewCard(new HeapSolitaireCardInfo());
-            pixels = (int)tempDeck.ObjectSize.Width / 4;
+            _pixels = (int)tempDeck.ObjectSize.Width / 4;
             _cardList.CollectionChanged += CollectionChanged;
             _canvas = new SKCanvasView();
             _canvas.EnableTouchEvents = true;
@@ -109,7 +111,7 @@ namespace HeapSolitaireXF
             int times = _cardList.Count + 3;
             times.Times(x =>
             {
-                AddPixelColumn(_thisGrid, pixels);
+                AddPixelColumn(_thisGrid, _pixels);
             });
             int y = 0;
             _cardList.ForEach(thisCard =>

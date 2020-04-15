@@ -1,9 +1,11 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using Phase10CP;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
+using Phase10CP.Cards;
+using Phase10CP.Data;
 using Xamarin.Forms;
+
 namespace Phase10XF
 {
-    public class CardGraphicsXF : BaseColorCardsXF<Phase10CardInformation, Phase10GraphicsCP>
+    public class CardGraphicsXF : BaseColorCardsXF<Phase10CardInformation, Phase10GraphicsCP>//begin
     {
         public static readonly BindableProperty CardCategoryProperty = BindableProperty.Create(propertyName: "CardCategory", returnType: typeof(EnumCardCategory), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCardCategory.Blank, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CardCategoryPropertyChanged);
         public EnumCardCategory CardCategory
@@ -26,6 +28,10 @@ namespace Phase10XF
         {
             base.DoCardBindings();
             SetBinding(CardCategoryProperty, new Binding(nameof(Phase10CardInformation.CardCategory)));
+        }
+        protected override void PopulateInitObject()
+        {
+            MainObject!.Init();
         }
     }
 }

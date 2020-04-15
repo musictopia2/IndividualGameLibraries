@@ -9,9 +9,10 @@ using CommonBasicStandardLibraries.CollectionClasses;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
 using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+
 namespace CandylandXF
 {
     public class ProportionXF : IProportionBoard

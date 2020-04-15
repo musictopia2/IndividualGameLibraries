@@ -1,5 +1,7 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using PaydayCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using PaydayCP.Cards;
+using PaydayCP.Data;
+using PaydayCP.Graphics;
 using Xamarin.Forms;
 namespace PaydayXF
 {

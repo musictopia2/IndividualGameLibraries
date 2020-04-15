@@ -1,10 +1,9 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using MonopolyCardGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using Xamarin.Forms;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
+using BasicGamingUIXFLibrary.BasicControls.GameFrames;
+using MonopolyCardGameCP.Cards;
+using MonopolyCardGameCP.Logic;
+
 namespace MonopolyCardGameXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<MonopolyCardGameCardInformation, MonopolyCardGameGraphicsCP>
@@ -40,18 +39,6 @@ namespace MonopolyCardGameXF
         async void IMonopolyScroll.ScrollToBottom() //iffy.
         {
             await ScrollToBottomAsync();
-        }
-    }
-    public class CustomProportion : IProportionImage
-    {
-        float IProportionImage.Proportion
-        {
-            get
-            {
-                if (ScreenUsed == EnumScreen.LargeTablet)
-                    return 1.2f;
-                return 0.95f; //experiment.
-            }
         }
     }
 }

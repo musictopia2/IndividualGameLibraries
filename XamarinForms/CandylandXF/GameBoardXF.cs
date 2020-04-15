@@ -1,16 +1,19 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
-using CandylandCP;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
+using BasicGameFrameworkLibrary.BasicEventModels;
 using CommonBasicStandardLibraries.Messenging;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CandylandCP.Data;
+using CandylandCP.GraphicsCP;
+using CandylandCP.Logic;
+
 namespace CandylandXF
 {
     public class GameBoardXF : ContentView, IHandle<NewTurnEventModel>, IHandle<CandylandPlayerItem>
     {
-        internal SkiaSharpGameBoardXF ThisElement;
+        internal SkiaSharpGameBoardXF Element { get; set; }
         private readonly SKCanvasView _otherElement;
         CandylandBoardGraphicsCP? _privateBoard;
         CandylandMainGameClass? _thisGame;
@@ -21,26 +24,26 @@ namespace CandylandXF
         }
         public GameBoardXF()
         {
-            ThisElement = new SkiaSharpGameBoardXF();
-            ThisElement.EnableTouchEvents = true;
-            ThisElement.Touch += ThisElement_Touch;
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element = new SkiaSharpGameBoardXF();
+            Element.EnableTouchEvents = true;
+            Element.Touch += ThisElement_Touch;
+            Element.PaintSurface += ThisElement_PaintSurface;
             _otherElement = new SKCanvasView();
             _otherElement.PaintSurface += OtherPaint;
         }
         private void ThisElement_Touch(object sender, SKTouchEventArgs e)
         {
-            if (HasLoaded == false)
+            if (_hasLoaded == false)
                 return;
-            ThisElement.StartClick(e.Location.X, e.Location.Y);
+            Element.StartClick(e.Location.X, e.Location.Y);
         }
         private void OtherPaint(object? sender, SKPaintSurfaceEventArgs e)
         {
-            if (HasLoaded == false)
+            if (_hasLoaded == false)
                 return;
             _privateBoard!.DrawGraphicsForBoard(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
-        private bool HasLoaded = false;
+        private bool _hasLoaded = false;
         public void LoadBoard()
         {
             _privateBoard = Resolve<CandylandBoardGraphicsCP>();
@@ -50,27 +53,27 @@ namespace CandylandXF
             EventAggregator thisT = Resolve<EventAggregator>();
             thisT.Subscribe(this); //i think this is it.  if i am wrong, rethink
             _thisGame = Resolve<CandylandMainGameClass>();
-            HasLoaded = true;
+            _hasLoaded = true;
             Grid grid = new Grid();
             grid.Children.Add(_otherElement);
-            grid.Children.Add(ThisElement);
+            grid.Children.Add(Element);
             Content = grid;
             _otherElement.InvalidateSurface();
-            ThisElement.InvalidateSurface(); //i think
+            Element.InvalidateSurface(); //i think
         }
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
-            if (HasLoaded == false)
+            if (_hasLoaded == false)
                 return;
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         public void Handle(NewTurnEventModel message)
         {
-            ThisElement.InvalidateSurface();
+            Element.InvalidateSurface();
         }
         public void Handle(CandylandPlayerItem message)
         {
-            ThisElement.InvalidateSurface();
+            Element.InvalidateSurface();
         }
     }
 }

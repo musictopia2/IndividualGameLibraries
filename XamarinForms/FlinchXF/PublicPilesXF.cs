@@ -1,18 +1,20 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Animations;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using BasicGameFramework.MultiplePilesViewModels;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Animations;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
-using FlinchCP;
 using SkiaSharp;
 using System.Collections.Specialized;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using FlinchCP.Cards;
+using FlinchCP.Piles;
+
 namespace FlinchXF
 {
     public class PublicPilesXF : ContentView, IHandleAsync<AnimateCardInPileEventModel<FlinchCardInformation>>

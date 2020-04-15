@@ -1,4 +1,4 @@
-using MinesweeperCP;
+using MinesweeperCP.ViewModels;
 using System;
 using System.Globalization;
 using Xamarin.Forms;

@@ -1,12 +1,12 @@
-using BaseGPXPagesAndControlsXF.BasicControls.ChoicePickers;
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using PokerCP;
+using BasicGamingUIXFLibrary.BasicControls.ChoicePickers;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using PokerCP.ViewModels;
 using Xamarin.Forms;
 namespace PokerXF
 {
     public class BetUI : BaseFrameXF
     {
-        public void Init(PokerViewModel thisMod)
+        public void Init(PokerMainViewModel thisMod)
         {
             NumberChooserXF thisNumber = new NumberChooserXF();
             thisNumber.Columns = 3;

@@ -1,10 +1,10 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameFrames;
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using LifeCardGameCP;
+using BasicGamingUIXFLibrary.BasicControls.GameFrames;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
 using Xamarin.Forms;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using LifeCardGameCP.Cards;
+using LifeCardGameCP.Data;
+using LifeCardGameCP.Logic;
+
 namespace LifeCardGameXF
 {
     public class CardGraphicsXF : BaseDeckGraphicsXF<LifeCardGameCardInformation, LifeCardGameGraphicsCP>
@@ -171,18 +171,6 @@ namespace LifeCardGameXF
         async void ILifeScroll.ScrollToBottom() //iffy.
         {
             await ScrollToBottomAsync();
-        }
-    }
-    public class CustomProportion : IProportionImage
-    {
-        float IProportionImage.Proportion
-        {
-            get
-            {
-                if (ScreenUsed == EnumScreen.LargeTablet)
-                    return 1.2f;
-                return 0.95f; //experiment.
-            }
         }
     }
 }

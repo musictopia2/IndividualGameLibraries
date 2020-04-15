@@ -1,7 +1,8 @@
-using BasicGameFramework.CommonInterfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
-using RummyDiceCP;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using RummyDiceCP.Data;
+using RummyDiceCP.Logic;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using SkiaSharpGeneralLibrary.Interfaces;
@@ -30,32 +31,6 @@ namespace RummyDiceXF
             var thisItem = (RummyDiceGraphicsXF)bindable;
             thisItem._mains!.IsSelected = (bool)newValue;
         }
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(propertyName: "Command", returnType: typeof(ICommand), declaringType: typeof(RummyDiceGraphicsXF), defaultBindingMode: BindingMode.TwoWay, propertyChanged: CommandPropertyChanged);
-        public ICommand Command
-        {
-            get
-            {
-                return (ICommand)GetValue(CommandProperty);
-            }
-            set
-            {
-                SetValue(CommandProperty, value);
-            }
-        }
-        private static void CommandPropertyChanged(BindableObject bindable, object oldValue, object newValue) { }
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(propertyName: "CommandParameter", returnType: typeof(object), declaringType: typeof(RummyDiceGraphicsXF), defaultBindingMode: BindingMode.TwoWay, propertyChanged: CommandParameterPropertyChanged);
-        public object CommandParameter
-        {
-            get
-            {
-                return GetValue(CommandParameterProperty);
-            }
-            set
-            {
-                SetValue(CommandParameterProperty, value);
-            }
-        }
-        private static void CommandParameterPropertyChanged(BindableObject bindable, object oldValue, object newValue) { }
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(propertyName: "Color", returnType: typeof(EnumColorType), declaringType: typeof(RummyDiceGraphicsXF), defaultValue: EnumColorType.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: ColorPropertyChanged);
         public EnumColorType Color
         {
@@ -68,6 +43,7 @@ namespace RummyDiceXF
                 base.SetValue(ColorProperty, value);
             }
         }
+        public ICommand? Command { get; set; }
         private static void ColorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var thisItem = (RummyDiceGraphicsXF)bindable;
@@ -96,8 +72,10 @@ namespace RummyDiceXF
             _mains!.ActualWidthHeight = (float)thisD;
             _thisDraw.InvalidateSurface();
         }
-        public void SendDiceInfo(RummyDiceInfo thisDice)
+        private RummyBoardCP? _board;
+        public void SendDiceInfo(RummyDiceInfo thisDice, RummyBoardCP board)
         {
+            _board = board;
             _mains = new RummyDiceGraphicsCP(this);
             _mains.MinimumWidthHeight = thisDice.HeightWidth;
             SetBinding(IsSelectedProperty, new Binding(nameof(RummyDiceInfo.IsSelected))); //maybe i forgot this too.
@@ -130,14 +108,24 @@ namespace RummyDiceXF
         {
             _mains!.DrawDice(e.Surface.Canvas);
         }
-        private void Touch(object sender, SKTouchEventArgs e)
+        private async void Touch(object sender, SKTouchEventArgs e)
         {
-            var tempCommand = Command;
-            if (tempCommand != null)
+            if (_board == null && Command == null)
             {
-                if (tempCommand.CanExecute(CommandParameter) == true)
-                    tempCommand.Execute(CommandParameter);
+                return;
             }
+            RummyDiceInfo dice = (RummyDiceInfo)BindingContext;
+            if (Command != null)
+            {
+                if (Command.CanExecute(null) == false)
+                {
+                    return;
+                }
+                Command.Execute(dice);
+                return;
+            }
+
+            await _board!.SelectDiceAsync((RummyDiceInfo)BindingContext);
         }
     }
 }

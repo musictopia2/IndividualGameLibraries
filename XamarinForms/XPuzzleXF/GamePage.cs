@@ -1,45 +1,42 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.ExtensionClasses;
-using BasicGameFramework.StandardImplementations.XamarinForms.Interfaces;
-using BaseGPXPagesAndControlsXF.BasePageProcesses.Pages;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.BasicGameDataClasses;
-using BasicGameFramework.CommonInterfaces;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGameFrameworkLibrary.BasicGameDataClasses;
+using BasicGameFrameworkLibrary.CommonInterfaces;
+using XPuzzleCP.Logic;
+using XPuzzleCP.Data;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using BasicGamingUIXFLibrary.Shells;
+using BasicGameFrameworkLibrary.StandardImplementations.XamarinForms.Interfaces;
 using Xamarin.Forms;
-using XPuzzleCP;
 namespace XPuzzleXF
 {
-    public class GamePage : SinglePlayerGamePage<XPuzzleViewModel>
+    public class GamePage : SinglePlayerShellView
     {
-        public GamePage(IGamePlatform customPlatform, IStartUp starts, EnumGamePackageMode mode) : base(customPlatform, starts, mode) { }
-        public override Task HandleAsync(LoadEventModel message)
+        public GamePage(
+            IGamePlatform customPlatform,
+            IGameInfo gameData,
+            BasicData basicData,
+            IStartUp start,
+            IStandardScreen screen) : base(customPlatform, gameData, basicData, start, screen)
         {
-            XPuzzleSaveInfo thisSave = OurContainer!.Resolve<XPuzzleSaveInfo>();
-            _thisBoard!.CreateControls(thisSave.SpaceList);
-            return Task.CompletedTask;
+            //TODO:  may need to think about if we need load or update (?)
         }
-        public override Task HandleAsync(UpdateEventModel message)
-        {
-            return Task.CompletedTask;
-        }
-        private XPuzzleGameBoard? _thisBoard;
-        protected override async Task AfterGameButtonAsync()
-        {
-            _thisBoard = new XPuzzleGameBoard();
-            StackLayout thisStack = new StackLayout();
-            GameButton!.HorizontalOptions = LayoutOptions.Center;
-            GameButton!.VerticalOptions = LayoutOptions.Center;
-            thisStack.Children.Add(GameButton);
-            thisStack.Children.Add(_thisBoard);
-            Content = thisStack;
-            ThisMod!.NewGameVisible = true;
-            await ThisMod.StartNewGameAsync(); //if starting new game, has to be at end.
-            ThisMod.CommandContainer!.IsExecuting = false; //i think.
-        }
-        protected override void RegisterInterfaces()
-        {
-            OurContainer!.RegisterNonSavedClasses<XPuzzleViewModel>(); //go ahead and use the custom processes for this.
 
+        
+
+        protected override Task PopulateUIAsync()
+        {
+            //if any exceptions to the shell, do here or override other things.
+            return Task.CompletedTask;
         }
     }
 }

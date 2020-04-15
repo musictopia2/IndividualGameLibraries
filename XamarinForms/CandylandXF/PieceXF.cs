@@ -1,7 +1,7 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using CandylandCP;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using CandylandCP.GraphicsCP;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 namespace CandylandXF
 {
     public class PieceXF : BaseGraphicsXF<CandylandPieceGraphicsCP>

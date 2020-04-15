@@ -1,5 +1,7 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using ClueBoardGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using ClueBoardGameCP.Cards;
+using ClueBoardGameCP.Data;
+using ClueBoardGameCP.Graphics;
 using Xamarin.Forms;
 namespace ClueBoardGameXF
 {

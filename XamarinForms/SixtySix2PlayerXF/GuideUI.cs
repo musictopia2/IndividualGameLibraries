@@ -1,8 +1,8 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using SixtySix2PlayerCP;
+using SixtySix2PlayerCP.Data;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
 using static BasicXFControlsAndPages.Helpers.GridHelper;
 namespace SixtySix2PlayerXF
 {
@@ -31,7 +31,7 @@ namespace SixtySix2PlayerXF
             AddControlToGrid(_thisGrid!, output, _rowNumber, 1);
             _rowNumber++;
         }
-        public void LoadList(SixtySix2PlayerViewModel thisMod)
+        public void LoadList(SixtySix2PlayerVMData thisMod)
         {
             Text = "Scoring Guide";
             _thisGrid = new Grid();

@@ -1,23 +1,28 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using RummyDiceCP;
 using SkiaSharp;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions; //this usually will be used too.
+using RummyDiceCP.Data;
+using RummyDiceCP.ViewModels;
+using RummyDiceCP.Logic;
+
 namespace RummyDiceXF
 {
     public class RummyDiceHandXF : BaseFrameXF
     {
         private CustomBasicCollection<RummyDiceInfo>? _handList;
         private StackLayout? _thisStack;
-        private Grid? thisGrid;
+        private Grid? _thisGrid;
         RummyDiceHandVM? _thisMod;
-        public void LoadList(RummyDiceHandVM thisMod)
+        private RummyDiceMainGameClass? _mainGame;
+        public void LoadList(RummyDiceHandVM thisMod, RummyDiceMainGameClass mainGame)
         {
             _thisMod = thisMod;
+            _mainGame = mainGame;
             BindingContext = thisMod;
             HorizontalOptions = LayoutOptions.FillAndExpand; //hopefully this works too.
             _handList = thisMod.HandList;
@@ -34,7 +39,8 @@ namespace RummyDiceXF
             _thisStack = new StackLayout();
             _thisStack.Orientation = StackOrientation.Horizontal;
             _thisStack.Spacing = 0;
-            Button thisBut = GetSmallerButton("Place Tiles", nameof(RummyDiceHandVM.BoardCommand));
+            Button thisBut = GetSmallerButton("Place Tiles", "");
+            thisBut.Command = thisMod.BoardCommand; //i think this way this time.
             StackLayout finalStack = new StackLayout();
             finalStack.Orientation = StackOrientation.Horizontal;
             finalStack.Children.Add(thisBut);
@@ -44,15 +50,14 @@ namespace RummyDiceXF
             thisBut.VerticalOptions = LayoutOptions.Start;
             _thisStack.HorizontalOptions = LayoutOptions.FillAndExpand;
             thisBut.FontSize *= .7f;
-            thisGrid = new Grid();
-            SetBinding(IsVisibleProperty, new Binding(nameof(RummyDiceHandVM.Visible)));
-            thisGrid.Children.Add(ThisDraw);
-            thisGrid.Children.Add(finalStack);
+            _thisGrid = new Grid();
+            _thisGrid.Children.Add(ThisDraw);
+            _thisGrid.Children.Add(finalStack);
             var thisRect = ThisFrame.GetControlArea();
             thisBut.Margin = new Thickness(thisRect.Left + 3, thisRect.Top + 10, 3, 3);
             _thisStack.Margin = new Thickness(thisRect.Left + 3, thisRect.Top + 10, 3, 3);
             PopulateControls(); //just in case there is something to start with.
-            Content = thisGrid;
+            Content = _thisGrid;
         }
         public void UpdateList(RummyDiceHandVM thisMod)
         {
@@ -75,19 +80,12 @@ namespace RummyDiceXF
             foreach (var firstDice in _handList!)
             {
                 RummyDiceGraphicsXF thisGraphics = new RummyDiceGraphicsXF();
-                thisGraphics.SendDiceInfo(firstDice);
-                var thisBind = GetCommandBinding(nameof(RummyDiceHandVM.DiceCommand));
-                thisGraphics.SetBinding(RummyDiceGraphicsXF.CommandProperty, thisBind);
-                thisGraphics.CommandParameter = firstDice;
+                thisGraphics.SendDiceInfo(firstDice, _mainGame!.MainBoard1);
+                thisGraphics.Command = _thisMod!.DiceCommand;
                 _thisStack.Children.Add(thisGraphics);
                 x += 1;
             }
         }
-        private Binding GetCommandBinding(string path)
-        {
-            Binding thisBind = new Binding(path);
-            thisBind.Source = _thisMod;
-            return thisBind;
-        }
+        
     }
 }

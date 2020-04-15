@@ -1,10 +1,12 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using SorryCardGameCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using SorryCardGameCP.Cards;
+using SorryCardGameCP.Data;
 using Xamarin.Forms;
 using cs = CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.SColorString;
+
 namespace SorryCardGameXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<SorryCardGameCardInformation, SorryCardGameGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<SorryCardGameCardInformation, SorryCardGameGraphicsCP>//begin
     {
         public static readonly BindableProperty CategoryProperty = BindableProperty.Create(propertyName: "Category", returnType: typeof(EnumCategory), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCategory.Blank, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CategoryPropertyChanged);
         public EnumCategory Category

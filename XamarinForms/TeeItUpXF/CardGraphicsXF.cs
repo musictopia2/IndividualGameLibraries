@@ -1,9 +1,10 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using TeeItUpCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using TeeItUpCP.Cards;
 using Xamarin.Forms;
+
 namespace TeeItUpXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<TeeItUpCardInformation, TeeItUpGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<TeeItUpCardInformation, TeeItUpGraphicsCP>//begin
     {
         public static readonly BindableProperty PointsProperty = BindableProperty.Create(propertyName: "Points", returnType: typeof(int), declaringType: typeof(CardGraphicsXF), defaultValue: -6, defaultBindingMode: BindingMode.TwoWay, propertyChanged: PointsPropertyChanged);
 

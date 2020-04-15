@@ -1,8 +1,8 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using BasicGameFramework.BasicEventModels;
-using BasicGameFramework.DIContainers;
+using BasicGameFrameworkLibrary.BasicEventModels;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
 using CommonBasicStandardLibraries.Messenging;
-using CountdownCP;
+using CountdownCP.Data;
+using CountdownCP.Graphics;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
@@ -11,49 +11,55 @@ namespace CountdownXF
 {
     public class PlayerBoardXF : ContentView, IHandle<RepaintEventModel>
     {
-        internal SkiaSharpGameBoardXF ThisElement;
+        internal SkiaSharpGameBoardXF Element { get; set; }
         PlayerBoardCP? _privateBoard;
         private bool _hasLoaded = false;
-        public void LoadBoard(CountdownPlayerItem thisPlayer)
+        IEventAggregator? _aggregator;
+        internal void Dispose()
         {
-            _privateBoard = new PlayerBoardCP((IGamePackageResolver)cons, ThisElement, thisPlayer); //hopefully no problem.
+            if (_aggregator != null)
+            {
+                _aggregator.Unsubscribe(this);
+            }
+        }
+
+        public void LoadBoard(CountdownPlayerItem thisPlayer, CountdownGameContainer gameContainer)
+        {
+            _privateBoard = new PlayerBoardCP(gameContainer, Element, thisPlayer); //hopefully no problem.
+            _aggregator = gameContainer.Aggregator;
             SKSize thisSize = _privateBoard.SuggestedSize();
             WidthRequest = thisSize.Width;
             VerticalOptions = LayoutOptions.Start;
             HorizontalOptions = LayoutOptions.Start;
             HeightRequest = thisSize.Height;
             EventAggregator thisT = Resolve<EventAggregator>();
-            thisT.Subscribe(this, EnumRepaintCategories.fromskiasharpboard.ToString());
-            Content = ThisElement;
+            thisT.Subscribe(this, EnumRepaintCategories.FromSkiasharpboard.ToString());
+            Content = Element;
             _hasLoaded = true;
-            ThisElement.InvalidateSurface(); //i think
-        }
-        public void UpdateBoard(CountdownPlayerItem ThisPlayer)
-        {
-            _privateBoard!.UpdatePlayer(ThisPlayer);
+            Element.InvalidateSurface(); //i think
         }
         private void ThisElement_Touch(object sender, SKTouchEventArgs e)
         {
             if (_hasLoaded == false)
                 return;
-            ThisElement.StartClick(e.Location.X, e.Location.Y);
+            Element.StartClick(e.Location.X, e.Location.Y);
         }
         public PlayerBoardXF()
         {
-            ThisElement = new SkiaSharpGameBoardXF();
-            ThisElement.EnableTouchEvents = true;
-            ThisElement.Touch += ThisElement_Touch;
-            ThisElement.PaintSurface += ThisElement_PaintSurface;
+            Element = new SkiaSharpGameBoardXF();
+            Element.EnableTouchEvents = true;
+            Element.Touch += ThisElement_Touch;
+            Element.PaintSurface += ThisElement_PaintSurface;
         }
         private void ThisElement_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
             if (_hasLoaded == false)
                 return;
-            ThisElement.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            Element.StartInvalidate(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
         public void Handle(RepaintEventModel message)
         {
-            ThisElement.InvalidateSurface();
+            Element.InvalidateSurface();
         }
     }
 }

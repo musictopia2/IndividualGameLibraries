@@ -1,18 +1,8 @@
-using System;
-using System.Text;
-using CommonBasicStandardLibraries.Exceptions;
-using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
-using System.Linq;
-using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using CommonBasicStandardLibraries.CollectionClasses;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
-using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
-using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
-using TroubleCP;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
 using SkiaSharp;
+using TroubleCP.Graphics;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+
 namespace TroubleXF
 {
     public class BoardPosition : IBoardPosition
@@ -25,7 +15,7 @@ namespace TroubleXF
             {
                 return space switch
                 {
-                    27 => 0, 
+                    27 => 0,
                     41 => 0,
                     1 => 18,//blue/yellow start
                     16 => 18,

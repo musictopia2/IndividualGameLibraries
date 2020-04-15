@@ -1,5 +1,5 @@
 using BasicXFControlsAndPages.Helpers;
-using BowlingDiceGameCP;
+using BowlingDiceGameCP.Data;
 using CommonBasicStandardLibraries.Exceptions;
 using Xamarin.Forms;
 namespace BowlingDiceGameXF

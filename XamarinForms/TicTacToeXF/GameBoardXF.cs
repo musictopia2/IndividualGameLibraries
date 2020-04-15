@@ -1,5 +1,5 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using TicTacToeCP;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
+using TicTacToeCP.Data;
 using Xamarin.Forms;
 namespace TicTacToeXF
 {

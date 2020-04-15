@@ -1,11 +1,12 @@
-using BasicGameFramework.DIContainers;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.DIContainers;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
+using CommonBasicStandardLibraries.Exceptions;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using SkiaSharpGeneralLibrary.Interfaces;
-using System.Windows.Input;
-using ThinkTwiceCP;
+using ThinkTwiceCP.Data;
+using ThinkTwiceCP.Logic;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace ThinkTwiceXF
@@ -47,11 +48,12 @@ namespace ThinkTwiceXF
             _thisDraw.InvalidateSurface();
         }
         public SKSize DiceSize { get; set; } //try to do without bindings for this.  taking a risk.  hopefully it pays off.
-        public ICommand? Command { get; set; }
         public static string GetDiceTag => "StandardDice"; //same as other dice.
-        public void SendDiceInfo(CategoriesDice thisDice) //it did send dice
+        private ThinkTwiceGameContainer? _gameContainer;
+        public void SendDiceInfo(CategoriesDice thisDice, ThinkTwiceGameContainer gameContainer) //it did send dice
         {
-            IGamePackageResolver thisR = (IGamePackageResolver)cons;
+            _gameContainer = gameContainer;
+            IGamePackageResolver thisR = (IGamePackageResolver)cons!;
             IProportionImage thisP = thisR.Resolve<IProportionImage>(GetDiceTag);
             _mains = new ButtonDiceGraphicsCP();
             _mains.PaintUI = this;
@@ -61,20 +63,28 @@ namespace ThinkTwiceXF
             SetBinding(IsVisibleProperty, new Binding(nameof(CategoriesDice.Visible)));
             SKSize tempSize = new SKSize(thisDice.HeightWidth, thisDice.HeightWidth);
             DiceSize = tempSize.GetSizeUsed(thisP.Proportion * 1.3f);
-            Command = thisDice.CategoryClickCommand!;
             HeightRequest = DiceSize.Height;
             WidthRequest = DiceSize.Width;
             BindingContext = thisDice;
             Init();
         }
-        private void DrawTouch(object sender, SKTouchEventArgs e)
+        private async void DrawTouch(object sender, SKTouchEventArgs e)
         {
-            var tempCommand = Command;
-            if (tempCommand != null)
+
+            var dice = (CategoriesDice)BindingContext;
+            if (dice.Visible == false)
             {
-                if (tempCommand.CanExecute(null) == true)
-                    tempCommand.Execute(null);
+                return;
             }
+            if (_gameContainer!.Command.IsExecuting)
+            {
+                return;
+            }
+            if (_gameContainer.CategoryClicked == null)
+            {
+                throw new BasicBlankException("Nobody is handling the game category clicked.  Rethink");
+            }
+            await _gameContainer.ProcessCustomCommandAsync(_gameContainer.CategoryClicked);
         }
 
         public static readonly BindableProperty TextProperty = BindableProperty.Create(propertyName: "Text", returnType: typeof(string), declaringType: typeof(CategoryXF), defaultBindingMode: BindingMode.TwoWay, propertyChanged: TextPropertyChanged);

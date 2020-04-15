@@ -1,14 +1,14 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BaseSolitaireClassesCP.GraphicsViewModels;
-using BasicGameFramework.BasicDrawables.Dictionary;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGameFrameworkLibrary.SolitaireClasses.GraphicsObservable;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using SkiaSharp.Views.Forms;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace BeleaguredCastleXF
 {
     public class SinglePileUI : ContentView

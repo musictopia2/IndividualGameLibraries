@@ -1,30 +1,32 @@
-using BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses;
-using BingoCP;
+using BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using BasicGamingUIXFLibrary.Helpers;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
+using BingoCP.Data;
+using BingoCP.Logic;
+using BingoCP.ViewModels;
 using CommonBasicStandardLibraries.Exceptions;
 using SkiaSharp.Views.Forms;
 using System.ComponentModel;
 using Xamarin.Forms;
-using static BasicGameFramework.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
+using static BasicGameFrameworkLibrary.StandardImplementations.CrossPlatform.DataClasses.GlobalScreenClass;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace BingoXF
 {
-    public class BingoSpaceXF : ContentView
+    public class BingoSpaceXF : GraphicsCommand
     {
         public SpaceInfoCP? ThisSpace;
-        private SKCanvasView? _thisDraw;
-        private BingoViewModel? _thisMod;
         private BingoMainGameClass? _mainGame;
         public void Init()
         {
             if (ThisSpace == null)
                 throw new BasicBlankException("Must send in the space");
-            _thisMod = Resolve<BingoViewModel>();
             _mainGame = Resolve<BingoMainGameClass>();
-            _thisDraw = new SKCanvasView();
-            _thisDraw.PaintSurface += ThisDraw_PaintSurface;
-            _thisDraw.EnableTouchEvents = true;
-            _thisDraw.Touch += Touch;
+            ThisDraw.PaintSurface += ThisDraw_PaintSurface;
             ThisSpace.PropertyChanged += ThisSpace_PropertyChanged;
+            CommandParameter = ThisSpace;
+            this.SetName(nameof(BingoMainViewModel.SelectSpace));
+            GamePackageViewModelBinder.ManuelElements.Add(this);
             if (ScreenUsed == EnumScreen.SmallPhone)
             {
                 WidthRequest = 60;
@@ -41,7 +43,7 @@ namespace BingoXF
                 HeightRequest = 120;
             }
             Grid thisGrid = new Grid();
-            thisGrid.Children.Add(_thisDraw);
+            thisGrid.Children.Add(ThisDraw);
             Label thisLabel = new Label();
             thisLabel.HorizontalOptions = LayoutOptions.Center;
             thisLabel.VerticalOptions = LayoutOptions.Center; // needs to stretch for background.
@@ -84,18 +86,16 @@ namespace BingoXF
             thisLabel.SetBinding(Label.TextProperty, new Binding(nameof(SpaceInfoCP.Text)));
             thisLabel.InputTransparent = true; //try this too.
             thisGrid.Children.Add(thisLabel);
-            Content = thisGrid;
+            Content = thisGrid; //hopefully this simple.
         }
-
-        private void Touch(object sender, SKTouchEventArgs e)
+        protected override void SetUpContent()
         {
-            if (_thisMod!.SelectSpaceCommand!.CanExecute(ThisSpace!))
-                _thisMod.SelectSpaceCommand.Execute(ThisSpace!);
+             //something else will do it later.
         }
         private void ThisSpace_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(SpaceInfoCP.AlreadyMarked))
-                _thisDraw!.InvalidateSurface();
+                ThisDraw!.InvalidateSurface();
         }
         private void ThisDraw_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {

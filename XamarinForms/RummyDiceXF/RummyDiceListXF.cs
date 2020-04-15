@@ -1,5 +1,6 @@
 using CommonBasicStandardLibraries.CollectionClasses;
-using RummyDiceCP;
+using RummyDiceCP.Data;
+using RummyDiceCP.Logic;
 using System;
 using System.Collections.Specialized;
 using Xamarin.Forms;
@@ -20,12 +21,6 @@ namespace RummyDiceXF
             }
             return null;
         }
-        private Binding GetCommandBinding(string path)
-        {
-            Binding thisBind = new Binding(path);
-            thisBind.Source = _thisMod;
-            return thisBind;
-        }
         private void RefreshItems()
         {
             CustomBasicList<RummyDiceGraphicsXF> tempList = new CustomBasicList<RummyDiceGraphicsXF>();
@@ -41,23 +36,22 @@ namespace RummyDiceXF
         private void DiceBindings(RummyDiceGraphicsXF thisGraphics, RummyDiceInfo thisDice) // needs the dice for the data context
         {
             thisGraphics.BindingContext = thisDice;
-            thisGraphics.CommandParameter = thisDice;
-            var ThisBind = GetCommandBinding(nameof(RummyBoardCP.DiceCommand));
-            thisGraphics.SetBinding(RummyDiceGraphicsXF.CommandProperty, ThisBind);
         }
         private void PopulateList()
         {
             foreach (var firstDice in _diceList!)
             {
                 RummyDiceGraphicsXF thisGraphics = new RummyDiceGraphicsXF(); // this does the bindings already as well
-                thisGraphics.SendDiceInfo(firstDice); //i think this too now.
+                thisGraphics.SendDiceInfo(firstDice, _board!); //i think this too now.
                 DiceBindings(thisGraphics, firstDice);
                 _thisStack!.Children.Add(thisGraphics);
             }
         }
+        private RummyBoardCP? _board;
         public void LoadDiceViewModel(RummyDiceMainGameClass mainGame)
         {
             _thisMod = mainGame.MainBoard1;
+            _board = mainGame.MainBoard1;
             Margin = new Thickness(3, 3, 3, 3);
             BindingContext = _thisMod;
             _diceList = mainGame.SaveRoot!.DiceList;
@@ -67,16 +61,7 @@ namespace RummyDiceXF
             PopulateList();
             Content = _thisStack;
         }
-        public void UpdateDiceViewModel(RummyDiceMainGameClass mainGame)
-        {
-            _thisMod = mainGame.MainBoard1;
-            BindingContext = _thisMod;
-            _diceList!.CollectionChanged -= DiceList_CollectionChanged;
-            _diceList = mainGame.SaveRoot!.DiceList;
-            _diceList.CollectionChanged += DiceList_CollectionChanged;
-            _thisStack!.Children.Clear();
-            PopulateList();
-        }
+        
         private void DiceList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
@@ -86,7 +71,7 @@ namespace RummyDiceXF
                     var newDice = (RummyDiceInfo)ThisItem!;
                     RummyDiceGraphicsXF thisD = new RummyDiceGraphicsXF();
                     DiceBindings(thisD, newDice); // well see what we need
-                    thisD.SendDiceInfo(newDice);
+                    thisD.SendDiceInfo(newDice, _board!);
                     _thisStack!.Children.Add(thisD);
                 }
             }

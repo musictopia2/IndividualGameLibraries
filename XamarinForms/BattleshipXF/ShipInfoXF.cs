@@ -1,15 +1,16 @@
+using BasicGamingUIXFLibrary.Helpers;
 using BasicXFControlsAndPages.Helpers;
-using BattleshipCP;
+using BasicXFControlsAndPages.MVVMFramework.ViewLinkersPlusBinders;
+using BattleshipCP.Data;
+using BattleshipCP.ViewModels;
 using CommonBasicStandardLibraries.Exceptions;
 using Xamarin.Forms;
-using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace BattleshipXF
 {
     public class ShipInfoXF : ContentView
     {
-        public void CreateShip(ShipInfoCP thisShip)
+        public void CreateShip(ShipInfoCP thisShip, BattleshipMainViewModel model)
         {
-            BattleshipViewModel thisMod = Resolve<BattleshipViewModel>();
             BindingContext = thisShip;
             Grid thisGrid = new Grid();
             float labelSize;
@@ -31,13 +32,13 @@ namespace BattleshipXF
             thisBut.SetBinding(IsVisibleProperty, thisBind);
             if (thisShip.ShipCategory == EnumShipList.None)
                 throw new BasicBlankException("Can't be none");
-            thisBind = new Binding(nameof(BattleshipViewModel.ChooseShipCommand));
-            thisBind.Source = thisMod; // i think
-            thisBut.SetBinding(Button.CommandProperty, thisBind);
+
+            thisBut.SetName(nameof(BattleshipMainViewModel.ChooseShip));
+            GamePackageViewModelBinder.ManuelElements.Add(thisBut); //try this one as well.
             thisBut.CommandParameter = thisShip.ShipCategory;
             thisBut.Margin = new Thickness(5, 0, 0, 0);
-            thisBind = new Binding(nameof(BattleshipViewModel.ShipSelected));
-            thisBind.Source = thisMod;
+            thisBind = new Binding(nameof(BattleshipMainViewModel.ShipSelected));
+            thisBind.Source = model;
             IValueConverter thisConv = new ChooseShipConverter();
             thisBind.Converter = thisConv;
             thisBind.ConverterParameter = thisShip.ShipCategory;

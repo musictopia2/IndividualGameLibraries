@@ -1,20 +1,26 @@
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using ConcentrationCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGameFrameworkLibrary.TestUtilities;
+using ConcentrationCP.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Text;
+using System.Threading.Tasks;
+
 namespace ConcentrationXF
 {
     public class TestConfig : ITestCardSetUp<RegularSimpleCard, ConcentrationPlayerItem>
     {
-        public Task SetUpTestHandsAsync(PlayerCollection<ConcentrationPlayerItem> PlayerList, IListShuffler<RegularSimpleCard> DeckList)
+        public Task SetUpTestHandsAsync(PlayerCollection<ConcentrationPlayerItem> playerlist, IListShuffler<RegularSimpleCard> decklist)
         {
-            ConcentrationPlayerItem ThisPlayer = PlayerList.GetSelf();
+            ConcentrationPlayerItem player = playerlist.GetSelf();
             //for testing i will get 8 eights.
-            ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
             //can be anything you want.
             return Task.CompletedTask;
         }

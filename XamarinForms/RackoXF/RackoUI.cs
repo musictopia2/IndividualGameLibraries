@@ -1,23 +1,26 @@
-using BaseGPXPagesAndControlsXF.BasicControls.SimpleControls;
-using BasicGameFramework.BasicDrawables.Dictionary;
-using BasicGameFramework.Extensions;
+using BasicGamingUIXFLibrary.BasicControls.SimpleControls;
+using BasicGameFrameworkLibrary.BasicDrawables.Dictionary;
+using BasicGameFrameworkLibrary.Extensions;
 using BasicXFControlsAndPages.Helpers;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using RackoCP;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
+using RackoCP.Cards;
+using RackoCP.ViewModels;
+using RackoCP.Data;
+
 namespace RackoXF
 {
     public class RackoUI : BaseFrameXF
     {
         private DeckObservableDict<RackoCardInformation>? _cardList;
         private StackLayout? _thisStack;
-        private ICommand? thisCommand;
+        private ICommand? _thisCommand;
         private Grid? FindControl(RackoCardInformation thisCard)
         {
             foreach (var thisCon in _thisStack!.Children)
@@ -28,26 +31,35 @@ namespace RackoXF
             }
             return null;
         }
-        public void Init(RackoMainGameClass mainGame)
+        public void Init(RackoMainViewModel viewModel, RackoVMData model, RackoGameContainer gameContainer)
         {
-            mainGame.SingleInfo = mainGame!.PlayerList!.GetSelf();
-            _cardList = mainGame.SingleInfo.MainHandList;
-            thisCommand = mainGame.ThisMod!.PlayOnPileCommand;
+            gameContainer.SingleInfo = gameContainer!.PlayerList!.GetSelf();
+            _cardList = gameContainer.SingleInfo.MainHandList;
+            _thisCommand = viewModel.GetBasicGameCommand(nameof(RackoMainViewModel.PlayOnPileAsync));
             Grid mainGrid = new Grid();
             _thisStack = new StackLayout();
             Text = "Your Card List";
             var thisRect = ThisFrame.GetControlArea();
             _thisStack.Margin = new Thickness(thisRect.Left + 3, thisRect.Top + 10, 3, 3);
-            if (mainGame.SingleInfo.MainHandList.Count != 10)
+            if (gameContainer.SingleInfo.MainHandList.Count != 10)
                 throw new BasicBlankException("Must have 10 cards before i can init.  Rethink now.");
-            thisCommand!.CanExecuteChanged += ThisCommand_CanExecuteChanged;
+            _thisCommand!.CanExecuteChanged += ThisCommand_CanExecuteChanged;
             _cardList.CollectionChanged += CardList_CollectionChanged;
-            PopulateControls(mainGame);
+            PopulateControls(gameContainer);
             mainGrid.Children.Add(ThisDraw);
             mainGrid.Children.Add(_thisStack);
             Content = mainGrid;
         }
-        private void PopulateControls(RackoMainGameClass mainGame)
+        public void Dispose()
+        {
+            if (_cardList == null)
+            {
+                return;
+            }
+            _thisCommand!.CanExecuteChanged -= ThisCommand_CanExecuteChanged;
+            _cardList!.CollectionChanged -= CardList_CollectionChanged;
+        }
+        private void PopulateControls(RackoGameContainer mainGame)
         {
             _thisStack!.Children.Clear();
             int starts = mainGame.PlayerList.Count() + 2;
@@ -78,10 +90,11 @@ namespace RackoXF
                 CardGraphicsXF ThisGraphics = new CardGraphicsXF();
                 ThisGraphics.SendSize("", thisCard); //hopefully this simple.
                 GridHelper.AddControlToGrid(thisGrid, ThisGraphics, 0, 1);
-                RowClickerXF ThisCustom = new RowClickerXF();
-                ThisCustom.Command = mainGame.ThisMod!.PlayOnPileCommand;
-                GridHelper.AddControlToGrid(thisGrid, ThisCustom, 0, 0);
-                Grid.SetColumnSpan(ThisCustom, 2); // so it spans the entire control.
+                RowClickerXF custom = new RowClickerXF();
+                custom.Command = _thisCommand!;
+                custom.CommandParameter = thisCard;
+                GridHelper.AddControlToGrid(thisGrid, custom, 0, 0);
+                Grid.SetColumnSpan(custom, 2); // so it spans the entire control.
                 _thisStack.Children.Add(thisGrid);
             }
         }
@@ -96,6 +109,9 @@ namespace RackoXF
                 CardGraphicsXF nextControl = (CardGraphicsXF)oldGrid!.Children[1];
                 nextControl.BindingContext = null;
                 nextControl.BindingContext = e.NewItems[0];
+                oldGrid.BindingContext = e.NewItems[0]; // i think i forgot the 0
+                var row = (RowClickerXF)oldGrid!.Children[2];
+                row.CommandParameter = e.NewItems[0]!;
                 oldGrid.BindingContext = e.NewItems[0]; // i think i forgot the 0
                 return;
             }
@@ -115,21 +131,16 @@ namespace RackoXF
                     CardGraphicsXF nextControl = (CardGraphicsXF)thisGrid.Children[1];
                     nextControl.BindingContext = null;
                     nextControl.BindingContext = tempList[x];
+                    var row = (RowClickerXF)thisGrid!.Children[2];
+                    row.CommandParameter = e.NewItems[0]!;
                     x += 1;
                 }
             }
         }
         private void ThisCommand_CanExecuteChanged(object? sender, EventArgs e)
         {
-            IsEnabled = thisCommand!.CanExecute(null); //was forced to do this way now.
+            IsEnabled = _thisCommand!.CanExecute(null); //was forced to do this way now.
         }
-        public void Update(RackoMainGameClass mainGame)
-        {
-            mainGame.SingleInfo = mainGame.PlayerList!.GetSelf();
-            _cardList!.CollectionChanged -= CardList_CollectionChanged;
-            _cardList = mainGame.SingleInfo.MainHandList;
-            _cardList.CollectionChanged += CardList_CollectionChanged;
-            PopulateControls(mainGame);
-        }
+        
     }
 }

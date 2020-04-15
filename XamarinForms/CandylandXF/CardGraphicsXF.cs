@@ -1,5 +1,6 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using CandylandCP;
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using CandylandCP.Data;
+using CandylandCP.GraphicsCP;
 using Xamarin.Forms;
 namespace CandylandXF
 {

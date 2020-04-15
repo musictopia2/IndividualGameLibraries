@@ -1,5 +1,6 @@
-using BaseGPXPagesAndControlsXF.BasicControls.GameBoards;
-using BowlingDiceGameCP;
+using BasicGamingUIXFLibrary.BasicControls.GameBoards;
+using BowlingDiceGameCP.Data;
+using BowlingDiceGameCP.Logic;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
 using System.Linq;

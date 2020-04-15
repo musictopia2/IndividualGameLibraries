@@ -1,6 +1,6 @@
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
-using static BowlingDiceGameCP.BowlingGlobalDrawing;
+using static BowlingDiceGameCP.Logic.BowlingGlobalDrawing;
 namespace BowlingDiceGameXF
 {
     public class BlankBowlingBorderXF : ContentView

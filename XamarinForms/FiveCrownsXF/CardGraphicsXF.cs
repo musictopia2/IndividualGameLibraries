@@ -1,9 +1,22 @@
-using BaseGPXPagesAndControlsXF.GameGraphics.Base;
-using FiveCrownsCP;
+using System;
+using System.Text;
+using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
+using System.Linq;
+using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
+using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
+using CommonBasicStandardLibraries.CollectionClasses;
+using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using fs = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.FileHelpers;
+using js = CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.JsonSerializers.NewtonJsonStrings; //just in case i need those 2.
+using BasicGamingUIXFLibrary.GameGraphics.Base;
+using FiveCrownsCP.Cards;
 using Xamarin.Forms;
+using FiveCrownsCP.Data;
+
 namespace FiveCrownsXF
 {
-    public class CardGraphicsXF : BaseDeckGraphicsXF<FiveCrownsCardInformation, FiveCrownsGraphicsCP>
+    public class CardGraphicsXF : BaseDeckGraphicsXF<FiveCrownsCardInformation, FiveCrownsGraphicsCP>//begin
     {
         public static readonly BindableProperty CardValueProperty = BindableProperty.Create(propertyName: "CardValue", returnType: typeof(EnumCardValueList), declaringType: typeof(CardGraphicsXF), defaultValue: EnumCardValueList.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: CardValuePropertyChanged);
         public EnumCardValueList CardValue

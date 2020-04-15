@@ -1,22 +1,28 @@
-using BasicGameFramework.BasicDrawables.Interfaces;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.MultiplayerClasses.BasicPlayerClasses;
-using BasicGameFramework.RegularDeckOfCards;
-using BasicGameFramework.TestUtilities;
-using CousinRummyCP;
+using BasicGameFrameworkLibrary.BasicDrawables.Interfaces;
+using BasicGameFrameworkLibrary.MultiplayerClasses.BasicPlayerClasses;
+using BasicGameFrameworkLibrary.RegularDeckOfCards;
+using BasicGameFrameworkLibrary.TestUtilities;
+using CousinRummyCP.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks; //most of the time, i will be using asyncs.
+using System.Text;
+using System.Threading.Tasks;
+
 namespace CousinRummyXF
 {
-    //public class TestConfig : ITestCardSetUp<RegularSimpleCard, CousinRummyPlayerItem>
-    //{
-    //    public Task SetUpTestHandsAsync(PlayerCollection<CousinRummyPlayerItem> PlayerList, IListShuffler<RegularSimpleCard> DeckList)
-    //    {
-    //        CousinRummyPlayerItem ThisPlayer = PlayerList.GetSelf();
-    //        //for testing i will get 8 eights.
-    //        ThisPlayer.StartUpList = DeckList.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
-    //        //can be anything you want.
-    //        return Task.CompletedTask;
-    //    }
-    //}
+    public class TestConfig : ITestCardSetUp<RegularRummyCard, CousinRummyPlayerItem>
+    {
+        public Task SetUpTestHandsAsync(PlayerCollection<CousinRummyPlayerItem> playerlist, IListShuffler<RegularRummyCard> decklist)
+        {
+            //CousinRummyPlayerItem player = playerlist.GetSelf();
+            //for testing i will get 8 eights.
+            //player.StartUpList = decklist.Where(Items => Items.Value == EnumCardValueList.Eight).Take(2).ToRegularDeckDict();
+            //this is an example.
+
+
+            //can be anything you want.
+            return Task.CompletedTask;
+        }
+    }
 }

@@ -1,11 +1,11 @@
-using BasicGameFramework.DIContainers;
-using BasicGameFramework.Extensions;
-using BasicGameFramework.GameGraphicsCP.Interfaces;
+using BasicGameFrameworkLibrary.DIContainers;
+using BasicGameFrameworkLibrary.Extensions;
+using BasicGameFrameworkLibrary.GameGraphicsCP.Interfaces;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using SkiaSharpGeneralLibrary.Interfaces;
-using System.Windows.Input;
-using ThinkTwiceCP;
+using ThinkTwiceCP.Data;
+using ThinkTwiceCP.Logic;
 using Xamarin.Forms;
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
 namespace ThinkTwiceXF
@@ -25,7 +25,7 @@ namespace ThinkTwiceXF
         }
         public void SendDiceInfo(Multiplier thisDice) //it did send dice
         {
-            IGamePackageResolver thisR = (IGamePackageResolver)cons;
+            IGamePackageResolver thisR = (IGamePackageResolver)cons!;
             IProportionImage thisP = thisR.Resolve<IProportionImage>(GetDiceTag);
             _mains = new ButtonDiceGraphicsCP();
             _mains.PaintUI = this;

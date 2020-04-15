@@ -1,7 +1,7 @@
 using CommonBasicStandardLibraries.CollectionClasses;
-using CribbageCP;
+using CribbageCP.Data;
 using Xamarin.Forms;
-using static BaseGPXPagesAndControlsXF.BasePageProcesses.Pages.SharedPageFunctions;
+using static BasicGamingUIXFLibrary.Helpers.SharedUIFunctions;
 using static BasicXFControlsAndPages.Helpers.GridHelper;
 namespace CribbageXF
 {
@@ -9,12 +9,12 @@ namespace CribbageXF
     {
         private CustomBasicCollection<ScoreInfo>? _scoreList;
         private Grid? _thisGrid;
-        private CribbageViewModel? _thisMod;
-        public void LoadLists(CribbageViewModel thisMod)
+        private CribbageVMData? _model;
+        public void LoadLists(CribbageVMData model)
         {
-            _thisMod = thisMod;
+            _model = model;
             _thisGrid = new Grid();
-            _scoreList = thisMod.ScoreBoard1!.ScoreList;
+            _scoreList = _model.ScoreBoard1!.ScoreList;
             _scoreList.CollectionChanged += ScoreList_CollectionChanged;
             AddAutoColumns(_thisGrid, 2);
             PopulateList();
@@ -65,7 +65,7 @@ namespace CribbageXF
             AddControlToGrid(_thisGrid, thisLabel, x, 0);
             thisLabel = GetDefaultLabel(); //at least for this.
             thisLabel.FontAttributes = FontAttributes.Bold;
-            thisLabel.Text = _thisMod!.TotalScore.ToString();
+            thisLabel.Text = _model!.TotalScore.ToString();
             AddControlToGrid(_thisGrid, thisLabel, x, 1);
         }
     }

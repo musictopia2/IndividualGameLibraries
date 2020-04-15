@@ -1,16 +1,16 @@
-using BaseGPXPagesAndControlsXF.BasicControls.MultipleFrameContainers;
-using BaseGPXPagesAndControlsXF.GameGraphics.Cards;
-using BaseSolitaireClassesCP.Cards;
-using BasicGameFramework.MultiplePilesViewModels;
+using BasicGameFrameworkLibrary.MultiplePilesObservable;
+using BasicGameFrameworkLibrary.SolitaireClasses.Cards;
+using BasicGamingUIXFLibrary.BasicControls.MultipleFrameContainers;
+using BasicGamingUIXFLibrary.GameGraphics.Cards;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
-using LittleSpiderSolitaireCP;
+using LittleSpiderSolitaireCP.Logic;
 using System.Linq;
 using Xamarin.Forms;
 using static BasicXFControlsAndPages.Helpers.GridHelper; //just in case
 using static CommonBasicStandardLibraries.BasicDataSettingsAndProcesses.BasicDataFunctions;
-using ts = BasicGameFramework.GameGraphicsCP.Cards.DeckOfCardsCP;
+using ts = BasicGameFrameworkLibrary.GameGraphicsCP.Cards.DeckOfCardsCP;
 namespace LittleSpiderSolitaireXF
 {
     public class CustomWasteUI : ContentView
