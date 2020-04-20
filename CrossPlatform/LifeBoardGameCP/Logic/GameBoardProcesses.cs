@@ -115,6 +115,9 @@ namespace LifeBoardGameCP.Logic
             do
             {
                 x++;
+                //there was a case where the position went from 47 to 50.
+                //somehow no 48 and no 49.
+
                 if (x > 16)
                     throw new BasicBlankException("Can't move more than 16 spaces.  This means its hosed."); //if testing, rethink
                 if (currentPosition == 0 && _gameContainer.SingleInfo.OptionChosen == EnumStart.Career)
@@ -123,9 +126,9 @@ namespace LifeBoardGameCP.Logic
                     currentPosition = 1;
                 else if (currentPosition == 0)
                     throw new BasicBlankException("Current position cannot be 0 if not choosing college or career");
-                else if (currentPosition == 48 && useSecond)
+                else if (currentPosition >= 48 && useSecond && currentPosition < 56)
                     currentPosition = 56;
-                else if (currentPosition == 84 && useSecond)
+                else if (currentPosition >= 84 && useSecond && currentPosition < 92)
                     currentPosition = 92;
                 else if (x == 1 && _stops.Any(items => items == currentPosition))
                     currentPosition++;

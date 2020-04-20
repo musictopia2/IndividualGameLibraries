@@ -329,6 +329,10 @@ namespace CribbageCP.Logic
         protected override async Task StartSetUpAsync(bool isBeginning)
         {
             LoadControls();
+            if (_gameContainer.DeckList.Any(x => x.Value == EnumCardValueList.HighAce))
+            {
+                throw new BasicBlankException("Ace must be low.  Rethink");
+            }
             if (SaveRoot!.Dealer == 0)
                 SaveRoot!.Dealer = await PlayerList!.CalculateOldTurnAsync();
             else

@@ -5,7 +5,7 @@ namespace LifeBoardGameXF.Views
 {
     public class StealTilesView : BasicPlayerPicker
     {
-        public StealTilesView(LifeBoardGameVMData model, IEventAggregator aggregator) : base(model, aggregator)
+        public StealTilesView(LifeBoardGameVMData model, IEventAggregator aggregator, LifeBoardGameGameContainer gameContainer) : base(model, aggregator, gameContainer)
         {
         }
     }

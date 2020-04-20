@@ -3,6 +3,7 @@ using BasicGameFrameworkLibrary.MultiplayerClasses.Extensions;
 using BasicGameFrameworkLibrary.NetworkingClasses.Extensions;
 using CommonBasicStandardLibraries.AdvancedGeneralFunctionsAndProcesses.BasicExtensions;
 using CommonBasicStandardLibraries.Exceptions;
+using CommonBasicStandardLibraries.MVVMFramework.UIHelpers;
 using LifeBoardGameCP.Cards;
 using LifeBoardGameCP.Data;
 using System.Linq;
@@ -58,6 +59,10 @@ namespace LifeBoardGameCP.Logic
 
         public async Task TradedSalaryAsync(string player)
         {
+            if (player == "")
+            {
+                UIPlatform.ShowError("Player cannot be blank.  Rethink");
+            }
             _gameContainer.SingleInfo = _gameContainer.PlayerList!.GetWhoPlayer();
             if (_gameContainer.GameStatus == EnumWhatStatus.NeedTradeSalary && _gameContainer.CanSendMessage())
             {
@@ -90,8 +95,8 @@ namespace LifeBoardGameCP.Logic
                 await move.PossibleAutomateMoveAsync();
                 return; //i think.
             }
-            else if (_gameContainer.GameStatus != EnumWhatStatus.NeedToSpin)
-                throw new BasicBlankException("Rethinking is required");
+            //else if (_gameContainer.GameStatus != EnumWhatStatus.NeedToSpin)
+            //    throw new BasicBlankException("Rethinking is required");
             await _gameContainer.ContinueTurnAsync!.Invoke();
         }
     }

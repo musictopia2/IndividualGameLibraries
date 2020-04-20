@@ -106,6 +106,12 @@ namespace CousinRummyXF.Views
             otherStack.Children.Add(button);
             button = GetSmallerButton("Lay Down Other Sets", nameof(CousinRummyMainViewModel.OtherSetsAsync)); // i think its othersets commands (?)
             otherStack.Children.Add(button);
+
+            if (restoreP != null)
+            {
+                otherStack.Children.Add(restoreP); //default add to grid but does not have to.
+            }
+
             AddControlToGrid(bottomGrid, otherStack, 0, 0);
             AddControlToGrid(bottomGrid, _mainG, 0, 1);
             AddControlToGrid(gameGrid, bottomGrid, 2, 0);
@@ -123,10 +129,7 @@ namespace CousinRummyXF.Views
 
             _discardGPile.Margin = new Thickness(5, 5, 5, 5);
 
-            if (restoreP != null)
-            {
-                otherStack.Children.Add(restoreP); //default add to grid but does not have to.
-            }
+            
             Content = gameGrid;
         }
         Task IHandleAsync<LoadEventModel>.HandleAsync(LoadEventModel message)

@@ -29,12 +29,12 @@ namespace LifeBoardGameCP.ViewModels
             _gameContainer = gameContainer;
             _model = model;
             _processes = processes;
-            _model.PlayerChosen = ""; //i think
+            //_model.PlayerChosen = ""; //i think
             //reset the other part.
         }
 
         public override bool CanSubmit => _model.PlayerChosen != "";
-
+        //public override bool CanSubmit => true; //temporarily.
         public override Task SubmitAsync()
         {
             return _processes.TradedSalaryAsync(_model.PlayerChosen);

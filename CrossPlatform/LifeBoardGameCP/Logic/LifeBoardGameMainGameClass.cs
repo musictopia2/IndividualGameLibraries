@@ -17,6 +17,7 @@ using CommonBasicStandardLibraries.BasicDataSettingsAndProcesses;
 using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
+using CommonBasicStandardLibraries.MVVMFramework.UIHelpers;
 using LifeBoardGameCP.Cards;
 using LifeBoardGameCP.Data;
 using LifeBoardGameCP.EventModels;
@@ -210,7 +211,16 @@ namespace LifeBoardGameCP.Logic
                         throw new BasicBlankException("The second possible position cannot be 0.  Otherwise, should have made move automatically");
                     }
                     CustomBasicList<int> posList = new CustomBasicList<int> { firstNumber, secondNumber };
-                    await MakeMoveAsync(posList.GetRandomItem());
+                    int numberChosen;
+                    if (Test.DoubleCheck)
+                    {
+                        numberChosen = secondNumber; //the problem only happens with second.
+                    }
+                    else
+                    {
+                        numberChosen = posList.GetRandomItem();
+                    }
+                    await MakeMoveAsync(numberChosen);
                     //await _boardProcesses.ComputerChoseSpaceAsync(posList.GetRandomItem());
                     break;
                 case EnumWhatStatus.NeedNight:
@@ -251,7 +261,23 @@ namespace LifeBoardGameCP.Logic
             //hopefully the erasing of colors is already handled.
             await FinishUpAsync(isBeginning);
         }
-
+        //protected override async Task ShowHumanCanPlayAsync()
+        //{
+        //    await base.ShowHumanCanPlayAsync();
+        //    if (BasicData.IsXamarinForms && (SaveRoot.GameStatus == EnumWhatStatus.NeedTradeSalary || SaveRoot.GameStatus == EnumWhatStatus.NeedStealTile))
+        //    {
+        //        await UIPlatform.ShowMessageAsync("Trying to show human can continue");
+        //        if (_gameContainer.SubmitPlayerCommand == null)
+        //        {
+        //            //UIPlatform.ShowError("Nobody set up the submit player command.  Rethink");
+        //            return;
+        //        }
+        //        _gameContainer.SubmitPlayerCommand.ReportCanExecuteChange(); //try this way.
+        //        //await Task.Delay(200); //try delay to fix second bug.
+        //        //await UIPlatform.ShowMessageAsync("Choose Player Or End Turn");
+        //        //_gameContainer.Command.ManualReport();
+        //    }
+        //}
         async Task IMiscDataNM.MiscDataReceived(string status, string content)
         {
             switch (status) //can't do switch because we don't know what the cases are ahead of time.
@@ -523,9 +549,19 @@ namespace LifeBoardGameCP.Logic
             }
             await FinishTilesAsync();
         }
-
+        private void CheckSalaries()
+        {
+            PlayerList.ForEach(player =>
+            {
+                if (player.Hand.Count(x => x.CardCategory == EnumCardCategory.Salary) > 1)
+                {
+                    throw new BasicBlankException($"Player {player.NickName} had more than one salary.  That is not correct.  Rethink");
+                }
+            });
+        }
         public override async Task EndTurnAsync()
         {
+            CheckSalaries();
             SaveRoot.WasNight = false;
             WhoTurn = await PlayerList!.CalculateWhoTurnAsync(true);
             //if anything else is needed, do here.

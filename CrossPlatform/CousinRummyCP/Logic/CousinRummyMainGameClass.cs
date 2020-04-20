@@ -514,6 +514,10 @@ namespace CousinRummyCP.Logic
         }
         public async Task LayDownOtherSetsAsync()
         {
+            if (BasicData.IsXamarinForms)
+            {
+                await Task.Delay(20);
+            }
             int manys = SingleInfo!.ObjectCount; //since i can trust it works properly.
             if (manys == 0)
             {

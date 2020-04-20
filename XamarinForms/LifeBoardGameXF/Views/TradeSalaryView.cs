@@ -5,7 +5,7 @@ namespace LifeBoardGameXF.Views
 {
     public class TradeSalaryView : BasicPlayerPicker
     {
-        public TradeSalaryView(LifeBoardGameVMData model, IEventAggregator aggregator) : base(model, aggregator)
+        public TradeSalaryView(LifeBoardGameVMData model, IEventAggregator aggregator, LifeBoardGameGameContainer gameContainer) : base(model, aggregator, gameContainer)
         {
         }
     }

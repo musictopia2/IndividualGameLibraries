@@ -176,6 +176,12 @@ namespace LifeBoardGameCP.Data
         }
         public int GetNumberSpun(int position)
         {
+            //could have eventually used config.  however, obviously only for testing.
+
+            //if (Test.DoubleCheck)
+            //{
+            //    return 10; //for now.
+            //}
             if (position >= 3 && position <= 33)
                 return 1;
             if (position >= 40 && position <= 69)
@@ -268,6 +274,7 @@ namespace LifeBoardGameCP.Data
             if (Test!.DoubleCheck == true)
                 return true; //to test the entertainer part.
             var tempList = SaveRoot.SpinList.Skip(SaveRoot.SpinList.Count - 2).ToCustomBasicList();
+            
             if (tempList.Count != 2)
                 throw new BasicBlankException("Must have 2 items");
             if (tempList.First() < 8)
@@ -381,6 +388,6 @@ namespace LifeBoardGameCP.Data
             thisPlayer.MoneyEarned += moneyCollected;
             PopulatePlayerProcesses.FillInfo(thisPlayer);
         }
-
+        //public PlainCommand? SubmitPlayerCommand { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace LifeBoardGameCP.ViewModels
     public class LifeBoardGameMainViewModel : SimpleBoardGameVM, IHandleAsync<ShowCardEventModel>
     {
         private readonly LifeBoardGameMainGameClass _mainGame; //if we don't need, delete.
+
         //private readonly BasicData _basicData;
         private readonly IGamePackageResolver _resolver;
 

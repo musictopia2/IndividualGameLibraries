@@ -23,7 +23,12 @@ namespace CousinRummyXF
         public Bootstrapper(IGamePlatform customPlatform, IStartUp starts, EnumGamePackageMode mode) : base(customPlatform, starts, mode)
         {
         }
-
+        protected override Task RegisterTestsAsync()
+        {
+            TestData!.SaveOption = BasicGameFrameworkLibrary.TestUtilities.EnumTestSaveCategory.RestoreOnly;
+            TestData.StatePosition = 1; //to backtrack.
+            return Task.CompletedTask;
+        }
         protected override Task ConfigureAsync()
         {
             OurContainer!.RegisterCommonRegularCards<CousinRummyShellViewModel, RegularRummyCard>(registerCommonProportions: false, customDeck: true);

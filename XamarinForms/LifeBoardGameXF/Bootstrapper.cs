@@ -29,7 +29,17 @@ namespace LifeBoardGameXF
         public Bootstrapper(IGamePlatform customPlatform, IStartUp starts, EnumGamePackageMode mode) : base(customPlatform, starts, mode)
         {
         }
+        protected override Task RegisterTestsAsync()
+        {
+            //TestData!.PlayCategory = BasicGameFrameworkLibrary.TestUtilities.EnumPlayCategory.NoShuffle;
 
+            //LifeBoardGameGameContainer.StartCollegeCareer = true;
+            TestData!.SaveOption = BasicGameFrameworkLibrary.TestUtilities.EnumTestSaveCategory.RestoreOnly;
+            //TestData.NoAnimations = true;
+            TestData.StatePosition = 1;
+            TestData.DoubleCheck = true;
+            return base.RegisterTestsAsync();
+        }
         protected override Task ConfigureAsync()
         {
 			

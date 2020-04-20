@@ -21,7 +21,12 @@ namespace TeeItUpWPF
         public Bootstrapper(IStartUp starts, EnumGamePackageMode mode) : base(starts, mode)
         {
         }
-
+        protected override Task RegisterTestsAsync()
+        {
+            TestData!.SaveOption = BasicGameFrameworkLibrary.TestUtilities.EnumTestSaveCategory.RestoreOnly;
+            TestData.StatePosition = 4;
+            return base.RegisterTestsAsync();
+        }
         protected override Task ConfigureAsync()
         {
             OurContainer!.RegisterNonSavedClasses<TeeItUpShellViewModel>();

@@ -15,6 +15,7 @@ using CommonBasicStandardLibraries.CollectionClasses;
 using CommonBasicStandardLibraries.Exceptions;
 using CommonBasicStandardLibraries.Messenging;
 using CommonBasicStandardLibraries.MVVMFramework.UIHelpers;
+using System;
 using System.Linq;
 using System.Threading.Tasks; //most of the time, i will be using asyncs.
 using TeeItUpCP.Cards;
@@ -236,120 +237,128 @@ namespace TeeItUpCP.Logic
         {
             int playerID = thisPlayer.Id;
             int deck = thisCard.Deck;
-            if (SaveRoot!.GameStatus == EnumStatusType.Beginning)
+            try
             {
-                if (thisPlayer.PlayerBoard!.CanStart)
+                if (SaveRoot!.GameStatus == EnumStatusType.Beginning)
                 {
-                    throw new BasicBlankException("Should have not allowed this since 2 cards was already selected");
-                    //await _thisMod!.ShowGameMessageAsync("You already selected the 2 cards");
-                    //return
-                }
-                //if (BasicData!.MultiPlayer == true)
-                //{
-                //    SingleInfo = PlayerList!.GetSelf();
-                //    playerID = SingleInfo.Id;
-                //    AddFirstPlay(deck, playerID);
-                //}
-                await BeginningCardSelectedAsync(deck, playerID);
-                return;
-            }
-            bool knowns = thisPlayer.PlayerBoard!.IsCardKnown(deck);
-            if (thisCard.IsMulligan == true && knowns == true)
-            {
-                if (SaveRoot.GameStatus != EnumStatusType.FirstTurn)
-                {
-                    await UIPlatform.ShowMessageAsync("This is not the first turn.  Therefore, the Mulligan card is not valid");
+                    if (thisPlayer.PlayerBoard!.CanStart)
+                    {
+                        throw new BasicBlankException("Should have not allowed this since 2 cards was already selected");
+                        //await _thisMod!.ShowGameMessageAsync("You already selected the 2 cards");
+                        //return
+                    }
+                    //if (BasicData!.MultiPlayer == true)
+                    //{
+                    //    SingleInfo = PlayerList!.GetSelf();
+                    //    playerID = SingleInfo.Id;
+                    //    AddFirstPlay(deck, playerID);
+                    //}
+                    await BeginningCardSelectedAsync(deck, playerID);
                     return;
                 }
-                if (_model!.OtherPile!.PileEmpty() == false)
+                bool knowns = thisPlayer.PlayerBoard!.IsCardKnown(deck);
+                if (thisCard.IsMulligan == true && knowns == true)
                 {
-                    await UIPlatform.ShowMessageAsync("Sorry, since you already drew, cannot use the Mulligan");
+                    if (SaveRoot.GameStatus != EnumStatusType.FirstTurn)
+                    {
+                        await UIPlatform.ShowMessageAsync("This is not the first turn.  Therefore, the Mulligan card is not valid");
+                        return;
+                    }
+                    if (_model!.OtherPile!.PileEmpty() == false)
+                    {
+                        await UIPlatform.ShowMessageAsync("Sorry, since you already drew, cannot use the Mulligan");
+                        return;
+                    }
+                    if (thisPlayer.PlayerBoard.IsSelf == false)
+                    {
+                        await UIPlatform.ShowMessageAsync("Sorry, cannot use someone else's Mulligan");
+                        return;
+                    }
+                    if (thisPlayer.PlayerBoard.IsMulliganValid(deck) == false)
+                    {
+                        await UIPlatform.ShowMessageAsync("Sorry, the mulligan cannot be used because someone traded with you");
+                        return;
+                    }
+                    if (BasicData!.MultiPlayer == true)
+                        await Network!.SendAllAsync("firstmulliganchosen", deck);
+                    await UseMulliganFirstTurnAsync(deck);
                     return;
                 }
-                if (thisPlayer.PlayerBoard.IsSelf == false)
+                bool selfs = thisPlayer.PlayerBoard.IsSelf;
+                if (SaveRoot.FirstMulligan)
                 {
-                    await UIPlatform.ShowMessageAsync("Sorry, cannot use someone else's Mulligan");
+                    if (selfs)
+                    {
+                        await UIPlatform.ShowMessageAsync("Since you are using a Mulligan, you must trade with another player");
+                        return;
+                    }
+                    if (thisPlayer.PlayerBoard.CanStealCard(deck) == false)
+                    {
+                        await UIPlatform.ShowMessageAsync("The card chosen cannot be stolen");
+                        return;
+                    }
+                    if (BasicData!.MultiPlayer == true)
+                        await SendPlayAsync("firstmulliganplayed", deck, playerID);
+                    await FirstMulliganTradeAsync(playerID, deck);
                     return;
                 }
-                if (thisPlayer.PlayerBoard.IsMulliganValid(deck) == false)
+                int oldDeck;
+                if (_model!.OtherPile!.PileEmpty() == true)
+                    oldDeck = 0;
+                else
+                    oldDeck = _model.OtherPile.GetCardInfo().Deck;
+                if (thisCard.IsMulligan && knowns)
                 {
-                    await UIPlatform.ShowMessageAsync("Sorry, the mulligan cannot be used because someone traded with you");
+                    await UIPlatform.ShowMessageAsync("A mulligan card cannot be used for trading");
+                    return;
+                }
+                if (oldDeck == 0 && selfs == false)
+                {
+                    await UIPlatform.ShowMessageAsync("Cannot steal any card because no card is chosen");
+                    return;
+                }
+                if (selfs == false)
+                {
+                    var previousCard = _model.OtherPile.GetCardInfo();
+                    if (previousCard.IsMulligan == false)
+                    {
+                        await UIPlatform.ShowMessageAsync("Since the card is not a mulligan, cannot steal another player's card");
+                        return;
+                    }
+                    if (thisPlayer.PlayerBoard.CanStealCard(deck) == false)
+                    {
+                        await UIPlatform.ShowMessageAsync("The card cannot be stolen from another player");
+                        return;
+                    }
+                    if (BasicData!.MultiPlayer == true)
+                        await SendPlayAsync("stealcard", deck, playerID);
+                    await StealCardAsync(playerID, deck);
+                    return;
+                }
+                if (oldDeck == 0)
+                {
+                    await UIPlatform.ShowMessageAsync("Sorry, you must choose to pickup from discard or the deck first");
+                    return;
+                }
+                if (thisPlayer.PlayerBoard.IsPartFrozen(deck))
+                {
+                    await UIPlatform.ShowMessageAsync("Since the column is frozen, cannot trade it anymore for the round");
+                    return;
+                }
+                if (HasMatch(thisPlayer.PlayerBoard, deck, knowns) == false) //hopefully this is still correct.
+                {
+                    await UIPlatform.ShowMessageAsync("There is a match.  Therefore, must return a match");
                     return;
                 }
                 if (BasicData!.MultiPlayer == true)
-                    await Network!.SendAllAsync("firstmulliganchosen", deck);
-                await UseMulliganFirstTurnAsync(deck);
-                return;
+                    await Network!.SendAllAsync("tradecard", deck);
+                await TradeCardAsync(deck);
             }
-            bool selfs = thisPlayer.PlayerBoard.IsSelf;
-            if (SaveRoot.FirstMulligan)
+            catch (Exception ex)
             {
-                if (selfs)
-                {
-                    await UIPlatform.ShowMessageAsync("Since you are using a Mulligan, you must trade with another player");
-                    return;
-                }
-                if (thisPlayer.PlayerBoard.CanStealCard(deck) == false)
-                {
-                    await UIPlatform.ShowMessageAsync("The card chosen cannot be stolen");
-                    return;
-                }
-                if (BasicData!.MultiPlayer == true)
-                    await SendPlayAsync("firstmulliganplayed", deck, playerID);
-                await FirstMulliganTradeAsync(playerID, deck);
-                return;
+                UIPlatform.ShowError(ex.Message);
             }
-            int oldDeck;
-            if (_model!.OtherPile!.PileEmpty() == true)
-                oldDeck = 0;
-            else
-                oldDeck = _model.OtherPile.GetCardInfo().Deck;
-            if (thisCard.IsMulligan && knowns)
-            {
-                await UIPlatform.ShowMessageAsync("A mulligan card cannot be used for trading");
-                return;
-            }
-            if (oldDeck == 0 && selfs == false)
-            {
-                await UIPlatform.ShowMessageAsync("Cannot steal any card because no card is chosen");
-                return;
-            }
-            if (selfs == false)
-            {
-                var previousCard = _model.OtherPile.GetCardInfo();
-                if (previousCard.IsMulligan == false)
-                {
-                    await UIPlatform.ShowMessageAsync("Since the card is not a mulligan, cannot steal another player's card");
-                    return;
-                }
-                if (thisPlayer.PlayerBoard.CanStealCard(deck) == false)
-                {
-                    await UIPlatform.ShowMessageAsync("The card cannot be stolen from another player");
-                    return;
-                }
-                if (BasicData!.MultiPlayer == true)
-                    await SendPlayAsync("stealcard", deck, playerID);
-                await StealCardAsync(playerID, deck);
-                return;
-            }
-            if (oldDeck == 0)
-            {
-                await UIPlatform.ShowMessageAsync("Sorry, you must choose to pickup from discard or the deck first");
-                return;
-            }
-            if (thisPlayer.PlayerBoard.IsPartFrozen(deck))
-            {
-                await UIPlatform.ShowMessageAsync("Since the column is frozen, cannot trade it anymore for the round");
-                return;
-            }
-            if (HasMatch(thisPlayer.PlayerBoard, deck, knowns) == false) //hopefully this is still correct.
-            {
-                await UIPlatform.ShowMessageAsync("There is a match.  Therefore, must return a match");
-                return;
-            }
-            if (BasicData!.MultiPlayer == true)
-                await Network!.SendAllAsync("tradecard", deck);
-            await TradeCardAsync(deck);
+            
         }
         public async Task SendPlayAsync(string status, int deck, int player)
         {
@@ -479,21 +488,29 @@ namespace TeeItUpCP.Logic
         }
         public async Task TradeCardAsync(int deck)
         {
-            int matches = SingleInfo!.PlayerBoard!.ColumnMatched(_model!.OtherPile!.GetCardInfo().Deck);
-            if (HasMatch(SingleInfo.PlayerBoard, deck, true) == false || matches == 0)
+            try
             {
-                SingleInfo.PlayerBoard.TradeCard(deck, _model.OtherPile.GetCardInfo().Deck);
-                TeeItUpCardInformation tempCard = new TeeItUpCardInformation();
-                tempCard.Populate(deck);
-                await DiscardAsync(tempCard);
-                return;
+                int matches = SingleInfo!.PlayerBoard!.ColumnMatched(_model!.OtherPile!.GetCardInfo().Deck);
+                if (HasMatch(SingleInfo.PlayerBoard, deck, true) == false || matches == 0)
+                {
+                    SingleInfo.PlayerBoard.TradeCard(deck, _model.OtherPile.GetCardInfo().Deck);
+                    TeeItUpCardInformation tempCard = new TeeItUpCardInformation();
+                    tempCard.Populate(deck);
+                    await DiscardAsync(tempCard);
+                    return;
+                }
+                SingleInfo.PlayerBoard.MatchCard(deck, out int newDeck);
+                if (newDeck == 0)
+                    UIPlatform.ShowError("When trading card, newdeck cannot be 0");
+                TeeItUpCardInformation finCard = new TeeItUpCardInformation();
+                finCard.Populate(newDeck);
+                await DiscardAsync(finCard);
             }
-            SingleInfo.PlayerBoard.MatchCard(deck, out int newDeck);
-            if (newDeck == 0)
-                throw new BasicBlankException("When trading card, newdeck cannot be 0");
-            TeeItUpCardInformation finCard = new TeeItUpCardInformation();
-            finCard.Populate(newDeck);
-            await DiscardAsync(finCard);
+            catch (Exception ex)
+            {
+                UIPlatform.ShowError(ex.Message);
+            }
+            
         }
 
     }

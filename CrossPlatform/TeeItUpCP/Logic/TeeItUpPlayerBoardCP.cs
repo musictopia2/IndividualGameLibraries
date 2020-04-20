@@ -158,6 +158,7 @@ namespace TeeItUpCP.Logic
                 throw new BasicBlankException("Not even a mulligan");
             return !thisCard.MulliganUsed;
         }
+        private int _tempDeck = -1;
         public void TradeCard(int oldDeck, int newDeck)
         {
             TeeItUpCardInformation thisCard = new TeeItUpCardInformation();
@@ -165,9 +166,38 @@ namespace TeeItUpCP.Logic
             thisCard.IsUnknown = false;
             if (thisCard.IsMulligan == true)
                 thisCard.MulliganUsed = true;
+
+            //looks like for trading, you can't ignore because then duplicate cards.
+            //however, if we remove, then it gets hosed as well.
+            //the problem is you had the mulligan but it can be reused.
+
+
+
             if (ObjectList.ObjectExist(thisCard.Deck))
-                return;
-            //ObjectList.RemoveObjectByDeck(thisCard.Deck); //looks like causes deeper issues though.
+            {
+                //ObjectList.RemoveObjectByDeck(thisCard.Deck); //looks like causes deeper issues though.
+
+                var card = ObjectList.GetSpecificItem(thisCard.Deck);
+                
+
+                ObjectList.ReplaceDictionary(thisCard.Deck, _tempDeck, card);
+                card.Deck = _tempDeck; //try this too.
+                _tempDeck--;
+
+                if (ObjectList.ObjectExist(thisCard.Deck))
+                {
+                    throw new BasicBlankException("Did not replace with new temporary value.  Rethink");
+                }
+            }
+            
+            //    return;
+            //in the old, removeobjectbydeck caused deeper issues.
+            //this time, can risk removing object by deck.  since it has better ways of refreshing in the new.
+            //take a risk and see what happens.
+            //can't just ignore if object exist because that causes other problems.
+
+
+
             TradeObject(oldDeck, thisCard);
         }
         private EnumColumnType ColumnStatus(TeeItUpCardInformation oldCard, TeeItUpCardInformation newCard)

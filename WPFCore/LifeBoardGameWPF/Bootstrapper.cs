@@ -29,7 +29,10 @@ namespace LifeBoardGameWPF
 
             //LifeBoardGameGameContainer.StartCollegeCareer = true;
             //TestData!.SaveOption = BasicGameFrameworkLibrary.TestUtilities.EnumTestSaveCategory.RestoreOnly;
-            //TestData.NoAnimations = true;
+            ////TestData.NoAnimations = true;
+            //TestData.StatePosition = 2;
+            //TestData.DoubleCheck = true;
+            //TestData.ShowErrorMessageBoxes = false;
             return base.RegisterTestsAsync();
         }
         protected override Task ConfigureAsync()

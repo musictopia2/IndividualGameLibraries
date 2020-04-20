@@ -126,6 +126,14 @@ namespace OldMaidCP.Logic
         protected override async Task StartSetUpAsync(bool isBeginning)
         {
             LoadControls();
+            if (_gameContainer.DeckList.Count != 49)
+            {
+                throw new BasicBlankException("The deck must be 49 cards for old maid");
+            }
+            if (_gameContainer.DeckList.Any(x => x.Value == EnumCardValueList.Queen && x.Suit != EnumSuitList.Spades))
+            {
+                throw new BasicBlankException("Only queen allowed is queen of spades");
+            }
             SaveRoot!.PlayOrder.IsReversed = true;
             SaveRoot.PlayOrder.OtherTurn = await PlayerList!.CalculateWhoTurnAsync();
             SaveRoot.PlayOrder.IsReversed = false; //try this way.
